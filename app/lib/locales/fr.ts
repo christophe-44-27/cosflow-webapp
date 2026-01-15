@@ -313,6 +313,6 @@ export const fr = {
     of: 'sur',
     total: 'au total',
   },
-} as const;
+};
 
 export type Translations = typeof fr;

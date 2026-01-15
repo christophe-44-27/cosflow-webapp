@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="833010e0-5aea-4b31-a7c6-3b4442e377b7" name="Changes" comment="First gros commit ça a l'air">
-      <change afterPath="$PROJECT_DIR$/public/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/auth-modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/auth-modal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/discovery-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/discovery-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/landing-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/landing-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/mobile-banner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/mobile-banner.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/sidebar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/web-gallery-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/web-gallery-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/web-projects-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/web-projects-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/locales/en.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/locales/en.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/locales/fr.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/locales/fr.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/sitemap.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/sitemap.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,25 +36,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "main",
-    "js.debugger.nextJs.config.created.client": "true",
-    "js.debugger.nextJs.config.created.server": "true",
-    "last_opened_file_path": "/Users/clablancherie/repositories/cosflow-web/public",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "ts.external.directory.path": "/Users/clablancherie/repositories/cosflow-web/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/clablancherie/repositories/cosflow-web/public&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/clablancherie/repositories/cosflow-web/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public" />
@@ -109,7 +95,7 @@
       <workItem from="1768323909548" duration="5359000" />
       <workItem from="1768339120801" duration="13585000" />
       <workItem from="1768418686923" duration="18000" />
-      <workItem from="1768418708577" duration="9068000" />
+      <workItem from="1768418708577" duration="10255000" />
     </task>
     <task id="LOCAL-00001" summary="First gros commit ça a l'air">
       <option name="closed" value="true" />

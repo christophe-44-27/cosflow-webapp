@@ -35,15 +35,15 @@ export function AppClientWrapper() {
   const renderView = () => {
     switch (activeView) {
       case 'home':
-        return <LandingView isLoggedIn={isLoggedIn} onLogout={handleLogout} onGetStarted={handleGetStarted} />;
+        return <LandingView />;
       case 'discovery':
         return <DiscoveryView />;
       case 'gallery':
-        return <WebGalleryView isLoggedIn={isLoggedIn} onLogout={handleLogout} />;
+        return <WebGalleryView />;
       case 'projects':
-        return <WebProjectsView isLoggedIn={isLoggedIn} onLogout={handleLogout} />;
+        return <WebProjectsView />;
       case 'account':
-        return <WebAccountView isLoggedIn={isLoggedIn} onLogout={handleLogout} />;
+        return <WebAccountView />;
       case 'events':
         return (
           <div className="flex-1 flex items-center justify-center">
@@ -63,15 +63,13 @@ export function AppClientWrapper() {
           </div>
         );
       default:
-        return <LandingView isLoggedIn={isLoggedIn} onLogout={handleLogout} onGetStarted={handleGetStarted} />;
+        return <LandingView />;
     }
   };
 
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar
-        activeView={activeView}
-        onViewChange={setActiveView}
         isLoggedIn={isLoggedIn}
         onLoginRequired={handleLoginRequired}
       />

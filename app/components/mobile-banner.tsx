@@ -4,7 +4,7 @@ import { useState } from 'react';
 export function MobileBanner() {
     const [isVisible, setIsVisible] = useState(true);
 
-    const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.yourapp.cosflow'; // Remplacez par votre lien
+    const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=co.cosflow.app';
 
     if (!isVisible) return null;
 

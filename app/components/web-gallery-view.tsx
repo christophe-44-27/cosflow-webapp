@@ -86,7 +86,7 @@ export function WebGalleryView() {
 
     return (
         <div className="flex-1">
-            <Header title="Galerie Publique" showSearch={true} showAddButton={true} />
+            <Header title="Galerie Publique" showSearch={false} showAddButton={true} />
 
             <div className="p-8 space-y-6">
                 {/* Filters */}

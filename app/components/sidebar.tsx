@@ -1,10 +1,11 @@
 'use client';
 
-import { Search, Folder, Camera, Settings, User, Home, Image, Calendar, Lock, Menu, X } from 'lucide-react';
+import { Search, Folder, Settings, User, Home, Image, Calendar, Lock, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from '../lib/locale-context';
+import NextImage from 'next/image';
 
 interface SidebarProps {
     isLoggedIn: boolean;
@@ -46,8 +47,14 @@ export function Sidebar({ isLoggedIn, onLoginRequired }: SidebarProps) {
             {/* Mobile Header */}
             <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-secondary border-b border-white/10 flex items-center justify-between px-4 z-50">
                 <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
-                        <Camera className="w-6 h-6 text-white" />
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
+                        <NextImage
+                            src="/logo.png"
+                            alt="Cosflow Logo"
+                            width={40}
+                            height={40}
+                            className="w-full h-full object-contain"
+                        />
                     </div>
                     <h1 className="text-white">{t.sidebar.appName}</h1>
                 </div>
@@ -75,8 +82,14 @@ export function Sidebar({ isLoggedIn, onLoginRequired }: SidebarProps) {
                 {/* Logo - Desktop Only */}
                 <div className="hidden md:block p-6 border-b border-white/10">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
-                            <Camera className="w-6 h-6 text-white" />
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
+                            <NextImage
+                                src="/logo.png"
+                                alt="Cosflow Logo"
+                                width={40}
+                                height={40}
+                                className="w-full h-full object-contain"
+                            />
                         </div>
                         <h1 className="text-white">{t.sidebar.appName}</h1>
                     </div>

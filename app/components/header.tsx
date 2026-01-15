@@ -11,15 +11,15 @@ interface HeaderProps {
     showAddButton?: boolean;
 }
 
-export function Header({ title, showSearch = true, showAddButton = false }: HeaderProps) {
+export function Header({ title, showSearch = false, showAddButton = false }: HeaderProps) {
     const { isLoggedIn, handleLogout } = useAuth();
     const t = useTranslations();
     return (
-        <header className="bg-secondary/50 backdrop-blur-sm border-b border-white/10 px-4 md:px-8 py-4 sticky top-0 z-10">
-            <div className="flex items-center justify-between">
+        <header className="bg-secondary/50 backdrop-blur-sm border-b border-white/10 px-4 sm:px-6 lg:px-8 py-4 sticky top-0 z-10">
+            <div className="flex items-center justify-between gap-2 sm:gap-4">
                 <h2 className="text-white hidden md:block">{title}</h2>
 
-                <div className="flex items-center gap-4 md:ml-auto">
+                <div className="flex items-center gap-2 sm:gap-3 md:gap-4 md:ml-auto">
                     {showSearch && (
                         <div className="relative hidden md:block">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/60" />

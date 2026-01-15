@@ -74,13 +74,14 @@ export const en: Translations = {
     },
     features: {
       title: 'Everything you need',
+      comingSoon: 'Coming Soon',
       projectManagement: {
         title: 'Project Management',
         description: 'Organize your photoshoots and track the progress of your cosplay projects in real-time.',
       },
-      privateGalleries: {
-        title: 'Private Galleries',
-        description: 'Store and share your photos in secure galleries with access control.',
+      publicOrPrivate: {
+        title: 'Public or Private?',
+        description: 'Control access to your cosplay projects by showing publicly only what you want.',
       },
       events: {
         title: 'Events',
@@ -115,7 +116,7 @@ export const en: Translations = {
         'Secure photo storage',
         'Real-time collaboration',
         'Project progress tracking',
-        'Public and private galleries',
+        'Public and private projects',
         'Notifications and reminders',
       ],
       ultraFast: {
@@ -145,7 +146,7 @@ export const en: Translations = {
       title: 'Download the mobile app',
       subtitle: 'Enjoy Cosflow everywhere with our mobile apps',
       appStore: 'App Store',
-      appStoreDesc: 'iOS app for iPhone and iPad',
+      appStoreDesc: 'iOS app for iPhone and iPad (Beta)',
       googlePlay: 'Google Play',
       googlePlayDesc: 'Android app available now',
       discord: 'Discord',
@@ -167,16 +168,49 @@ export const en: Translations = {
   // Discovery View
   discovery: {
     title: 'Discovery',
-    featuredCreators: 'Cosflow creators',
-    publicProjects: 'Public projects',
+    featuredCreators: 'Cosflow Creators',
+    publicProjects: 'Projects',
     followers: 'Followers',
     projects: 'Projects',
     viewProfile: 'View profile',
+    viewAll: 'View all',
     photos: 'photos',
     loadingCreators: 'Loading creators...',
     loadingProjects: 'Loading projects...',
     errorLoadingCreators: 'Error loading creators',
     errorLoadingProjects: 'Error loading projects',
+    projectsTotal: 'projects total',
+  },
+
+  // Creators View
+  creators: {
+    title: 'Cosflow Creators',
+    searchPlaceholder: 'Search for a creator...',
+    filters: {
+      all: 'All',
+      photographers: 'Photographers',
+      cosplayers: 'Cosplayers',
+      creators: 'Creators',
+    },
+    stats: {
+      totalCreators: 'Total Creators',
+      pages: 'Pages',
+      currentPage: 'Current Page',
+      creatorsPerPage: 'Creators/Page',
+    },
+    followers: 'Followers',
+    projects: 'Projects',
+    viewProfile: 'View profile',
+    noCreators: 'No creators found',
+    noCreatorsDesc: 'No creators match your search.',
+    errorLoading: 'Error loading creators',
+    pagination: {
+      previous: 'Previous',
+      next: 'Next',
+      page: 'Page',
+      of: 'of',
+      creatorsTotal: 'creators total',
+    },
   },
 
   // Gallery View
@@ -196,7 +230,7 @@ export const en: Translations = {
 
   // Projects View
   projects: {
-    title: 'Public Projects',
+    title: 'Projects',
     stats: {
       totalProjects: 'Total Projects',
       pages: 'Pages',

@@ -8,10 +8,12 @@ import Link from 'next/link';
 import { apiService } from '../lib/api';
 import { Project } from '../lib/types';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { useTranslations } from '../lib/locale-context';
 
 export function WebProjectsView() {
     const router = useRouter();
     const searchParams = useSearchParams();
+    const t = useTranslations();
     const [projects, setProjects] = useState<Project[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -57,7 +59,7 @@ export function WebProjectsView() {
 
     return (
         <div className="flex-1">
-            <Header title="Projets Publics" showSearch={true} showAddButton={true} />
+            <Header title={t.projects.title} showSearch={false} showAddButton={true} />
 
             <div className="p-8 space-y-6">
                 {/* Stats Overview */}
@@ -213,16 +215,16 @@ export function WebProjectsView() {
                                 className="flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                             >
                                 <ChevronLeft className="w-5 h-5" />
-                                <span className="font-medium">Précédent</span>
+                                <span className="font-medium">{t.projects.pagination.previous}</span>
                             </button>
 
                             {/* Page Info */}
                             <div className="text-center">
                                 <div className="text-white text-lg font-medium mb-1">
-                                    Page {currentPage} sur {totalPages}
+                                    {t.projects.pagination.page} {currentPage} {t.projects.pagination.of} {totalPages}
                                 </div>
                                 <div className="text-white/60 text-sm">
-                                    {totalProjects} projets au total
+                                    {totalProjects} {t.projects.pagination.projectsTotal}
                                 </div>
                             </div>
 
@@ -232,7 +234,7 @@ export function WebProjectsView() {
                                 disabled={currentPage === totalPages}
                                 className="flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                             >
-                                <span className="font-medium">Suivant</span>
+                                <span className="font-medium">{t.projects.pagination.next}</span>
                                 <ChevronRight className="w-5 h-5" />
                             </button>
                         </div>

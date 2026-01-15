@@ -8,6 +8,7 @@ import { apiService } from '../lib/api';
 import { ProjectDetail } from '../lib/types';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import Link from 'next/link';
+import { useTranslations } from '../lib/locale-context';
 
 interface ProjectDetailViewProps {
     slug: string;
@@ -15,6 +16,7 @@ interface ProjectDetailViewProps {
 
 export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
     const { isLoggedIn, handleLoginRequired } = useAuth();
+    const t = useTranslations();
     const [project, setProject] = useState<ProjectDetail | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -33,7 +35,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
                 setProject(response.data);
                 setIsLiked(response.data.is_liked_by_user || false);
             } catch (err) {
-                setError('Erreur lors du chargement du projet');
+                setError(t.projectDetail.errorLoadingProject);
                 console.error('Error fetching project:', err);
             } finally {
                 setIsLoading(false);
@@ -41,7 +43,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
         };
 
         fetchProject();
-    }, [slug]);
+    }, [slug, t]);
 
     const handleLike = () => {
         if (!isLoggedIn) {
@@ -132,7 +134,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
     if (isLoading) {
         return (
             <div className="flex-1">
-                <Header title="Chargement..." showSearch={false} />
+                <Header title={t.projectDetail.loading} showSearch={false} />
                 <div className="p-8">
                     <div className="animate-pulse space-y-6">
                         <div className="h-96 bg-white/5 rounded-2xl"></div>
@@ -147,10 +149,10 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
     if (error || !project) {
         return (
             <div className="flex-1">
-                <Header title="Erreur" showSearch={false} />
+                <Header title={t.projectDetail.error} showSearch={false} />
                 <div className="p-8">
                     <div className="bg-red-500/10 border border-red-500/50 rounded-2xl p-6 text-red-500 text-center">
-                        {error || 'Projet introuvable'}
+                        {error || t.projectDetail.projectNotFound}
                     </div>
                 </div>
             </div>
@@ -207,7 +209,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
                                     </div>
                                     <div>
                                         <p className="text-white font-medium text-sm">@{project.user.profile.name}</p>
-                                        <p className="text-white/50 text-xs">Créateur</p>
+                                        <p className="text-white/50 text-xs">{t.projectDetail.creator}</p>
                                     </div>
                                 </Link>
 
@@ -239,13 +241,13 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
                                     }`}
                                 >
                                     <Share2 className="w-4 h-4" />
-                                    <span>{showCopied ? 'Copié !' : 'Partager'}</span>
+                                    <span>{showCopied ? t.projectDetail.copied : t.projectDetail.share}</span>
                                 </button>
                                 <button
                                     onClick={handleFollow}
                                     className="px-4 py-1.5 rounded-lg bg-primary text-white text-sm hover:bg-primary/90 transition-colors"
                                 >
-                                    Suivre
+                                    {t.projectDetail.follow}
                                 </button>
                             </div>
                         </div>
@@ -255,7 +257,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
                             <div className="bg-white/5 rounded-xl p-3 border border-white/10">
                                 <div className="flex items-center gap-2 mb-1">
                                     <Camera className="w-4 h-4 text-primary" />
-                                    <span className="text-white/50 text-xs">Photos</span>
+                                    <span className="text-white/50 text-xs">{t.projectDetail.stats.photos}</span>
                                 </div>
                                 <p className="text-white text-lg font-bold">{project.photos.length}</p>
                             </div>
@@ -263,7 +265,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
                             <div className="bg-white/5 rounded-xl p-3 border border-white/10">
                                 <div className="flex items-center gap-2 mb-1">
                                     <ImageIcon className="w-4 h-4 text-tertiary" />
-                                    <span className="text-white/50 text-xs">Références</span>
+                                    <span className="text-white/50 text-xs">{t.projectDetail.stats.references}</span>
                                 </div>
                                 <p className="text-white text-lg font-bold">{project.photoReferences.length}</p>
                             </div>
@@ -271,7 +273,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
                             <div className="bg-white/5 rounded-xl p-3 border border-white/10">
                                 <div className="flex items-center gap-2 mb-1">
                                     <Heart className="w-4 h-4 text-red-500" />
-                                    <span className="text-white/50 text-xs">Likes</span>
+                                    <span className="text-white/50 text-xs">{t.projectDetail.stats.likes}</span>
                                 </div>
                                 <p className="text-white text-lg font-bold">{project.likes_count}</p>
                             </div>
@@ -281,7 +283,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
                                     <div className="w-4 h-4 rounded-full border-2 border-green-500 flex items-center justify-center">
                                         <span className="text-[8px] text-green-500">%</span>
                                     </div>
-                                    <span className="text-white/50 text-xs">Progression</span>
+                                    <span className="text-white/50 text-xs">{t.projectDetail.stats.progression}</span>
                                 </div>
                                 <p className="text-white text-lg font-bold">{project.progression}%</p>
                             </div>
@@ -289,7 +291,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
                             <div className="bg-white/5 rounded-xl p-3 border border-white/10">
                                 <div className="flex items-center gap-2 mb-1">
                                     <Clock className="w-4 h-4 text-orange-400" />
-                                    <span className="text-white/50 text-xs">Temps</span>
+                                    <span className="text-white/50 text-xs">{t.projectDetail.stats.time}</span>
                                 </div>
                                 <p className="text-white text-sm font-medium">{project.total_project_working_time || '-'}</p>
                             </div>
@@ -297,7 +299,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
                             <div className="bg-white/5 rounded-xl p-3 border border-white/10">
                                 <div className="flex items-center gap-2 mb-1">
                                     <DollarSign className="w-4 h-4 text-emerald-400" />
-                                    <span className="text-white/50 text-xs">Budget</span>
+                                    <span className="text-white/50 text-xs">{t.projectDetail.stats.budget}</span>
                                 </div>
                                 <p className="text-white text-sm font-medium">{project.project_estimated_price}$</p>
                             </div>
@@ -305,7 +307,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
                             <div className="bg-white/5 rounded-xl p-3 border border-white/10">
                                 <div className="flex items-center gap-2 mb-1">
                                     <Calendar className="w-4 h-4 text-blue-400" />
-                                    <span className="text-white/50 text-xs">Créé</span>
+                                    <span className="text-white/50 text-xs">{t.projectDetail.stats.created}</span>
                                 </div>
                                 <p className="text-white text-xs font-medium">{project.created_at}</p>
                             </div>
@@ -313,7 +315,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
                             <div className="bg-white/5 rounded-xl p-3 border border-white/10">
                                 <div className="flex items-center gap-2 mb-1">
                                     <Calendar className="w-4 h-4 text-purple-400" />
-                                    <span className="text-white/50 text-xs">Mis à jour</span>
+                                    <span className="text-white/50 text-xs">{t.projectDetail.stats.updated}</span>
                                 </div>
                                 <p className="text-white text-xs font-medium">{project.updated_at}</p>
                             </div>
@@ -323,13 +325,13 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
 
                 {/* Photo Gallery */}
                 <div className="bg-secondary border border-white/10 rounded-2xl p-8">
-                    <h2 className="text-white text-2xl font-bold mb-6">Galerie</h2>
+                    <h2 className="text-white text-2xl font-bold mb-6">{t.projectDetail.gallery.title}</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {/* Photos Column */}
                         <div>
                             <div className="flex items-center gap-2 mb-4">
                                 <Camera className="w-5 h-5 text-primary" />
-                                <h3 className="text-white font-semibold">Photos ({project.photos.length})</h3>
+                                <h3 className="text-white font-semibold">{t.projectDetail.gallery.photos} ({project.photos.length})</h3>
                             </div>
                             {project.photos.length > 0 ? (
                                 <div className="grid grid-cols-2 gap-2">
@@ -361,7 +363,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
                             ) : (
                                 <div className="text-center py-8 bg-white/5 rounded-xl">
                                     <ImageIcon className="w-10 h-10 text-white/20 mx-auto mb-2" />
-                                    <p className="text-white/40 text-sm">Aucune photo</p>
+                                    <p className="text-white/40 text-sm">{t.projectDetail.gallery.noPhotos}</p>
                                 </div>
                             )}
                         </div>
@@ -370,7 +372,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
                         <div>
                             <div className="flex items-center gap-2 mb-4">
                                 <ImageIcon className="w-5 h-5 text-tertiary" />
-                                <h3 className="text-white font-semibold">Références ({project.photoReferences.length})</h3>
+                                <h3 className="text-white font-semibold">{t.projectDetail.gallery.references} ({project.photoReferences.length})</h3>
                             </div>
                             {project.photoReferences.length > 0 ? (
                                 <div className="grid grid-cols-2 gap-2">
@@ -396,7 +398,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
                             ) : (
                                 <div className="text-center py-8 bg-white/5 rounded-xl">
                                     <ImageIcon className="w-10 h-10 text-white/20 mx-auto mb-2" />
-                                    <p className="text-white/40 text-sm">Aucune référence</p>
+                                    <p className="text-white/40 text-sm">{t.projectDetail.gallery.noReferences}</p>
                                 </div>
                             )}
                         </div>
@@ -405,7 +407,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
                         <div>
                             <div className="flex items-center gap-2 mb-4">
                                 <Camera className="w-5 h-5 text-green-500" />
-                                <h3 className="text-white font-semibold">Photoshoots ({project.photoshoots.length})</h3>
+                                <h3 className="text-white font-semibold">{t.projectDetail.gallery.photoshoots} ({project.photoshoots.length})</h3>
                             </div>
                             {project.photoshoots.length > 0 ? (
                                 <div className="grid grid-cols-2 gap-2">
@@ -424,7 +426,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
                                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                                             <div className="absolute bottom-0 left-0 right-0 p-2">
                                                 <p className="text-white text-xs font-medium truncate">{shoot.title}</p>
-                                                <p className="text-white/60 text-[10px]">{shoot.images_count} photos</p>
+                                                <p className="text-white/60 text-[10px]">{shoot.images_count} {t.projectDetail.gallery.photosCount}</p>
                                             </div>
                                         </div>
                                     ))}
@@ -432,7 +434,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
                             ) : (
                                 <div className="text-center py-8 bg-white/5 rounded-xl">
                                     <Camera className="w-10 h-10 text-white/20 mx-auto mb-2" />
-                                    <p className="text-white/40 text-sm">Aucun photoshoot</p>
+                                    <p className="text-white/40 text-sm">{t.projectDetail.gallery.noPhotoshoots}</p>
                                 </div>
                             )}
                         </div>

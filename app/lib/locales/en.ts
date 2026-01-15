@@ -315,4 +315,40 @@ export const en: Translations = {
     of: 'of',
     total: 'total',
   },
+
+  // Project Detail
+  projectDetail: {
+    loading: 'Loading...',
+    error: 'Error',
+    projectNotFound: 'Project not found',
+    errorLoadingProject: 'Error loading project',
+    creator: 'Creator',
+    follow: 'Follow',
+    share: 'Share',
+    copied: 'Copied!',
+    stats: {
+      photos: 'Photos',
+      references: 'References',
+      likes: 'Likes',
+      progression: 'Progress',
+      time: 'Time',
+      budget: 'Budget',
+      created: 'Created',
+      updated: 'Updated',
+    },
+    gallery: {
+      title: 'Gallery',
+      photos: 'Photos',
+      references: 'References',
+      photoshoots: 'Photoshoots',
+      noPhotos: 'No photos',
+      noReferences: 'No references',
+      noPhotoshoots: 'No photoshoots',
+      photosCount: 'photos',
+    },
+    status: {
+      completed: 'completed',
+      inProgress: 'in_progress',
+    },
+  },
 } as const;

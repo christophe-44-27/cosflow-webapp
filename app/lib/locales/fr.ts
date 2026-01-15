@@ -313,6 +313,42 @@ export const fr = {
     of: 'sur',
     total: 'au total',
   },
+
+  // Project Detail
+  projectDetail: {
+    loading: 'Chargement...',
+    error: 'Erreur',
+    projectNotFound: 'Projet introuvable',
+    errorLoadingProject: 'Erreur lors du chargement du projet',
+    creator: 'Créateur',
+    follow: 'Suivre',
+    share: 'Partager',
+    copied: 'Copié !',
+    stats: {
+      photos: 'Photos',
+      references: 'Références',
+      likes: 'Likes',
+      progression: 'Progression',
+      time: 'Temps',
+      budget: 'Budget',
+      created: 'Créé',
+      updated: 'Mis à jour',
+    },
+    gallery: {
+      title: 'Galerie',
+      photos: 'Photos',
+      references: 'Références',
+      photoshoots: 'Photoshoots',
+      noPhotos: 'Aucune photo',
+      noReferences: 'Aucune référence',
+      noPhotoshoots: 'Aucun photoshoot',
+      photosCount: 'photos',
+    },
+    status: {
+      completed: 'completed',
+      inProgress: 'in_progress',
+    },
+  },
 };
 
 export type Translations = typeof fr;

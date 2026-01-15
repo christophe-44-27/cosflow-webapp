@@ -11,11 +11,17 @@ export class ApiService {
   private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
 
+    // Get the current locale from localStorage (same key used by LocaleContext)
+    const locale = typeof window !== 'undefined'
+      ? localStorage.getItem('cosflow-locale') || 'fr'
+      : 'fr';
+
     const response = await fetch(url, {
       ...options,
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'Accept-Language': locale,
         ...options.headers,
       },
     });

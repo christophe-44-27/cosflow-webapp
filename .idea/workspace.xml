@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="833010e0-5aea-4b31-a7c6-3b4442e377b7" name="Changes" comment="First gros commit ça a l'air">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="833010e0-5aea-4b31-a7c6-3b4442e377b7" name="Changes" comment="update and resolve build">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +96,7 @@
       <workItem from="1768323909548" duration="5359000" />
       <workItem from="1768339120801" duration="13585000" />
       <workItem from="1768418686923" duration="18000" />
-      <workItem from="1768418708577" duration="10255000" />
+      <workItem from="1768418708577" duration="11245000" />
     </task>
     <task id="LOCAL-00001" summary="First gros commit ça a l'air">
       <option name="closed" value="true" />
@@ -105,7 +106,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768362071211</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update and resolve build">
+      <option name="closed" value="true" />
+      <created>1768446419540</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1768446419540</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,7 +125,8 @@
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
     <MESSAGE value="First gros commit ça a l'air" />
-    <option name="LAST_COMMIT_MESSAGE" value="First gros commit ça a l'air" />
+    <MESSAGE value="update and resolve build" />
+    <option name="LAST_COMMIT_MESSAGE" value="update and resolve build" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

@@ -521,8 +521,8 @@ export const en: Translations = {
     features: {
       unlimitedProjects: 'Unlimited projects',
       prioritySupport: 'Priority support',
-      advancedAnalytics: 'Advanced analytics',
-      customBranding: 'Profile customization',
+      advancedAnalytics: 'Unlimited photos',
+      customBranding: 'Unlimited documents',
     },
     pricing: {
       title: 'Choose your plan',

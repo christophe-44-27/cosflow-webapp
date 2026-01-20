@@ -519,22 +519,22 @@ export const fr = {
     features: {
       unlimitedProjects: 'Projets illimités',
       prioritySupport: 'Support prioritaire',
-      advancedAnalytics: 'Statistiques avancées',
-      customBranding: 'Personnalisation du profil',
+      advancedAnalytics: 'Photos illimitées',
+      customBranding: 'Documents illimités',
     },
     pricing: {
       title: 'Choisissez votre plan',
       subtitle: 'Sélectionnez l\'offre qui correspond à vos besoins',
       monthly: {
         title: 'Mensuel',
-        price: '9,99€',
+        price: '1,49$ (CAD)',
         period: 'mois',
       },
       yearly: {
         title: 'Annuel',
-        price: '99,99€',
+        price: '14,99$ (CAD)',
         period: 'an',
-        savings: 'Économisez 17%',
+        savings: 'Économisez 16%',
       },
       selectPlan: 'Choisir ce plan',
       footer: 'Paiement sécurisé via Stripe. Annulez à tout moment.',

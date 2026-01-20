@@ -2,65 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="833010e0-5aea-4b31-a7c6-3b4442e377b7" name="Changes" comment="update and resolve build">
-      <change afterPath="$PROJECT_DIR$/app/components/project-owner-view-refactored.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/components/ProjectElementsSection.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/components/ProjectGallerySection.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/components/ProjectInfoSection.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/components/ProjectStatsBar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/components/TimeTrackingSection.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/components/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/hooks/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/hooks/useProjectBudget.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/hooks/useProjectData.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/hooks/useProjectElements.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/hooks/useProjectInfo.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/hooks/useTimeEntries.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/types.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/api-endpoints.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/api-public-endpoints.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/services/api-client.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/services/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/services/public-api.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.claude/settings.local.json" beforeDir="false" afterPath="$PROJECT_DIR$/.claude/settings.local.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/app-client-wrapper.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/app-layout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/auth-modal.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/discovery-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/discovery-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/landing-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/landing-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/profile-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/profile-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/project-detail-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/project-detail-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/sidebar.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/web-account-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/web-account-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/web-creators-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/web-creators-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/web-gallery-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/web-gallery-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/components/web-projects-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/web-projects-view.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/creators/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/discovery/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/events/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/forge/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/gallery/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/auth-context.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/locale-context.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/locale-context.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/locales/INTEGRATION_EXAMPLE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/locales/README.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/lib/locales/en.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/locales/en.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/lib/locales/fr.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/locales/fr.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/profile/[slug]/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/projects/[slug]/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/projects/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,7 +102,7 @@
       <workItem from="1768593320617" duration="7087000" />
       <workItem from="1768742231817" duration="11904000" />
       <workItem from="1768873967352" duration="5783000" />
-      <workItem from="1768879883553" duration="3113000" />
+      <workItem from="1768879883553" duration="4112000" />
     </task>
     <task id="LOCAL-00001" summary="First gros commit ça a l'air">
       <option name="closed" value="true" />
@@ -192,7 +136,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768448762406</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="update and resolve build">
+      <option name="closed" value="true" />
+      <created>1768883069360</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1768883069360</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

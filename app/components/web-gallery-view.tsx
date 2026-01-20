@@ -3,10 +3,8 @@
 import { Header } from './header';
 import { Heart, Camera, Eye, SlidersHorizontal } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import { useAuth } from '../lib/auth-context';
 
 export function WebGalleryView() {
-    const { isLoggedIn, handleLogout } = useAuth();
     const filters = ['Tous', 'Anime/Manga', 'Gaming', 'Comics', 'Original'];
 
     const galleries = [
@@ -86,7 +84,7 @@ export function WebGalleryView() {
 
     return (
         <div className="flex-1">
-            <Header title="Galerie Publique" showSearch={false} showAddButton={true} />
+            <Header title="Galerie Publique" />
 
             <div className="p-8 space-y-6">
                 {/* Filters */}

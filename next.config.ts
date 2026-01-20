@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'cosflow-media.s3.ca-central-1.amazonaws.com',
+      },
     ],
   },
 };

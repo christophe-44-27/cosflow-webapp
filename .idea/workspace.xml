@@ -2,8 +2,65 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="833010e0-5aea-4b31-a7c6-3b4442e377b7" name="Changes" comment="update and resolve build">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/components/project-owner-view-refactored.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/components/ProjectElementsSection.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/components/ProjectGallerySection.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/components/ProjectInfoSection.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/components/ProjectStatsBar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/components/TimeTrackingSection.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/components/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/hooks/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/hooks/useProjectBudget.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/hooks/useProjectData.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/hooks/useProjectElements.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/hooks/useProjectInfo.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/hooks/useTimeEntries.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/features/projects/owner-view/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/api-endpoints.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/api-public-endpoints.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/services/api-client.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/services/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/lib/services/public-api.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.claude/settings.local.json" beforeDir="false" afterPath="$PROJECT_DIR$/.claude/settings.local.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/account/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/app-client-wrapper.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/app-layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/auth-modal.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/discovery-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/discovery-view.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/landing-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/landing-view.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/profile-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/profile-view.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/project-detail-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/project-detail-view.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/sidebar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/web-account-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/web-account-view.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/web-creators-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/web-creators-view.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/web-gallery-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/web-gallery-view.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/web-projects-view.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/web-projects-view.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/creators/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/discovery/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/events/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/forge/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/gallery/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/auth-context.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/lib/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/locale-context.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/locale-context.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/locales/INTEGRATION_EXAMPLE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/locales/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/locales/en.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/locales/en.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/locales/fr.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/locales/fr.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/profile/[slug]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/projects/[slug]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/projects/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,27 +94,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
-    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/clablancherie/repositories/cosflow-web/public&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/clablancherie/repositories/cosflow-web/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "main",
+    "js.debugger.nextJs.config.created.client": "true",
+    "js.debugger.nextJs.config.created.server": "true",
+    "last_opened_file_path": "/Users/clablancherie/repositories/cosflow-web/app/lib",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "com.github.copilot.settings.ApplicationConfigurable",
+    "ts.external.directory.path": "/Users/clablancherie/repositories/cosflow-web/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/lib" />
       <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/app/components" />
     </key>
@@ -80,8 +138,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PS-253.29346.151" />
-        <option value="bundled-php-predefined-a98d8de5180a-0e0d91225499-com.jetbrains.php.sharedIndexes-PS-253.29346.151" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PS-253.29346.257" />
+        <option value="bundled-php-predefined-a98d8de5180a-0e0d91225499-com.jetbrains.php.sharedIndexes-PS-253.29346.257" />
       </set>
     </attachedChunks>
   </component>
@@ -96,7 +154,11 @@
       <workItem from="1768323909548" duration="5359000" />
       <workItem from="1768339120801" duration="13585000" />
       <workItem from="1768418686923" duration="18000" />
-      <workItem from="1768418708577" duration="11245000" />
+      <workItem from="1768418708577" duration="12800000" />
+      <workItem from="1768593320617" duration="7087000" />
+      <workItem from="1768742231817" duration="11904000" />
+      <workItem from="1768873967352" duration="5783000" />
+      <workItem from="1768879883553" duration="3113000" />
     </task>
     <task id="LOCAL-00001" summary="First gros commit ça a l'air">
       <option name="closed" value="true" />
@@ -114,7 +176,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768446419540</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="update and resolve build">
+      <option name="closed" value="true" />
+      <created>1768447551053</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1768447551053</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update and resolve build">
+      <option name="closed" value="true" />
+      <created>1768448762406</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1768448762406</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,6 +205,10 @@
     <MESSAGE value="First gros commit ça a l'air" />
     <MESSAGE value="update and resolve build" />
     <option name="LAST_COMMIT_MESSAGE" value="update and resolve build" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

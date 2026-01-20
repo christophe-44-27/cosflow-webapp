@@ -16,11 +16,12 @@ import {
     Twitch
 } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
-import { useAuth } from '../lib/auth-context';
-import { apiService } from '../lib/api';
+import { useAuth } from '@/app/features/auth';
+import { publicApiService } from '../lib/services';
 import { UserProfile, SocialLink, UserProfileProject, Event, Photoshoot } from '../lib/types';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import Link from 'next/link';
+import { useLocale } from '../lib/locale-context';
 
 interface ProfileViewProps {
     slug: string;
@@ -74,43 +75,6 @@ function TiktokIcon({ className }: { className?: string }) {
     );
 }
 
-// Pagination Component
-function Pagination({
-    meta,
-    onPageChange,
-    isLoading
-}: {
-    meta: PaginationMeta;
-    onPageChange: (page: number) => void;
-    isLoading: boolean;
-}) {
-    if (meta.last_page <= 1) return null;
-
-    return (
-        <div className="flex items-center justify-center gap-2 mt-6">
-            <button
-                onClick={() => onPageChange(meta.current_page - 1)}
-                disabled={meta.current_page === 1 || isLoading}
-                className="px-4 py-2 rounded-lg bg-white/5 text-white/60 hover:bg-white/10 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
-            >
-                <ChevronLeft className="w-4 h-4" />
-                Précédent
-            </button>
-            <div className="px-4 py-2 text-white/60">
-                Page {meta.current_page} sur {meta.last_page}
-            </div>
-            <button
-                onClick={() => onPageChange(meta.current_page + 1)}
-                disabled={meta.current_page === meta.last_page || isLoading}
-                className="px-4 py-2 rounded-lg bg-white/5 text-white/60 hover:bg-white/10 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
-            >
-                Suivant
-                <ChevronRight className="w-4 h-4" />
-            </button>
-        </div>
-    );
-}
-
 // Loading Skeleton for tabs
 function TabSkeleton({ count = 6 }: { count?: number }) {
     return (
@@ -129,6 +93,7 @@ function TabSkeleton({ count = 6 }: { count?: number }) {
 }
 
 export function ProfileView({ slug }: ProfileViewProps) {
+    const { t } = useLocale();
     const { isLoggedIn, handleLoginRequired } = useAuth();
 
     // Profile state
@@ -165,17 +130,54 @@ export function ProfileView({ slug }: ProfileViewProps) {
 
     const perPage = 9;
 
+    // Pagination component local to ProfileView with access to t
+    function Pagination({
+        meta,
+        onPageChange,
+        isLoading
+    }: {
+        meta: PaginationMeta;
+        onPageChange: (page: number) => void;
+        isLoading: boolean;
+    }) {
+        if (meta.last_page <= 1) return null;
+
+        return (
+            <div className="flex items-center justify-center gap-2 mt-6">
+                <button
+                    onClick={() => onPageChange(meta.current_page - 1)}
+                    disabled={meta.current_page === 1 || isLoading}
+                    className="px-4 py-2 rounded-lg bg-white/5 text-white/60 hover:bg-white/10 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                >
+                    <ChevronLeft className="w-4 h-4" />
+                    {t.common.previous}
+                </button>
+                <div className="px-4 py-2 text-white/60">
+                    {t.common.page} {meta.current_page} {t.common.of} {meta.last_page}
+                </div>
+                <button
+                    onClick={() => onPageChange(meta.current_page + 1)}
+                    disabled={meta.current_page === meta.last_page || isLoading}
+                    className="px-4 py-2 rounded-lg bg-white/5 text-white/60 hover:bg-white/10 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+                >
+                    {t.common.next}
+                    <ChevronRight className="w-4 h-4" />
+                </button>
+            </div>
+        );
+    }
+
     // Fetch profile
     useEffect(() => {
         const fetchProfile = async () => {
             try {
                 setIsLoadingProfile(true);
                 setProfileError(null);
-                const response = await apiService.getUserProfile(slug);
+                const response = await publicApiService.getUserProfile(slug);
                 setProfile(response.data);
                 setIsFollowing(response.data.is_following || false);
             } catch (err) {
-                setProfileError('Erreur lors du chargement du profil');
+                setProfileError(t.profile.profileLoadError);
                 console.error('Error fetching profile:', err);
             } finally {
                 setIsLoadingProfile(false);
@@ -183,7 +185,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
         };
 
         fetchProfile();
-    }, [slug]);
+    }, [slug, t]);
 
     // Fetch projects
     useEffect(() => {
@@ -192,7 +194,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
         const fetchProjects = async () => {
             try {
                 setIsLoadingProjects(true);
-                const response = await apiService.getUserProjects(slug, {
+                const response = await publicApiService.getUserProjects(slug, {
                     page: projectsPage,
                     per_page: perPage
                 });
@@ -222,7 +224,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
         const fetchEvents = async () => {
             try {
                 setIsLoadingEvents(true);
-                const response = await apiService.getUserEvents(slug, {
+                const response = await publicApiService.getUserEvents(slug, {
                     page: eventsPage,
                     per_page: perPage
                 });
@@ -252,7 +254,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
         const fetchPhotoshoots = async () => {
             try {
                 setIsLoadingPhotoshoots(true);
-                const response = await apiService.getUserPhotoshoots(slug, {
+                const response = await publicApiService.getUserPhotoshoots(slug, {
                     page: photoshootsPage,
                     per_page: perPage
                 });
@@ -351,11 +353,11 @@ export function ProfileView({ slug }: ProfileViewProps) {
     const getEventStatusLabel = (status: string) => {
         switch (status) {
             case 'upcoming':
-                return 'À venir';
+                return t.profile.upcoming;
             case 'ongoing':
-                return 'En cours';
+                return t.profile.ongoing;
             case 'past':
-                return 'Passé';
+                return t.profile.past;
             default:
                 return status;
         }
@@ -372,7 +374,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
     if (isLoadingProfile) {
         return (
             <div className="flex-1">
-                <Header title="Chargement..." showSearch={false} />
+                <Header title={t.profile.loading} />
                 <div className="p-8">
                     <div className="animate-pulse space-y-6">
                         <div className="h-48 bg-white/5 rounded-2xl"></div>
@@ -392,10 +394,10 @@ export function ProfileView({ slug }: ProfileViewProps) {
     if (profileError || !profile) {
         return (
             <div className="flex-1">
-                <Header title="Erreur" showSearch={false} />
+                <Header title={t.profile.error} />
                 <div className="p-8">
                     <div className="bg-red-500/10 border border-red-500/50 rounded-2xl p-6 text-red-500 text-center">
-                        {profileError || 'Profil introuvable'}
+                        {profileError || t.profile.profileNotFound}
                     </div>
                 </div>
             </div>
@@ -414,7 +416,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
     const tabs: { key: TabType; label: string; count: number; icon: React.ReactNode }[] = [
         {
             key: 'projects',
-            label: 'Projets',
+            label: t.profile.projects,
             count: profile.stats.public_projects_count,
             icon: <Folder className="w-4 h-4" />
         },
@@ -424,7 +426,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
     if ((profile.stats.photoshoots_count ?? 0) > 0) {
         tabs.push({
             key: 'photoshoots',
-            label: 'Photoshoots',
+            label: t.profile.photoshoots,
             count: profile.stats.photoshoots_count ?? 0,
             icon: <Camera className="w-4 h-4" />
         });
@@ -434,7 +436,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
     if (profile.stats.events_count > 0) {
         tabs.push({
             key: 'events',
-            label: 'Événements',
+            label: t.profile.events,
             count: profile.stats.events_count,
             icon: <Calendar className="w-4 h-4" />
         });
@@ -444,7 +446,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
 
     return (
         <div className="flex-1">
-            <Header title={profile.name} showSearch={false} />
+            <Header title={profile.name} />
 
             <div className="space-y-6">
                 {/* Profile Header with Cover */}
@@ -508,7 +510,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
                                             : 'bg-primary text-white hover:bg-primary/90'
                                     }`}
                                 >
-                                    {isFollowing ? 'Suivi' : 'Suivre'}
+                                    {isFollowing ? t.profile.following : t.profile.follow}
                                 </button>
                                 <button
                                     onClick={handleShare}
@@ -533,17 +535,17 @@ export function ProfileView({ slug }: ProfileViewProps) {
                             <div className="flex items-center gap-6 justify-center lg:justify-start">
                                 <div className="text-center">
                                     <p className="text-white text-2xl font-bold">{profile.stats.public_projects_count}</p>
-                                    <p className="text-white/50 text-sm">Projets</p>
+                                    <p className="text-white/50 text-sm">{t.profile.projects}</p>
                                 </div>
                                 <div className="w-px h-12 bg-white/10" />
                                 <div className="text-center">
                                     <p className="text-white text-2xl font-bold">{profile.stats.followers_count}</p>
-                                    <p className="text-white/50 text-sm">Abonnés</p>
+                                    <p className="text-white/50 text-sm">{t.profile.followers}</p>
                                 </div>
                                 <div className="w-px h-12 bg-white/10" />
                                 <div className="text-center">
                                     <p className="text-white text-2xl font-bold">{profile.stats.following_count}</p>
-                                    <p className="text-white/50 text-sm">Abonnements</p>
+                                    <p className="text-white/50 text-sm">{t.profile.following}</p>
                                 </div>
                             </div>
 
@@ -552,7 +554,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
                                 {profile.description ? (
                                     <p className="text-white/70 text-sm leading-relaxed">{profile.description}</p>
                                 ) : (
-                                    <p className="text-white/40 text-sm italic">Aucune description</p>
+                                    <p className="text-white/40 text-sm italic">{t.profile.noDescription}</p>
                                 )}
                             </div>
 
@@ -566,7 +568,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="p-2.5 rounded-xl bg-white/5 text-white/60 hover:text-white hover:bg-white/10 transition-colors"
-                                                title="Site web"
+                                                title={t.profile.website}
                                             >
                                                 <LinkIcon className="w-5 h-5" />
                                             </a>
@@ -577,7 +579,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="p-2.5 rounded-xl bg-white/5 text-white/60 hover:text-pink-400 hover:bg-pink-500/10 transition-colors"
-                                                title="Instagram"
+                                                title={t.profile.instagram}
                                             >
                                                 <InstagramIcon className="w-5 h-5" />
                                             </a>
@@ -588,7 +590,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="p-2.5 rounded-xl bg-white/5 text-white/60 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"
-                                                title="X (Twitter)"
+                                                title={t.profile.twitter}
                                             >
                                                 <TwitterIcon className="w-5 h-5" />
                                             </a>
@@ -599,7 +601,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="p-2.5 rounded-xl bg-white/5 text-white/60 hover:text-red-500 hover:bg-red-500/10 transition-colors"
-                                                title="YouTube"
+                                                title={t.profile.youtube}
                                             >
                                                 <YoutubeIcon className="w-5 h-5" />
                                             </a>
@@ -610,7 +612,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="p-2.5 rounded-xl bg-white/5 text-white/60 hover:text-white hover:bg-white/10 transition-colors"
-                                                title="TikTok"
+                                                title={t.profile.tiktok}
                                             >
                                                 <TiktokIcon className="w-5 h-5" />
                                             </a>
@@ -621,7 +623,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="p-2.5 rounded-xl bg-white/5 text-white/60 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"
-                                                title="Twitch"
+                                                title={t.profile.twitch}
                                             >
                                                 <Twitch className="w-5 h-5" />
                                             </a>
@@ -629,7 +631,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
                                     </>
                                 )}
                                 <div className="text-white/40 text-xs ml-2">
-                                    Membre depuis {profile.created_at}
+                                    {t.profile.memberSince} {profile.created_at}
                                 </div>
                             </div>
                         </div>
@@ -690,7 +692,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
                                                                 ? 'bg-green-500/20 text-green-400 border-green-500/30'
                                                                 : 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'
                                                         }`}>
-                                                            {project.status === 'completed' ? 'Terminé' : 'En cours'}
+                                                            {project.status === 'completed' ? t.profile.completed : t.profile.inProgress}
                                                         </span>
                                                     </div>
                                                     <div className="absolute bottom-3 left-3 right-3">
@@ -711,8 +713,8 @@ export function ProfileView({ slug }: ProfileViewProps) {
                             ) : (
                                 <div className="text-center py-16 bg-secondary border border-white/10 rounded-2xl">
                                     <Folder className="w-16 h-16 text-white/20 mx-auto mb-4" />
-                                    <p className="text-white/40 text-lg">Aucun projet public</p>
-                                    <p className="text-white/30 text-sm mt-1">Ce cosplayeur n&apos;a pas encore partagé de projets</p>
+                                    <p className="text-white/40 text-lg">{t.profile.noPublicProjects}</p>
+                                    <p className="text-white/30 text-sm mt-1">{t.profile.noProjectsMessage}</p>
                                 </div>
                             )}
                         </div>
@@ -776,8 +778,8 @@ export function ProfileView({ slug }: ProfileViewProps) {
                             ) : (
                                 <div className="text-center py-16 bg-secondary border border-white/10 rounded-2xl">
                                     <Camera className="w-16 h-16 text-white/20 mx-auto mb-4" />
-                                    <p className="text-white/40 text-lg">Aucun photoshoot</p>
-                                    <p className="text-white/30 text-sm mt-1">Ce cosplayeur n&apos;a pas encore partagé de photoshoots</p>
+                                    <p className="text-white/40 text-lg">{t.profile.noPhotoshoots}</p>
+                                    <p className="text-white/30 text-sm mt-1">{t.profile.noPhotoshootsMessage}</p>
                                 </div>
                             )}
                         </div>
@@ -840,7 +842,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
                                                                 className="inline-flex items-center gap-1 text-primary text-sm hover:underline mt-2"
                                                             >
                                                                 <ExternalLink className="w-3.5 h-3.5" />
-                                                                Site web
+                                                                {t.profile.website}
                                                             </a>
                                                         )}
                                                     </div>
@@ -859,8 +861,8 @@ export function ProfileView({ slug }: ProfileViewProps) {
                             ) : (
                                 <div className="text-center py-16 bg-secondary border border-white/10 rounded-2xl">
                                     <Calendar className="w-16 h-16 text-white/20 mx-auto mb-4" />
-                                    <p className="text-white/40 text-lg">Aucun événement</p>
-                                    <p className="text-white/30 text-sm mt-1">Ce cosplayeur n&apos;a pas encore participé à des événements</p>
+                                    <p className="text-white/40 text-lg">{t.profile.noEvents}</p>
+                                    <p className="text-white/30 text-sm mt-1">{t.profile.noEventsMessage}</p>
                                 </div>
                             )}
                         </div>

@@ -6,7 +6,7 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { apiService } from '../lib/api';
+import { publicApiService } from '../lib/services';
 import { User } from '../lib/types';
 import { useTranslations } from '../lib/locale-context';
 
@@ -36,7 +36,7 @@ export function WebCreatorsView() {
             try {
                 setIsLoading(true);
                 setError(null);
-                const response = await apiService.getUsers({
+                const response = await publicApiService.getUsers({
                     page: currentPage,
                     per_page: perPage,
                     sort: '-id'
@@ -69,7 +69,7 @@ export function WebCreatorsView() {
 
     return (
         <div className="flex-1">
-            <Header title={t.creators.title} showSearch={false} />
+            <Header title={t.creators.title} />
 
             <div className="p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                 {/* Search Bar */}

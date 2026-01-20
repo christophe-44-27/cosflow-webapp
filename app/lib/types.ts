@@ -27,6 +27,89 @@ export interface Project {
   updated_at: string;
 }
 
+// Project returned by authenticated /api/v2/projects endpoint
+export interface MyProject {
+  id: number;
+  title: string;
+  slug: string;
+  description: string | null;
+  status: string;
+  priority: string;
+  duration: string | null;
+  progression: number;
+  is_private: boolean;
+  category_id: string;
+  fandom_id: string | null;
+  origin_id: string | null;
+  user_id: number;
+  estimated_end_date: string | null;
+  project_estimated_price: string | null;
+  total_project_working_time: string;
+  created_at: string;
+  updated_at: string;
+  image_url: string;
+  photos: ProjectPhoto[];
+  photoshoots: Photoshoot[];
+  photoReferences: PhotoReference[];
+  likes_count: number;
+  is_liked_by_user: boolean;
+  category: {
+    id: number;
+    name: string;
+  };
+  fandom: {
+    id: number;
+    name: string;
+    category1: string | null;
+    category2: string | null;
+    status: string;
+    created_at: string;
+    updated_at: string;
+  } | null;
+  origin: {
+    id: number;
+    name: string;
+    category1: string | null;
+    category2: string | null;
+    status: string;
+    created_at: string;
+    updated_at: string;
+  } | null;
+  user: {
+    id: number;
+    email: string;
+    customer_id: string | null;
+    is_admin: boolean;
+    is_premium: boolean;
+    account_status: string;
+    subscription_status: string;
+    profile: {
+      id: number;
+      user_id: number;
+      name: string;
+      slug: string;
+      description: string | null;
+      locale: string;
+      avatar: string;
+      cover: string;
+      has_avatar: boolean;
+      has_cover: boolean;
+    };
+  };
+  elements: Array<{
+    id: number;
+    title: string;
+    type: string;
+    price: string | number | null;
+    is_done: boolean;
+    to_make: boolean;
+    project_id: number;
+    category_id: number | null;
+    parent_id: number | null;
+    total_working_time: string;
+  }>;
+}
+
 export interface PhotoMedia {
   id: string;
   name: string;

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../styles/index.css";
-import { AuthProvider } from "./lib/auth-context";
+import { AuthProviderWrapper } from "./features/auth";
 import { LocaleProvider } from "./lib/locale-context";
 
 const geistSans = Geist({
@@ -14,13 +14,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+import { getServerLocale } from "./lib/server-locale";
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://cosflow.app'),
   title: {
-    default: 'Cosflow - Plateforme de gestion de projets cosplay',
+    default: 'Cosflow',
     template: '%s | Cosflow',
   },
-  description: 'La plateforme tout-en-un pour gérer vos projets cosplay, collaborer avec des photographes et partager votre passion.',
   robots: {
     index: true,
     follow: true,
@@ -30,20 +31,23 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getServerLocale();
+  const lang = locale === 'fr' ? 'fr' : 'en';
+
   return (
-    <html lang="fr">
+    <html lang={lang}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <LocaleProvider>
-          <AuthProvider>
+          <AuthProviderWrapper>
             {children}
-          </AuthProvider>
+          </AuthProviderWrapper>
         </LocaleProvider>
       </body>
     </html>

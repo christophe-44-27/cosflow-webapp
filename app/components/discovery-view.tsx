@@ -6,7 +6,7 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { apiService } from '../lib/api';
+import { publicApiService } from '../lib/services';
 import { User, Project } from '../lib/types';
 import { useTranslations } from '../lib/locale-context';
 
@@ -38,7 +38,7 @@ export function DiscoveryView() {
             try {
                 setIsLoadingCreators(true);
                 setCreatorsError(null);
-                const response = await apiService.getUsers({
+                const response = await publicApiService.getUsers({
                     per_page: 4,
                     sort: '-id'
                 });
@@ -59,7 +59,7 @@ export function DiscoveryView() {
             try {
                 setIsLoadingProjects(true);
                 setProjectsError(null);
-                const response = await apiService.getProjects({
+                const response = await publicApiService.getProjects({
                     page: currentPage,
                     per_page: perPage,
                     sort: '-id'
@@ -82,7 +82,7 @@ export function DiscoveryView() {
 
     return (
         <div className="flex-1">
-            <Header title={t.discovery.title} showSearch={false} />
+            <Header title={t.discovery.title} />
 
             <div className="p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
                 {/* Featured Creators */}

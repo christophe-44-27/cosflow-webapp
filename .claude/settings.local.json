@@ -5,7 +5,9 @@
       "Bash(npm run build:*)",
       "Bash(npm install:*)",
       "Bash(grep:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(yarn build:*)",
+      "Bash(ls:*)"
     ]
   }
 }

@@ -2,7 +2,7 @@
 
 import { Header } from './header';
 import { Camera, Users, Image, Calendar, Zap, Shield, Star, ArrowRight, CheckCircle, Smartphone } from 'lucide-react';
-import { useAuth } from '../lib/auth-context';
+import { useAuth } from '@/app/features/auth';
 import { useTranslations } from '../lib/locale-context';
 
 export function LandingView() {
@@ -44,7 +44,7 @@ export function LandingView() {
 
     return (
         <div className="min-h-screen">
-            <Header title={t.landing.welcome} showSearch={false} />
+            <Header title={t.landing.welcome} />
 
             <div className="overflow-hidden pt-20 md:pt-0">
                 {/* Hero Section */}

@@ -19,6 +19,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'cosflow-media.s3.ca-central-1.amazonaws.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'd1f4vr4f1px6z.cloudfront.net',
+      },
     ],
   },
 };

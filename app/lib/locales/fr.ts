@@ -275,13 +275,6 @@ export const fr = {
   account: {
     title: 'Mon Compte',
     viewPublicProfile: 'Voir le profil public',
-    stats: {
-      title: 'Statistiques',
-      projects: 'Projets',
-      galleries: 'Galeries',
-      followers: 'Abonnés',
-      following: 'Abonnements',
-    },
     personalInfo: {
       title: 'Informations personnelles',
       name: 'Pseudonyme',
@@ -290,15 +283,65 @@ export const fr = {
       bio: 'Bio',
       saveChanges: 'Sauvegarder les modifications',
     },
+    profile: {
+      avatarUpload: {
+        title: 'Modifier l\'avatar',
+        subtitle: 'Télécharger une nouvelle photo de profil',
+        selectImage: 'Sélectionner une image',
+        changeImage: 'Changer l\'image',
+        upload: 'Télécharger',
+        uploading: 'Téléchargement...',
+        cancel: 'Annuler',
+        requirements: 'Exigences :',
+        formatRequirement: 'Formats : JPEG, PNG, JPG, GIF, WEBP',
+        sizeRequirement: 'Taille maximale : 2 Mo',
+        dimensionRequirement: 'Recommandé : Image carrée (1:1)',
+      },
+      coverUpload: {
+        title: 'Modifier la couverture',
+        subtitle: 'Télécharger une nouvelle image de couverture',
+        selectImage: 'Sélectionner une image',
+        changeImage: 'Changer l\'image',
+        upload: 'Télécharger',
+        uploading: 'Téléchargement...',
+        cancel: 'Annuler',
+        requirements: 'Exigences :',
+        formatRequirement: 'Formats : JPEG, PNG, JPG, GIF, WEBP',
+        sizeRequirement: 'Taille maximale : 2 Mo',
+        dimensionRequirement: 'Recommandé : 820x312px (ratio ~2.6:1)',
+      },
+    },
     security: {
       title: 'Sécurité',
       changePassword: {
         title: 'Changer le mot de passe',
         lastModified: 'Dernière modification il y a 3 mois',
       },
-      twoFactor: {
-        title: 'Authentification à deux facteurs',
-        status: 'Non activée',
+      changePasswordModal: {
+        title: 'Changer le mot de passe',
+        subtitle: 'Mettez à jour votre mot de passe pour sécuriser votre compte',
+        currentPassword: 'Mot de passe actuel',
+        newPassword: 'Nouveau mot de passe',
+        confirmNewPassword: 'Confirmer le nouveau mot de passe',
+        passwordRequirements: 'Le mot de passe doit contenir au moins 8 caractères',
+        submitButton: 'Mettre à jour le mot de passe',
+        updatingButton: 'Mise à jour...',
+        cancelButton: 'Annuler',
+        validation: {
+          currentPasswordRequired: 'Le mot de passe actuel est requis',
+          passwordRequired: 'Le mot de passe est requis',
+          passwordMinLength: 'Le mot de passe doit contenir au moins 8 caractères',
+          passwordsMatch: 'Les mots de passe ne correspondent pas',
+        },
+        errors: {
+          incorrectPassword: 'Le mot de passe actuel est incorrect',
+          unauthorized: 'Votre session a expiré. Veuillez vous reconnecter.',
+          serverError: 'Une erreur est survenue. Veuillez réessayer.',
+        },
+        success: {
+          title: 'Mot de passe mis à jour',
+          message: 'Votre mot de passe a été mis à jour avec succès.',
+        },
       },
     },
     privacy: {
@@ -306,17 +349,6 @@ export const fr = {
       publicProfile: {
         title: 'Profil public',
         description: 'Votre profil est visible par tous',
-      },
-      emailNotifications: {
-        title: 'Notifications par email',
-        description: 'Recevoir les mises à jour par email',
-      },
-    },
-    data: {
-      title: 'Données',
-      export: {
-        title: 'Exporter mes données',
-        description: 'Télécharger une copie de vos informations',
       },
     },
   },

@@ -19,6 +19,15 @@ export interface AuthUser {
     has_cover: boolean;
     is_complete: boolean;
     completion_percentage: number;
+    currency: {
+      id: number;
+      name: string;
+      code_iso: string;
+    } | null;
+    country: {
+      id: number;
+      name: string;
+    } | null;
   };
 }
 

@@ -277,13 +277,6 @@ export const en: Translations = {
   account: {
     title: 'My Account',
     viewPublicProfile: 'View public profile',
-    stats: {
-      title: 'Statistics',
-      projects: 'Projects',
-      galleries: 'Galleries',
-      followers: 'Followers',
-      following: 'Following',
-    },
     personalInfo: {
       title: 'Personal information',
       name: 'Pseudonym',
@@ -292,15 +285,65 @@ export const en: Translations = {
       bio: 'Bio',
       saveChanges: 'Save changes',
     },
+    profile: {
+      avatarUpload: {
+        title: 'Update Avatar',
+        subtitle: 'Upload a new profile picture',
+        selectImage: 'Select an image',
+        changeImage: 'Change image',
+        upload: 'Upload',
+        uploading: 'Uploading...',
+        cancel: 'Cancel',
+        requirements: 'Requirements:',
+        formatRequirement: 'Formats: JPEG, PNG, JPG, GIF, WEBP',
+        sizeRequirement: 'Maximum size: 2 MB',
+        dimensionRequirement: 'Recommended: Square image (1:1)',
+      },
+      coverUpload: {
+        title: 'Update Cover',
+        subtitle: 'Upload a new cover image',
+        selectImage: 'Select an image',
+        changeImage: 'Change image',
+        upload: 'Upload',
+        uploading: 'Uploading...',
+        cancel: 'Cancel',
+        requirements: 'Requirements:',
+        formatRequirement: 'Formats: JPEG, PNG, JPG, GIF, WEBP',
+        sizeRequirement: 'Maximum size: 2 MB',
+        dimensionRequirement: 'Recommended: 820x312px (ratio ~2.6:1)',
+      },
+    },
     security: {
       title: 'Security',
       changePassword: {
         title: 'Change password',
         lastModified: 'Last modified 3 months ago',
       },
-      twoFactor: {
-        title: 'Two-factor authentication',
-        status: 'Not enabled',
+      changePasswordModal: {
+        title: 'Change Password',
+        subtitle: 'Update your password to keep your account secure',
+        currentPassword: 'Current password',
+        newPassword: 'New password',
+        confirmNewPassword: 'Confirm new password',
+        passwordRequirements: 'Password must be at least 8 characters',
+        submitButton: 'Update password',
+        updatingButton: 'Updating...',
+        cancelButton: 'Cancel',
+        validation: {
+          currentPasswordRequired: 'Current password is required',
+          passwordRequired: 'Password is required',
+          passwordMinLength: 'Password must be at least 8 characters',
+          passwordsMatch: 'Passwords do not match',
+        },
+        errors: {
+          incorrectPassword: 'Current password is incorrect',
+          unauthorized: 'Your session has expired. Please log in again.',
+          serverError: 'An error occurred. Please try again.',
+        },
+        success: {
+          title: 'Password updated',
+          message: 'Your password has been successfully updated.',
+        },
       },
     },
     privacy: {
@@ -308,17 +351,6 @@ export const en: Translations = {
       publicProfile: {
         title: 'Public profile',
         description: 'Your profile is visible to everyone',
-      },
-      emailNotifications: {
-        title: 'Email notifications',
-        description: 'Receive updates by email',
-      },
-    },
-    data: {
-      title: 'Data',
-      export: {
-        title: 'Export my data',
-        description: 'Download a copy of your information',
       },
     },
   },

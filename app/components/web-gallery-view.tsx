@@ -1,6 +1,6 @@
 'use client';
 
-import { Header } from './header';
+
 import { Heart, Camera, Eye, SlidersHorizontal } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
@@ -84,9 +84,7 @@ export function WebGalleryView() {
 
     return (
         <div className="flex-1">
-            <Header title="Galerie Publique" />
-
-            <div className="p-8 space-y-6">
+            <div className="py-8 space-y-6">
                 {/* Filters */}
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">

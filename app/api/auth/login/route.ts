@@ -84,7 +84,6 @@ export async function POST(request: NextRequest) {
     });
 
     // Fetch user info after successful login
-    console.log('Fetching user from:', apiUrl(auth.userEndpoint));
     const userResponse = await fetch(apiUrl(auth.userEndpoint), {
       headers: {
         'Authorization': `Bearer ${tokenData.access_token}`,
@@ -92,7 +91,6 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    console.log('User fetch status:', userResponse.status);
 
     if (!userResponse.ok) {
       const errorText = await userResponse.text();
@@ -105,7 +103,6 @@ export async function POST(request: NextRequest) {
     }
 
     const userData = await userResponse.json();
-    console.log('User data received:', userData);
 
     return NextResponse.json({
       success: true,

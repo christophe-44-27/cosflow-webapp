@@ -30,14 +30,6 @@ export function ProfileForm() {
       const currId = user.profile?.currency?.id?.toString() || '';
       const cntryId = user.profile?.country?.id?.toString() || '';
 
-      console.log('🔍 Initializing form with:', {
-        currency: user.profile?.currency,
-        currId,
-        country: user.profile?.country,
-        cntryId,
-        currenciesLoaded: currencies.length,
-        countriesLoaded: countries.length,
-      });
 
       setName(user.profile?.name || '');
       setEmail(user.email || '');
@@ -84,13 +76,6 @@ export function ProfileForm() {
       updateAppLocale(locale);
     }
   };
-
-  console.log('📊 Current state:', {
-    currencyId,
-    countryId,
-    currenciesLoaded: currencies.length,
-    countriesLoaded: countries.length,
-  });
 
   if (!user) {
     return null;

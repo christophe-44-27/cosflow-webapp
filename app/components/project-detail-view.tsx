@@ -1,11 +1,11 @@
 'use client';
 
-import { Header } from './header';
+
 import { Heart, Camera, Share2, Calendar, Image as ImageIcon, X, ChevronLeft, ChevronRight, Clock, DollarSign } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/app/features/auth';
-import { publicApiService } from '../lib/services';
-import { ProjectDetail } from '../lib/types';
+import { projectService } from '../lib/services';
+import { ProjectDetail } from '@/app/types/models';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import Link from 'next/link';
 import { useTranslations } from '../lib/locale-context';
@@ -31,7 +31,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
             try {
                 setIsLoading(true);
                 setError(null);
-                const response = await publicApiService.getProject(slug);
+                const response = await projectService.getProject(slug);
                 setProject(response.data);
                 setIsLiked(response.data.is_liked_by_user || false);
             } catch (err) {
@@ -134,8 +134,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
     if (isLoading) {
         return (
             <div className="flex-1">
-                <Header title={t.projectDetail.loading} />
-                <div className="p-8">
+                <div className="py-8">
                     <div className="animate-pulse space-y-6">
                         <div className="h-96 bg-white/5 rounded-2xl"></div>
                         <div className="h-8 bg-white/5 rounded w-1/2"></div>
@@ -149,8 +148,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
     if (error || !project) {
         return (
             <div className="flex-1">
-                <Header title={t.projectDetail.error} />
-                <div className="p-8">
+                <div className="py-8">
                     <div className="bg-red-500/10 border border-red-500/50 rounded-2xl p-6 text-red-500 text-center">
                         {error || t.projectDetail.projectNotFound}
                     </div>
@@ -161,9 +159,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
 
     return (
         <div className="flex-1">
-            <Header title={project.title} />
-
-            <div className="p-8 space-y-6">
+            <div className="py-8 space-y-6">
                 {/* Project Header - Compact Layout */}
                 <div className="bg-secondary border border-white/10 rounded-2xl overflow-hidden">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">

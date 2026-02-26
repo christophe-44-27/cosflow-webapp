@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useLocale } from '@/app/lib/locale-context';
-import { Header } from '@/app/components/header';
+
 import { ChevronDown, ChevronUp, Settings, Camera, Clock, ListChecks, AlertTriangle, Loader2, Trash2 } from 'lucide-react';
 import {
   useProjectData,
@@ -46,6 +46,7 @@ export function ProjectOwnerView({ slug }: ProjectOwnerViewProps) {
     refetch,
     setElements,
     setTimeEntries,
+    setCategories,
   } = useProjectData(slug, locale);
 
   // Budget calculations
@@ -59,6 +60,7 @@ export function ProjectOwnerView({ slug }: ProjectOwnerViewProps) {
     slug,
     onRefetch: refetch,
     setElements,
+    setCategories,
   });
 
   // Time entries management
@@ -98,9 +100,7 @@ export function ProjectOwnerView({ slug }: ProjectOwnerViewProps) {
 
   return (
     <div className="flex-1">
-      <Header title={project.title} />
-
-      <div className="p-8 space-y-6">
+      <div className="py-8 space-y-6">
         {/* === Section: Informations du projet === */}
         <div className="bg-secondary border border-white/10 rounded-2xl overflow-hidden">
           <button

@@ -1,11 +1,10 @@
 'use client';
 
-import { Header } from './header';
 import { Image, SlidersHorizontal, MoreVertical, Calendar, Users, ChevronLeft, ChevronRight, Lock, Globe, Search, X, ArrowUpDown, Clock, CheckCircle, Circle, Eye, EyeOff } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { MyProject, ApiResponse } from '../lib/types';
+import { ProjectDetail, ApiResponse } from '@/app/types/models';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useTranslations, useLocale } from '../lib/locale-context';
 
@@ -30,7 +29,7 @@ export function WebProjectsView() {
     const searchParams = useSearchParams();
     const t = useTranslations();
     const { locale } = useLocale();
-    const [projects, setProjects] = useState<MyProject[]>([]);
+    const [projects, setProjects] = useState<ProjectDetail[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState(() => {
@@ -122,7 +121,7 @@ export function WebProjectsView() {
                     throw new Error('Failed to fetch projects');
                 }
 
-                const data: ApiResponse<MyProject[]> = await response.json();
+                const data: ApiResponse<ProjectDetail[]> = await response.json();
                 setProjects(data.data);
                 if (data.meta) {
                     setTotalPages(data.meta.last_page);
@@ -151,9 +150,7 @@ export function WebProjectsView() {
 
     return (
         <div className="flex-1">
-            <Header title={t.projects.title} />
-
-            <div className="p-8 space-y-6">
+            <div className="py-8 space-y-6">
                 {/* Stats Overview */}
                 <div className="grid grid-cols-4 gap-6">
                     <div className="bg-gradient-to-br from-primary to-primary/70 rounded-2xl p-6">

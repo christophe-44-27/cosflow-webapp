@@ -1,4 +1,4 @@
-// Re-export project-related types from lib/types for convenience
+// Re-export project-related types from canonical models location
 export type {
   Project,
   ProjectDetail,
@@ -6,4 +6,4 @@ export type {
   PhotoMedia,
   PhotoReference,
   UserProfileProject,
-} from '@/app/lib/types';
+} from '@/app/types/models';

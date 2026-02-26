@@ -1,6 +1,6 @@
 'use client';
 
-import { Header } from './header';
+
 import {
     Camera,
     Share2,
@@ -17,8 +17,8 @@ import {
 } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/app/features/auth';
-import { publicApiService } from '../lib/services';
-import { UserProfile, SocialLink, UserProfileProject, Event, Photoshoot } from '../lib/types';
+import { userService } from '../lib/services';
+import { UserProfile, SocialLink, UserProfileProject, Event, Photoshoot } from '@/app/types/models';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import Link from 'next/link';
 import { useLocale } from '../lib/locale-context';
@@ -173,7 +173,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
             try {
                 setIsLoadingProfile(true);
                 setProfileError(null);
-                const response = await publicApiService.getUserProfile(slug);
+                const response = await userService.getUserProfile(slug);
                 setProfile(response.data);
                 setIsFollowing(response.data.is_following || false);
             } catch (err) {
@@ -194,7 +194,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
         const fetchProjects = async () => {
             try {
                 setIsLoadingProjects(true);
-                const response = await publicApiService.getUserProjects(slug, {
+                const response = await userService.getUserProjects(slug, {
                     page: projectsPage,
                     per_page: perPage
                 });
@@ -224,7 +224,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
         const fetchEvents = async () => {
             try {
                 setIsLoadingEvents(true);
-                const response = await publicApiService.getUserEvents(slug, {
+                const response = await userService.getUserEvents(slug, {
                     page: eventsPage,
                     per_page: perPage
                 });
@@ -254,7 +254,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
         const fetchPhotoshoots = async () => {
             try {
                 setIsLoadingPhotoshoots(true);
-                const response = await publicApiService.getUserPhotoshoots(slug, {
+                const response = await userService.getUserPhotoshoots(slug, {
                     page: photoshootsPage,
                     per_page: perPage
                 });
@@ -374,8 +374,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
     if (isLoadingProfile) {
         return (
             <div className="flex-1">
-                <Header title={t.profile.loading} />
-                <div className="p-8">
+                <div className="py-8">
                     <div className="animate-pulse space-y-6">
                         <div className="h-48 bg-white/5 rounded-2xl"></div>
                         <div className="h-8 bg-white/5 rounded w-1/3"></div>
@@ -394,8 +393,7 @@ export function ProfileView({ slug }: ProfileViewProps) {
     if (profileError || !profile) {
         return (
             <div className="flex-1">
-                <Header title={t.profile.error} />
-                <div className="p-8">
+                <div className="py-8">
                     <div className="bg-red-500/10 border border-red-500/50 rounded-2xl p-6 text-red-500 text-center">
                         {profileError || t.profile.profileNotFound}
                     </div>
@@ -446,8 +444,6 @@ export function ProfileView({ slug }: ProfileViewProps) {
 
     return (
         <div className="flex-1">
-            <Header title={profile.name} />
-
             <div className="space-y-6">
                 {/* Profile Header with Cover */}
                 <div className="relative">

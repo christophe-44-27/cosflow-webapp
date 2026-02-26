@@ -1,13 +1,13 @@
 'use client';
 
-import { Header } from './header';
+
 import { MapPin, Search, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { publicApiService } from '../lib/services';
-import { User } from '../lib/types';
+import { userService } from '../lib/services';
+import { User } from '@/app/types/models';
 import { useTranslations } from '../lib/locale-context';
 
 export function WebCreatorsView() {
@@ -36,7 +36,7 @@ export function WebCreatorsView() {
             try {
                 setIsLoading(true);
                 setError(null);
-                const response = await publicApiService.getUsers({
+                const response = await userService.getUsers({
                     page: currentPage,
                     per_page: perPage,
                     sort: '-id'
@@ -69,9 +69,7 @@ export function WebCreatorsView() {
 
     return (
         <div className="flex-1">
-            <Header title={t.creators.title} />
-
-            <div className="p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
+            <div className="py-6 sm:py-8 space-y-6 sm:space-y-8">
                 {/* Search Bar */}
                 <div className="bg-secondary border border-white/10 rounded-2xl p-4 sm:p-6">
                     <div className="relative">

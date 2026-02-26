@@ -1,4 +1,4 @@
-// Re-export user-related types from lib/types for convenience
+// Re-export user-related types from canonical models location
 export type {
   User,
   UserProfile,
@@ -6,4 +6,4 @@ export type {
   Event,
   Photoshoot,
   PhotoshootImage,
-} from '@/app/lib/types';
+} from '@/app/types/models';

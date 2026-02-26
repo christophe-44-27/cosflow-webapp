@@ -44,7 +44,6 @@ export function useProfileUpdate({ onSuccess }: UseProfileUpdateOptions = {}) {
       setIsUpdating(true);
 
       try {
-        console.log('📤 Updating profile:', payload);
 
         const response = await fetch('/api/user/profile', {
           method: 'POST',
@@ -55,9 +54,6 @@ export function useProfileUpdate({ onSuccess }: UseProfileUpdateOptions = {}) {
         });
 
         if (response.ok) {
-          const responseData = await response.json();
-          console.log('✅ Profile updated:', responseData);
-
           // Refresh user data in context
           await refreshUser();
 

@@ -30,7 +30,6 @@ export async function GET(
 
     const finalUrl = apiUrl(API_ENDPOINTS.projects.detail(slug));
 
-    console.log('Fetching project (private) from:', finalUrl);
 
     const response = await fetch(finalUrl, {
       headers: {
@@ -104,10 +103,6 @@ export async function POST(
         },
         body: formData,
       });
-
-      console.log('Response:', response.body);
-      console.log('Response status:', response.status);
-      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
     } else {
       // JSON request
       const body = await request.json();
@@ -185,7 +180,6 @@ export async function DELETE(
 
     const finalUrl = apiUrl(API_ENDPOINTS.projects.delete(slug));
 
-    console.log('Deleting project:', finalUrl);
 
     const response = await fetch(finalUrl, {
       method: 'DELETE',

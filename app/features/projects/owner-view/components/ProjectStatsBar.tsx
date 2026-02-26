@@ -1,12 +1,13 @@
 'use client';
 
 import { TrendingUp, TrendingDown } from 'lucide-react';
-import { ProjectDetail } from '@/app/lib/types';
+import { ProjectDetail } from '@/app/types/models';
 import { formatBudget } from '@/app/lib/budget-utils';
 
 interface ProjectStatsBarProps {
   project: ProjectDetail;
   locale: string;
+  progression: number;
   actualBudget: number;
   estimatedBudget: number | null;
   budgetDifference: number | null;
@@ -19,6 +20,7 @@ interface ProjectStatsBarProps {
 export function ProjectStatsBar({
   project,
   locale,
+  progression,
   actualBudget,
   estimatedBudget,
   budgetDifference,
@@ -30,7 +32,7 @@ export function ProjectStatsBar({
     <div className="grid grid-cols-5 gap-4 pt-4 border-t border-white/10">
       <div className="text-center">
         <p className="text-white/50 text-xs">{t.projectInfo.progression}</p>
-        <p className="text-white text-lg font-bold">{project.progression}%</p>
+        <p className="text-white text-lg font-bold">{progression}%</p>
       </div>
       <div className="text-center">
         <p className="text-white/50 text-xs">{t.projectInfo.total_time}</p>

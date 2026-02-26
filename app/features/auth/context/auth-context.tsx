@@ -21,11 +21,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const fetchUser = useCallback(async () => {
     try {
       const response = await fetch('/api/auth/me');
-      console.log('Fetch user response status:', response.status);
 
       if (response.ok) {
         const data = await response.json();
-        console.log('Fetched user data:', data);
         setUser(data.user);
       } else if (response.status === 401) {
         // Try to refresh the token
@@ -86,7 +84,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       });
 
       const data = await response.json();
-      console.log('Login response:', data);
 
       if (!response.ok) {
         setError(data.error || 'Login failed');
@@ -96,10 +93,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       // If user data is returned, use it; otherwise fetch it
       if (data.user) {
-        console.log('Setting user from login response:', data.user);
         setUser(data.user);
       } else {
-        console.log('No user in response, fetching user data...');
         // Fetch user data after successful login
         await fetchUser();
       }

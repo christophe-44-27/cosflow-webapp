@@ -59,7 +59,6 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
     try {
       // TODO: Implement signup API call when available
       // For now, just show a message
-      console.log('Signup data:', data);
 
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));

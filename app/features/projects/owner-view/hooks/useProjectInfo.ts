@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { ProjectDetail } from '@/app/lib/types';
+import { ProjectDetail } from '@/app/types/models';
 import { useRouter } from 'next/navigation';
 
 interface UseProjectInfoProps {

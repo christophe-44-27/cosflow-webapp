@@ -1,6 +1,5 @@
 'use client';
 
-import { Header } from './header';
 import { Camera, Users, Image, Calendar, Zap, Shield, Star, ArrowRight, CheckCircle, Smartphone } from 'lucide-react';
 import { useAuth } from '@/app/features/auth';
 import { useTranslations } from '../lib/locale-context';
@@ -44,11 +43,9 @@ export function LandingView() {
 
     return (
         <div className="min-h-screen">
-            <Header title={t.landing.welcome} />
-
-            <div className="overflow-hidden pt-20 md:pt-0">
+            <div className="overflow-hidden">
                 {/* Hero Section */}
-                <section className="relative px-6 md:px-8 pt-6 md:pt-20 pb-6 md:pb-0">
+                <section className="relative pt-6 md:pt-20 pb-6 md:pb-0">
                     <div className="max-w-6xl mx-auto">
                         <div className="text-center mb-8 md:mb-16">
                             <h1 className="text-white text-4xl md:text-6xl mb-3 md:mb-6">
@@ -69,7 +66,7 @@ export function LandingView() {
                 </section>
 
                 {/* Features Grid */}
-                <section className="px-6 md:px-8 py-8 md:py-20">
+                <section className="py-8 md:py-20">
                     <div className="max-w-6xl mx-auto">
                         <h2 className="text-white text-3xl md:text-4xl text-center mb-10 md:mb-16">
                             {t.landing.features.title}
@@ -100,7 +97,7 @@ export function LandingView() {
                 </section>
 
                 {/* How It Works Section */}
-                <section className="px-4 md:px-8 py-12 md:py-20">
+                <section className="py-12 md:py-20">
                     <div className="max-w-6xl mx-auto">
                         <div className="text-center mb-8 md:mb-16">
                             <h2 className="text-white text-2xl md:text-4xl mb-4">
@@ -146,7 +143,7 @@ export function LandingView() {
                 </section>
 
                 {/* Benefits Section */}
-                <section className="px-4 md:px-8 py-12 md:py-20 bg-gradient-to-b from-white/5 to-transparent">
+                <section className="py-12 md:py-20 bg-gradient-to-b from-white/5 to-transparent">
                     <div className="max-w-6xl mx-auto">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
                             <div>
@@ -209,7 +206,7 @@ export function LandingView() {
                 </section>
 
                 {/* CTA Section */}
-                <section className="px-4 md:px-8 py-12 md:py-20">
+                <section className="py-12 md:py-20">
                     <div className="max-w-4xl mx-auto">
                         <div className="relative overflow-hidden bg-gradient-to-br from-primary to-tertiary rounded-2xl md:rounded-3xl p-8 md:p-12 text-center">
                             <div className="absolute top-0 right-0 w-32 h-32 md:w-64 md:h-64 bg-white/10 rounded-full -mr-16 md:-mr-32 -mt-16 md:-mt-32" />
@@ -240,7 +237,7 @@ export function LandingView() {
                 </section>
 
                 {/* Store and Discord Links */}
-                <section className="px-4 md:px-8 py-12 md:py-20 bg-gradient-to-b from-white/5 to-transparent">
+                <section className="py-12 md:py-20 bg-gradient-to-b from-white/5 to-transparent">
                     <div className="max-w-6xl mx-auto">
                         <div className="text-center mb-8 md:mb-16">
                             <h2 className="text-white text-2xl md:text-4xl mb-4">

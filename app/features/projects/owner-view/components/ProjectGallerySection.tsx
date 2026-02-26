@@ -1,7 +1,7 @@
 'use client';
 
 import { Camera, Image as ImageIcon } from 'lucide-react';
-import { ProjectDetail } from '@/app/lib/types';
+import { ProjectDetail } from '@/app/types/models';
 import { ImageWithFallback } from '@/app/components/figma/ImageWithFallback';
 
 interface ProjectGallerySectionProps {

@@ -1,13 +1,13 @@
 'use client';
 
-import { Header } from './header';
+
 import {Heart, Camera, MapPin, ChevronLeft, ChevronRight} from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { publicApiService } from '../lib/services';
-import { User, Project } from '../lib/types';
+import { userService, projectService } from '../lib/services';
+import { User, Project } from '@/app/types/models';
 import { useTranslations } from '../lib/locale-context';
 
 export function DiscoveryView() {
@@ -26,7 +26,7 @@ export function DiscoveryView() {
     });
     const [totalPages, setTotalPages] = useState(1);
     const [totalProjects, setTotalProjects] = useState(0);
-    const perPage = 6;
+    const perPage = 8;
 
     const updatePage = (newPage: number) => {
         setCurrentPage(newPage);
@@ -38,7 +38,7 @@ export function DiscoveryView() {
             try {
                 setIsLoadingCreators(true);
                 setCreatorsError(null);
-                const response = await publicApiService.getUsers({
+                const response = await userService.getUsers({
                     per_page: 4,
                     sort: '-id'
                 });
@@ -59,7 +59,7 @@ export function DiscoveryView() {
             try {
                 setIsLoadingProjects(true);
                 setProjectsError(null);
-                const response = await publicApiService.getProjects({
+                const response = await projectService.getProjects({
                     page: currentPage,
                     per_page: perPage,
                     sort: '-id'
@@ -82,9 +82,7 @@ export function DiscoveryView() {
 
     return (
         <div className="flex-1">
-            <Header title={t.discovery.title} />
-
-            <div className="p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
+            <div className="py-6 sm:py-8 space-y-6 sm:space-y-8">
                 {/* Featured Creators */}
                 <div>
                     <div className="flex items-center justify-between mb-4 sm:mb-6">
@@ -193,8 +191,8 @@ export function DiscoveryView() {
                     </div>
 
                     {isLoadingProjects ? (
-                        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
-                            {[1, 2, 3, 4, 5, 6].map((i) => (
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+                            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
                                 <div
                                     key={i}
                                     className="bg-secondary border border-white/10 rounded-2xl overflow-hidden animate-pulse"
@@ -212,7 +210,7 @@ export function DiscoveryView() {
                             <p className="text-red-400 text-sm sm:text-base">{projectsError}</p>
                         </div>
                     ) : (
-                        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
                             {publicProjects.map((project) => {
                                 const authorInitial = project.username.charAt(0).toUpperCase();
 

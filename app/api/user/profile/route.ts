@@ -27,12 +27,6 @@ export async function POST(request: NextRequest) {
     // Get the JSON data from the request
     const data: ProfileUpdateData = await request.json();
 
-    // Debug: Log what we're sending
-    console.log('📤 Updating profile:', {
-      endpoint: apiUrl('/user'),
-      fields: Object.keys(data),
-    });
-
     // Call Laravel backend (POST with JSON)
     const response = await fetch(apiUrl('/user'), {
       method: 'POST',
@@ -44,8 +38,6 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify(data),
     });
 
-    console.log('📥 Laravel response:', response.status);
-
     // Handle success
     if (response.ok) {
       const responseData = await response.json();
@@ -55,7 +47,6 @@ export async function POST(request: NextRequest) {
     // Handle validation errors (422)
     if (response.status === 422) {
       const errorData = await response.json();
-      console.log('❌ Validation errors:', errorData);
       return NextResponse.json(errorData, { status: 422 });
     }
 
@@ -69,7 +60,6 @@ export async function POST(request: NextRequest) {
 
     // Handle other errors
     const errorData = await response.json().catch(() => ({ error: 'Server error' }));
-    console.log('❌ Server error:', errorData);
     return NextResponse.json(errorData, { status: response.status });
 
   } catch (error) {

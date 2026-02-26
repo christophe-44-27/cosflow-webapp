@@ -74,8 +74,6 @@ export async function GET(request: NextRequest) {
     const queryString = queryParts.join('&');
     const finalUrl = apiUrl(`/api/v2/projects?${queryString}`);
 
-    console.log('Fetching projects from:', finalUrl);
-
     const response = await fetch(finalUrl, {
       headers: {
         'Authorization': `Bearer ${accessToken}`,

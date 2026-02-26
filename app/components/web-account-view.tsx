@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Header } from './header';
+
 import { Lock, Bell, Eye, Download, Shield, Camera, ExternalLink, Image as ImageIcon } from 'lucide-react';
 import { useAuth } from '@/app/features/auth';
 import { SubscriptionSection } from '@/app/features/subscription';
@@ -36,13 +36,10 @@ export function WebAccountView() {
 
   const { profile } = user;
 
-  console.log(profile);
 
   return (
     <div className="flex-1">
-      <Header title={t.account.title} />
-
-      <div className="p-4 md:p-8">
+      <div className="py-4 md:py-8">
         {/* Cover Image Section */}
         <div className="mb-6">
           <div className="relative w-full aspect-[2.6/1] rounded-2xl overflow-hidden bg-gradient-to-br from-primary/20 to-tertiary/20 border border-white/10 group">

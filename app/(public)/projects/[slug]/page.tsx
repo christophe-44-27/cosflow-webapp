@@ -3,7 +3,7 @@ import { ProjectDetailView } from '@/app/components/project-detail-view';
 import { ProjectOwnerView } from '@/app/components/project-owner-view';
 import type { Metadata } from 'next';
 import { getServerTranslations, getServerLocale } from '@/app/lib/server-locale';
-import { publicApiService } from '@/app/lib/services';
+import { projectService } from '@/app/lib/services';
 
 export async function generateMetadata({
   params
@@ -15,7 +15,7 @@ export async function generateMetadata({
   const locale = await getServerLocale();
 
   try {
-    const response = await publicApiService.getProject(slug);
+    const response = await projectService.getProject(slug);
     const project = response.data;
 
     return {

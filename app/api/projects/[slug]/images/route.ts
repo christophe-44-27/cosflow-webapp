@@ -28,8 +28,6 @@ export async function POST(
     const formData = await request.formData();
     const finalUrl = apiUrl(`/api/v2/projects/${slug}/images`);
 
-    console.log('Uploading project image:', finalUrl);
-
     const response = await fetch(finalUrl, {
       method: 'POST',
       headers: {

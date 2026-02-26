@@ -19,14 +19,6 @@ export async function POST(request: NextRequest) {
     // Get the FormData from the request
     const formData = await request.formData();
 
-    // Debug: Log what we're sending
-    console.log('📤 Uploading to Laravel:', {
-      endpoint: apiUrl('/user'),
-      fields: Array.from(formData.keys()),
-      hasImage: formData.has('image'),
-      hasCover: formData.has('cover'),
-    });
-
     // Call Laravel backend (POST with multipart/form-data)
     const response = await fetch(apiUrl('/user'), {
       method: 'POST',
@@ -38,8 +30,6 @@ export async function POST(request: NextRequest) {
       body: formData,
     });
 
-    console.log('📥 Laravel response:', response.status);
-
     // Handle success
     if (response.ok) {
       const data = await response.json();
@@ -49,7 +39,6 @@ export async function POST(request: NextRequest) {
     // Handle validation errors (422)
     if (response.status === 422) {
       const errorData = await response.json();
-      console.log('❌ Validation errors:', errorData);
       return NextResponse.json(errorData, { status: 422 });
     }
 
@@ -63,7 +52,6 @@ export async function POST(request: NextRequest) {
 
     // Handle other errors
     const errorData = await response.json().catch(() => ({ error: 'Server error' }));
-    console.log('❌ Server error:', errorData);
     return NextResponse.json(errorData, { status: response.status });
 
   } catch (error) {

@@ -102,23 +102,12 @@ export function useImageUpload({
       const fieldName = type === 'avatar' ? 'image' : 'cover';
       formData.append(fieldName, selectedFile);
 
-      // Debug: Log FormData contents
-      console.log('📤 Uploading:', {
-        type,
-        fieldName,
-        fileName: selectedFile.name,
-        fileSize: `${(selectedFile.size / 1024 / 1024).toFixed(2)} MB`,
-        fileType: selectedFile.type,
-      });
-
       const response = await fetch('/api/user-profile-image', {
         method: 'POST',
         body: formData,
       });
 
       if (response.ok) {
-        const data = await response.json();
-
         // Refresh user data in context
         await refreshUser();
 

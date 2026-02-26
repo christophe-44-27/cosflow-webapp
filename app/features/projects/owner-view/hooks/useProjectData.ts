@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ProjectDetail } from '@/app/lib/types';
+import { ProjectDetail } from '@/app/types/models';
 import { ProjectElement, TimeEntry, ElementCategory } from '../types';
 
 export function useProjectData(slug: string, locale: string) {
@@ -27,11 +27,31 @@ export function useProjectData(slug: string, locale: string) {
   const fetchProject = async () => {
     try {
       setIsLoading(true);
-      const res = await fetch(`/api/projects/${slug}`);
+      const [res, elemRes] = await Promise.all([
+        fetch(`/api/projects/${slug}`),
+        fetch(`/api/projects/${slug}/elements`),
+      ]);
       if (!res.ok) throw new Error('Failed to fetch project');
       const response = await res.json();
       setProject(response.data);
-      setElements(response.data.elements || []);
+
+      // Use dedicated elements endpoint (has `position`), flatten if nested
+      let rawElements: ProjectElement[] = response.data.elements || [];
+      if (elemRes.ok) {
+        const elemData = await elemRes.json();
+        const list: ProjectElement[] = elemData.data || [];
+        // Flatten nested structure if API returns children embedded in parents
+        const flat: ProjectElement[] = [];
+        for (const el of list) {
+          const { children, ...rest } = el as ProjectElement & { children?: ProjectElement[] };
+          flat.push(rest);
+          if (children?.length) flat.push(...children);
+        }
+        if (flat.length > 0) rawElements = flat;
+      }
+      setElements(rawElements.map((el: ProjectElement, i: number) =>
+        el.position != null ? el : { ...el, position: i }
+      ));
 
       // Fetch time entries
       const timeRes = await fetch(`/api/timesheets/projects/${slug}`);
@@ -63,6 +83,7 @@ export function useProjectData(slug: string, locale: string) {
     refetch: fetchProject,
     setElements,
     setTimeEntries,
+    setCategories,
   };
 }
 

@@ -4,6 +4,7 @@ import "../styles/index.css";
 import { AuthProviderWrapper } from "./features/auth";
 import { LocaleProvider } from "./lib/locale-context";
 import { Toaster } from "./components/ui/sonner";
+import { BugsnagProvider } from "./components/bugsnag-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,11 +41,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <LocaleProvider>
-          <AuthProviderWrapper>
-            {children}
-          </AuthProviderWrapper>
-        </LocaleProvider>
+        <BugsnagProvider>
+          <LocaleProvider>
+            <AuthProviderWrapper>
+              {children}
+            </AuthProviderWrapper>
+          </LocaleProvider>
+        </BugsnagProvider>
         <Toaster />
       </body>
     </html>

@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import type { AuthUser, LoginCredentials, AuthContextType } from '../types';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -13,7 +13,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [showAuthModal, setShowAuthModal] = useState(false);
 
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const isLoggedIn = !!user;
 
@@ -54,9 +53,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  // Check for authRequired param on mount
+  // Check for authRequired param on mount (window.location évite useSearchParams qui bloque l'ISR)
   useEffect(() => {
-    const authRequired = searchParams.get('authRequired');
+    const params = new URLSearchParams(window.location.search);
+    const authRequired = params.get('authRequired');
     if (authRequired === 'true') {
       setShowAuthModal(true);
       // Clean up the URL
@@ -64,7 +64,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       url.searchParams.delete('authRequired');
       window.history.replaceState({}, '', url.toString());
     }
-  }, [searchParams]);
+  }, []);
 
   useEffect(() => {
     fetchUser();
@@ -102,7 +102,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setShowAuthModal(false);
 
       // Check if there's a returnTo URL
-      const returnTo = searchParams.get('returnTo');
+      const returnTo = new URLSearchParams(window.location.search).get('returnTo');
       if (returnTo) {
         router.push(returnTo);
         // Clean up the URL

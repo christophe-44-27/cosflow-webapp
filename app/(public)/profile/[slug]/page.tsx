@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import { AppLayout } from '@/app/features/shared/components/app-layout';
 import { ProfileView } from '@/app/components/profile-view';
 

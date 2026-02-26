@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { cookies } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 import { SERVER_CONFIG, apiUrl } from '@/app/lib/server-config';
 import { API_ENDPOINTS } from '@/app/lib/api-endpoints';
 
@@ -151,6 +152,7 @@ export async function POST(
     }
 
     const data = await response.json();
+    revalidatePath('/projects/' + slug);
     return NextResponse.json(data);
 
   } catch (error) {
@@ -202,6 +204,7 @@ export async function DELETE(
       );
     }
 
+    revalidatePath('/projects/' + slug);
     return NextResponse.json({ success: true });
 
   } catch (error) {

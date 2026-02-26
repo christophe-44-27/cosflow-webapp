@@ -9,24 +9,39 @@ import { ProjectDetail } from '@/app/types/models';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import Link from 'next/link';
 import { useTranslations } from '../lib/locale-context';
+import { ProjectOwnerView } from './project-owner-view';
 
 interface ProjectDetailViewProps {
     slug: string;
+    initialData?: ProjectDetail | null;
 }
 
-export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
+export function ProjectDetailView({ slug, initialData }: ProjectDetailViewProps) {
     const { isLoggedIn, handleLoginRequired } = useAuth();
     const t = useTranslations();
-    const [project, setProject] = useState<ProjectDetail | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isOwnerView, setIsOwnerView] = useState(false);
+    const [project, setProject] = useState<ProjectDetail | null>(initialData ?? null);
+    const [isLoading, setIsLoading] = useState(!initialData);
     const [error, setError] = useState<string | null>(null);
-    const [isLiked, setIsLiked] = useState(false);
+    const [isLiked, setIsLiked] = useState(initialData?.is_liked_by_user || false);
     const [showCopied, setShowCopied] = useState(false);
     const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
     const [slideshowType, setSlideshowType] = useState<'photos' | 'references' | 'photoshoots'>('photos');
     const [selectedPhotoshootId, setSelectedPhotoshootId] = useState<number | null>(null);
 
+    // Routing owner view côté client uniquement (préserve l'ISR)
     useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        setIsOwnerView(params.get('owner') === 'true');
+    }, []);
+
+    useEffect(() => {
+        // Pas de fetch si les données sont déjà disponibles via SSR
+        if (initialData) {
+            setIsLiked(initialData.is_liked_by_user || false);
+            return;
+        }
+
         const fetchProject = async () => {
             try {
                 setIsLoading(true);
@@ -43,7 +58,7 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
         };
 
         fetchProject();
-    }, [slug, t]);
+    }, [slug, t, initialData]);
 
     const handleLike = () => {
         if (!isLoggedIn) {
@@ -130,6 +145,10 @@ export function ProjectDetailView({ slug }: ProjectDetailViewProps) {
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [selectedPhotoIndex, closeSlideshow, goToPrevious, goToNext]);
+
+    if (isOwnerView) {
+        return <ProjectOwnerView slug={slug} />;
+    }
 
     if (isLoading) {
         return (

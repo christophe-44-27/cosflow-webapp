@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 import { SERVER_CONFIG, apiUrl } from '@/app/lib/server-config';
 
 interface ProfileUpdateData {
@@ -41,6 +42,8 @@ export async function POST(request: NextRequest) {
     // Handle success
     if (response.ok) {
       const responseData = await response.json();
+      const profileSlug = responseData?.data?.profile?.slug || responseData?.profile?.slug;
+      if (profileSlug) revalidatePath('/profile/' + profileSlug);
       return NextResponse.json(responseData);
     }
 

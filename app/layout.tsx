@@ -15,8 +15,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-import { getServerLocale } from "./lib/server-locale";
-
 export const metadata: Metadata = {
   metadataBase: new URL('https://cosflow.app'),
   title: {
@@ -32,16 +30,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = await getServerLocale();
-  const lang = locale === 'fr' ? 'fr' : 'en';
-
   return (
-    <html lang={lang}>
+    <html lang="fr">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

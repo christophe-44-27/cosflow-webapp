@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next';
+import { projectService, userService } from './lib/services';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://app.cosflow.co';
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://cosflow.co';
 
-  return [
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -16,23 +17,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'daily',
       priority: 0.8,
     },
-    {
-      url: `${baseUrl}/gallery`,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/projects`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/events`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.6,
-    },
   ];
+
+  // Fetch public projects
+  let projectRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const response = await projectService.getProjects({ per_page: 100 });
+    projectRoutes = (response.data ?? []).map((project) => ({
+      url: `${baseUrl}/projects/${project.slug}`,
+      lastModified: new Date(project.updated_at ?? Date.now()),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }));
+  } catch {
+    // API indisponible — sitemap dégradé, on continue sans les projets
+  }
+
+  // Fetch public maker profiles
+  let profileRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const response = await userService.getUsers({ per_page: 100 });
+    profileRoutes = (response.data ?? []).map((user) => ({
+      url: `${baseUrl}/profile/${user.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    }));
+  } catch {
+    // API indisponible — sitemap dégradé, on continue sans les profils
+  }
+
+  return [...staticRoutes, ...projectRoutes, ...profileRoutes];
 }

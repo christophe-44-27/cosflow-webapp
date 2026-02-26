@@ -4,6 +4,7 @@ import { cache } from 'react';
 import { AppLayout } from '@/app/features/shared/components/app-layout';
 import { ProjectDetailView } from '@/app/components/project-detail-view';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { getTranslations, defaultLocale } from '@/app/lib/locales';
 import { projectService } from '@/app/lib/services';
 import type { ProjectDetail } from '@/app/types/models';
@@ -13,7 +14,10 @@ const getProject = cache(async (slug: string): Promise<ProjectDetail | null> => 
   try {
     const response = await projectService.getProject(slug);
     return response.data;
-  } catch {
+  } catch (error) {
+    if (error instanceof Error && (error.message.includes('403') || error.message.includes('404'))) {
+      notFound();
+    }
     return null;
   }
 });

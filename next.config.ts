@@ -1,5 +1,20 @@
 import type { NextConfig } from "next";
 
+// Validation des variables d'environnement requises
+const requiredEnvVars = [
+  'NEXT_PUBLIC_API_BASE_URL',
+  'NEXT_PUBLIC_APP_URL',
+] as const;
+
+for (const key of requiredEnvVars) {
+  if (!process.env[key]) {
+    throw new Error(
+      `[Cosflow] Variable d'environnement manquante : ${key}\n` +
+      `Consultez .env.example pour la liste complète des variables requises.`
+    );
+  }
+}
+
 const nextConfig: NextConfig = {
   // Configuration pour le déploiement sur Render
   output: 'standalone',

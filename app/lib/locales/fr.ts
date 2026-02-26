@@ -572,6 +572,14 @@ export const fr = {
       footer: 'Paiement sécurisé via Stripe. Annulez à tout moment.',
     },
   },
+
+  // 404
+  notFound: {
+    code: '404',
+    title: 'Ce projet est introuvable',
+    description: 'La page que tu cherches a peut-être changé d\'identité, été retirée, ou n\'a jamais existé dans cet univers.',
+    cta: 'Retourner à l\'accueil',
+  },
 };
 
 export type Translations = typeof fr;

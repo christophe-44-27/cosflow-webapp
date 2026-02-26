@@ -574,4 +574,12 @@ export const en: Translations = {
       footer: 'Secure payment via Stripe. Cancel anytime.',
     },
   },
+
+  // 404
+  notFound: {
+    code: '404',
+    title: 'This project is nowhere to be found',
+    description: 'The page you\'re looking for may have changed identity, been removed, or never existed in this universe.',
+    cta: 'Back to home',
+  },
 } as const;

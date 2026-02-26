@@ -4,8 +4,8 @@
 export const SERVER_CONFIG = {
   api: {
     baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.cosflow.co',
-    clientId: process.env.NEXT_PUBLIC_API_CLIENT_ID || '',
-    clientSecret: process.env.NEXT_PUBLIC_API_CLIENT_SECRET || '',
+    clientId: process.env.API_CLIENT_ID || '',
+    clientSecret: process.env.API_CLIENT_SECRET || '',
   },
   auth: {
     tokenEndpoint: '/oauth/token',

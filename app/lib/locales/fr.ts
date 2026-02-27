@@ -524,6 +524,18 @@ export const fr = {
     upcoming: 'À venir',
     ongoing: 'En cours',
     past: 'Passé',
+    // Epic 3
+    openToCommission: 'Open to Commission',
+    supportKofi: 'Soutenir sur Ko-fi ↗',
+    supportPatreon: 'Soutenir sur Patreon ↗',
+    records: {
+      title: 'Records Personnels',
+      totalHours: 'heures totales',
+      totalBudget: 'budget total',
+      mostComplex: 'Projet le plus complexe',
+      elements: 'éléments',
+      noProjects: 'Aucun projet complété pour l\'instant',
+    },
   },
 
   // Subscription
@@ -571,6 +583,43 @@ export const fr = {
       selectPlan: 'Choisir ce plan',
       footer: 'Paiement sécurisé via Stripe. Annulez à tout moment.',
     },
+  },
+
+  // Project public view
+  project: {
+    stats: {
+      hours: 'heures',
+      elements: 'éléments',
+      budget: 'budget',
+    },
+    cover: {
+      noImage: 'Photo du projet',
+    },
+    elements: {
+      sectionTitle: 'Éléments',
+      empty: 'Aucun élément pour ce projet',
+    },
+    gallery: {
+      sectionTitle: 'Galerie de référence',
+    },
+    sidebar: {
+      likesLabel: 'personnes aiment ce projet',
+      likeAction: '♡ Liker ce projet',
+      likedAction: '♥ Projet liké',
+      supportKofi: 'Soutenir sur Ko-fi ↗',
+      share: 'Partager ce projet',
+      shareCopied: 'Lien copié !',
+      follow: 'Suivre',
+    },
+  },
+
+  // Engagement (Epic 4)
+  engagement: {
+    likeToastMessage: 'Crée un compte pour liker ✨',
+    likeToastCta: 'Se connecter',
+    profileLikeAction: '♡ Liker',
+    profileLikedAction: '♥ Aimé',
+    profileLikesLabel: 'likes',
   },
 
   // 404

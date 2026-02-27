@@ -526,6 +526,18 @@ export const en: Translations = {
     upcoming: 'Upcoming',
     ongoing: 'Ongoing',
     past: 'Past',
+    // Epic 3
+    openToCommission: 'Open to Commission',
+    supportKofi: 'Support on Ko-fi ↗',
+    supportPatreon: 'Support on Patreon ↗',
+    records: {
+      title: 'Personal Records',
+      totalHours: 'total hours',
+      totalBudget: 'total budget',
+      mostComplex: 'Most complex project',
+      elements: 'elements',
+      noProjects: 'No completed projects yet',
+    },
   },
 
   // Subscription
@@ -573,6 +585,43 @@ export const en: Translations = {
       selectPlan: 'Select this plan',
       footer: 'Secure payment via Stripe. Cancel anytime.',
     },
+  },
+
+  // Project public view
+  project: {
+    stats: {
+      hours: 'hours',
+      elements: 'elements',
+      budget: 'budget',
+    },
+    cover: {
+      noImage: 'Project photo',
+    },
+    elements: {
+      sectionTitle: 'Elements',
+      empty: 'No elements for this project',
+    },
+    gallery: {
+      sectionTitle: 'Reference gallery',
+    },
+    sidebar: {
+      likesLabel: 'people like this project',
+      likeAction: '♡ Like this project',
+      likedAction: '♥ Project liked',
+      supportKofi: 'Support on Ko-fi ↗',
+      share: 'Share this project',
+      shareCopied: 'Link copied!',
+      follow: 'Follow',
+    },
+  },
+
+  // Engagement (Epic 4)
+  engagement: {
+    likeToastMessage: 'Create an account to like ✨',
+    likeToastCta: 'Sign in',
+    profileLikeAction: '♡ Like',
+    profileLikedAction: '♥ Liked',
+    profileLikesLabel: 'likes',
   },
 
   // 404

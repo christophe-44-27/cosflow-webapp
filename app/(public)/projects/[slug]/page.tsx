@@ -80,7 +80,7 @@ export default async function ProjectDetailPage({
   const initialData = await getProject(slug);
 
   return (
-    <AppLayout>
+    <AppLayout noContainer>
       <ProjectPublicView slug={slug} initialData={initialData} />
     </AppLayout>
   );

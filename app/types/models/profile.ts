@@ -39,6 +39,10 @@ export interface UserProfileProject {
   is_private: boolean;
   created_at: string;
   updated_at: string;
+  // Epic 3 — stats for ProjectCard
+  total_project_working_time?: string | null;
+  project_estimated_price?: string | null;
+  elements_count?: number;
 }
 
 export interface ProfileStats {
@@ -47,6 +51,16 @@ export interface ProfileStats {
   followers_count: number;
   following_count: number;
   photoshoots_count?: number;
+}
+
+export interface PersonalRecords {
+  total_hours: number;
+  total_budget: number;
+  most_complex_project: {
+    title: string;
+    slug: string;
+    elements_count: number;
+  } | null;
 }
 
 export interface UserProfile {
@@ -70,4 +84,12 @@ export interface UserProfile {
   profile_completion_percentage: number;
   created_at: string;
   is_following?: boolean;
+  // Epic 3 — new fields
+  open_to_commission?: boolean;
+  ko_fi_url?: string | null;
+  patreon_url?: string | null;
+  personal_records?: PersonalRecords | null;
+  // Epic 4 — likes
+  likes_count?: number;
+  is_liked_by_user?: boolean | null;
 }

@@ -8,6 +8,7 @@ export const API_ENDPOINTS = {
         update: (slug: string) => `/api/v2/projects/${slug}`,
         delete: (slug: string) => `/api/v2/projects/${slug}`,
         images: (slug: string) => `/api/v2/projects/${slug}/images`,
+        like: (slug: string) => `/api/v2/projects/${slug}/like`,
         elements: {
             list: (slug: string) => `/api/v2/projects/${slug}/elements`,
             detail: (slug: string, elementId: string) => `/api/v2/projects/${slug}/elements/${elementId}`,
@@ -17,6 +18,9 @@ export const API_ENDPOINTS = {
         list: '/api/v2/users',
         me: '/api/v2/users/me',
         detail: (slug: string) => `/api/v2/users/${slug}`,
+    },
+    profiles: {
+        like: (slug: string) => `/api/v2/profiles/${slug}/like`,
     },
     projectElements: {
         categories: '/api/v2/project-elements/categories',

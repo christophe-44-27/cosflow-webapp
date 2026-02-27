@@ -52,6 +52,8 @@ export interface ProjectUserProfile {
   required_fields: string[];
   is_verified: boolean;
   verification_status: VerificationStatus;
+  ko_fi_url?: string | null;
+  patreon_url?: string | null;
   login_streak: number;
   last_login_at: string;
   created_at: string;

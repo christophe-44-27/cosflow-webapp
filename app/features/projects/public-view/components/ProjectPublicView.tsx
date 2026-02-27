@@ -3,9 +3,13 @@
 import { useState, useEffect } from 'react';
 import { useLocale } from '@/app/lib/locale-context';
 import { ProjectOwnerView } from '@/app/components/project-owner-view';
-import { ProjectDetailView } from '@/app/components/project-detail-view';
 import { projectService } from '@/app/lib/services';
 import type { ProjectDetail } from '@/app/types/models';
+import { ProjectCoverImage } from './ProjectCoverImage';
+import { ProjectStatsBar } from './ProjectStatsBar';
+import { ProjectElementsList } from './ProjectElementsList';
+import { ProjectGallery } from './ProjectGallery';
+import { ProjectSidebar } from './ProjectSidebar';
 
 interface ProjectPublicViewProps {
   slug: string;
@@ -13,19 +17,14 @@ interface ProjectPublicViewProps {
 }
 
 /**
- * Vue publique d'un projet — Direction B "Maker Pride"
+ * Vue publique d'un projet — Direction D1 "Split Editorial"
  *
- * Structure cible (de haut en bas) :
- *  1. ProjectCoverImage  — cover 16:9 + gradient overlay + maker chip + titre  (Story 2.2)
- *  2. ProjectStatsBar    — 3 colonnes fond primary : heures · éléments · budget  (Story 2.2)
- *  3. ProjectActionsRow  — like + share                                           (Story 2.5)
- *  4. ProjectElementsList / ProjectElementCard                                    (Story 2.3)
- *  5. ProjectGallery     — galerie références 2 col mobile / 3 col desktop        (Story 2.4)
- *  6. MakerCard          — profil maker + lien Ko-fi/Patreon                      (Story 2.5)
- *
- * Scaffold Story 2.1 : délègue à ProjectDetailView pour préserver le rendu
- * existant. Les sections ci-dessus remplaceront progressivement ce contenu
- * dans les Stories 2.2 à 2.5.
+ * Structure (de haut en bas) :
+ *  1. ProjectCoverImage  — hero h-[50vh] full-width + gradient overlay + titre + maker chip
+ *  2. ProjectStatsBar    — full-width bg-[#6259CA] · heures · éléments · budget
+ *  3. Split grid 65/35   — colonne principale (gauche) + sidebar sticky (droite)
+ *     • Colonne principale (65%) : éléments (Story 2.3) + galerie (Story 2.4)
+ *     • Sidebar (35%)           : like + Ko-fi + share + MakerCard (Story 2.5)
  */
 export function ProjectPublicView({ slug, initialData }: ProjectPublicViewProps) {
   const { t } = useLocale();
@@ -42,9 +41,7 @@ export function ProjectPublicView({ slug, initialData }: ProjectPublicViewProps)
 
   // Fallback fetch côté client si le SSR n'a pas pu charger les données
   useEffect(() => {
-    if (initialData) {
-      return;
-    }
+    if (initialData) return;
     const fetchProject = async () => {
       try {
         setIsLoading(true);
@@ -67,12 +64,17 @@ export function ProjectPublicView({ slug, initialData }: ProjectPublicViewProps)
 
   if (isLoading) {
     return (
-      <div className="flex-1">
-        <div className="py-8">
-          <div className="animate-pulse space-y-6">
-            <div className="h-96 bg-white/5 rounded-2xl" />
-            <div className="h-8 bg-white/5 rounded w-1/2" />
-            <div className="h-4 bg-white/5 rounded w-1/4" />
+      <div className="animate-pulse">
+        <div className="h-[50vh] bg-white/5" />
+        <div className="h-20 bg-[#6259CA]/30" />
+        <div className="max-w-screen-xl mx-auto px-4 md:px-6 lg:px-8 mt-8 grid grid-cols-1 lg:grid-cols-[65fr_35fr] gap-8">
+          <div className="space-y-4">
+            <div className="h-8 bg-white/5 rounded w-1/3" />
+            <div className="h-14 bg-white/5 rounded" />
+            <div className="h-14 bg-white/5 rounded" />
+          </div>
+          <div className="space-y-4">
+            <div className="h-32 bg-white/5 rounded" />
           </div>
         </div>
       </div>
@@ -81,19 +83,40 @@ export function ProjectPublicView({ slug, initialData }: ProjectPublicViewProps)
 
   if (error || !project) {
     return (
-      <div className="flex-1">
-        <div className="py-8">
-          <div className="bg-red-500/10 border border-red-500/50 rounded-2xl p-6 text-red-500 text-center">
-            {error || t.projectDetail.projectNotFound}
-          </div>
+      <div className="max-w-screen-xl mx-auto px-4 md:px-6 lg:px-8 py-8">
+        <div className="bg-red-500/10 border border-red-500/50 rounded-2xl p-6 text-red-500 text-center">
+          {error || t.projectDetail.projectNotFound}
         </div>
       </div>
     );
   }
 
-  // TODO Story 2.2 : remplacer par <ProjectCoverImage /> + <ProjectStatsBar />
-  // TODO Story 2.3 : remplacer par <ProjectElementsList />
-  // TODO Story 2.4 : remplacer par <ProjectGallery />
-  // TODO Story 2.5 : remplacer par <ProjectActionsRow /> + <MakerCard />
-  return <ProjectDetailView slug={slug} initialData={project} />;
+  const makerProfile = project.user.profile;
+
+  return (
+    <article>
+      <ProjectCoverImage
+        imageUrl={project.image_url || null}
+        projectTitle={project.title}
+        fandomName={project.fandom?.name}
+        originName={project.origin?.name}
+        makerName={makerProfile.name}
+        makerAvatar={makerProfile.has_avatar ? makerProfile.avatar : undefined}
+      />
+      <ProjectStatsBar
+        totalWorkingTime={project.total_project_working_time}
+        elementsCount={project.elements.length}
+        estimatedPrice={project.project_estimated_price}
+      />
+      <div className="max-w-screen-xl mx-auto px-4 md:px-6 lg:px-8 mt-8 pb-16 grid grid-cols-1 lg:grid-cols-[65fr_35fr] gap-8 items-start">
+        <main>
+          <ProjectElementsList elements={project.elements} />
+          <ProjectGallery photoReferences={project.photoReferences} />
+        </main>
+        <aside className="lg:sticky lg:top-20 lg:h-fit">
+          <ProjectSidebar project={project} />
+        </aside>
+      </div>
+    </article>
+  );
 }

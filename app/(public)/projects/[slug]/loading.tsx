@@ -3,7 +3,7 @@ import { ProjectPageSkeleton } from '@/app/features/projects/public-view/compone
 
 export default function ProjectDetailLoading() {
   return (
-    <AppLayout>
+    <AppLayout noContainer>
       <ProjectPageSkeleton />
     </AppLayout>
   );

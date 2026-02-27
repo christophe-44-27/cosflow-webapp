@@ -1,43 +1,50 @@
 import { Skeleton } from '@/app/components/ui/skeleton';
 
+/**
+ * Skeleton Direction D1 — Split Editorial
+ * Reflète la structure : hero → stats bar → split 65/35
+ */
 export function ProjectPageSkeleton() {
   return (
-    <div className="px-4 md:px-6 py-8 space-y-4">
-      {/* Cover image 16:9 */}
-      <Skeleton className="w-full h-72 rounded-xl" />
+    <div>
+      {/* Hero — full-width h-[50vh] */}
+      <Skeleton className="w-full h-[50vh] rounded-none" />
 
-      {/* Stats bar — 3 colonnes (Direction B: fond primary) */}
-      <div className="grid grid-cols-3 gap-2">
-        <Skeleton className="h-16 rounded-lg" />
-        <Skeleton className="h-16 rounded-lg" />
-        <Skeleton className="h-16 rounded-lg" />
+      {/* Stats bar — violet bg, 3 colonnes */}
+      <div className="w-full bg-[#6259CA]/30">
+        <div className="grid grid-cols-3 max-w-screen-xl mx-auto px-4 md:px-6 lg:px-8 h-20 gap-4 items-center">
+          <Skeleton className="h-10" />
+          <Skeleton className="h-10" />
+          <Skeleton className="h-10" />
+        </div>
       </div>
 
-      {/* Actions row */}
-      <div className="flex gap-3">
-        <Skeleton className="h-10 w-24 rounded-lg" />
-        <Skeleton className="h-10 w-24 rounded-lg" />
-      </div>
+      {/* Split layout */}
+      <div className="max-w-screen-xl mx-auto px-4 md:px-6 lg:px-8 mt-8 grid grid-cols-1 lg:grid-cols-[65fr_35fr] gap-8 items-start">
+        {/* Colonne principale — 65% */}
+        <div className="space-y-4">
+          <Skeleton className="h-6 w-36" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <Skeleton className="h-16" />
+            <Skeleton className="h-16" />
+            <Skeleton className="h-16" />
+            <Skeleton className="h-16" />
+          </div>
+          <Skeleton className="h-6 w-28 mt-4" />
+          <div className="grid grid-cols-3 gap-3">
+            <Skeleton className="aspect-square" />
+            <Skeleton className="aspect-square" />
+            <Skeleton className="aspect-square" />
+          </div>
+        </div>
 
-      {/* Section header Éléments */}
-      <Skeleton className="h-5 w-36 rounded mt-2" />
-
-      {/* Éléments cards */}
-      <div className="space-y-2">
-        <Skeleton className="h-14 rounded-lg" />
-        <Skeleton className="h-14 rounded-lg" />
-        <Skeleton className="h-14 rounded-lg" />
-      </div>
-
-      {/* Section header Galerie */}
-      <Skeleton className="h-5 w-24 rounded mt-2" />
-
-      {/* Galerie grid 2 colonnes */}
-      <div className="grid grid-cols-2 gap-2">
-        <Skeleton className="aspect-square rounded-lg" />
-        <Skeleton className="aspect-square rounded-lg" />
-        <Skeleton className="aspect-square rounded-lg" />
-        <Skeleton className="aspect-square rounded-lg" />
+        {/* Sidebar — 35% */}
+        <div className="space-y-4 lg:sticky lg:top-20">
+          <Skeleton className="h-28" />
+          <Skeleton className="h-16" />
+          <Skeleton className="h-10" />
+          <Skeleton className="h-40" />
+        </div>
       </div>
     </div>
   );

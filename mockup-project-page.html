@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nezuko Kamado — Kimetsu no Yaiba · Cosflow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:          #6259CA;
+      --primary-light:    #7b73d4;
+      --primary-dark:     #4e46b8;
+      --primary-glow:     rgba(98, 89, 202, 0.25);
+      --secondary:        #1E1A40;
+      --secondary-light:  #252147;
+      --secondary-mid:    #2d2856;
+      --accent:           #2BD1C7;
+      --accent-dim:       rgba(43, 209, 199, 0.12);
+      --accent-glow:      rgba(43, 209, 199, 0.2);
+      --text:             #F0EFF8;
+      --text-muted:       #9690C4;
+      --text-dim:         #5f5a8a;
+      --surface:          rgba(255, 255, 255, 0.04);
+      --surface-hover:    rgba(255, 255, 255, 0.07);
+      --border:           rgba(255, 255, 255, 0.07);
+      --border-hover:     rgba(255, 255, 255, 0.14);
+
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+
+      --navbar-h: 60px;
+      --r-sm: 6px;
+      --r:    10px;
+      --r-lg: 14px;
+      --r-xl: 20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--secondary);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ═══════════════════════════
+       NAVBAR
+    ═══════════════════════════ */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--navbar-h);
+      z-index: 100;
+      background: rgba(30, 26, 64, 0.82);
+      backdrop-filter: blur(18px) saturate(1.4);
+      -webkit-backdrop-filter: blur(18px) saturate(1.4);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      height: 100%;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.04em;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    .logo-gem {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 4px;
+      transform: rotate(12deg);
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.125rem;
+      margin: 0 auto;
+    }
+
+    .nav-link {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.45rem 0.875rem;
+      border-radius: var(--r-sm);
+      transition: color .15s, background .15s;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-link:hover { color: var(--text); background: var(--surface); }
+
+    .nav-actions { display: flex; gap: 0.5rem; align-items: center; flex-shrink: 0; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--r-sm);
+      font-family: var(--font-body);
+      font-size: 0.825rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .15s;
+      border: 1px solid transparent;
+      text-decoration: none;
+      white-space: nowrap;
+      line-height: 1;
+    }
+
+    .btn-ghost { background: transparent; color: var(--text-muted); }
+    .btn-ghost:hover { background: var(--surface); color: var(--text); }
+
+    .btn-primary { background: var(--primary); color: white; border-color: var(--primary); }
+    .btn-primary:hover { background: var(--primary-light); border-color: var(--primary-light); }
+
+    /* ═══════════════════════════
+       HERO
+    ═══════════════════════════ */
+    .hero {
+      margin-top: var(--navbar-h);
+      height: 50vh;
+      min-height: 340px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-scene {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 70% at 20% 60%, rgba(140, 28, 60, 0.55) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 80% 25%, rgba(98, 89, 202, 0.45) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 60% 80%, rgba(43, 209, 199, 0.12) 0%, transparent 55%),
+        linear-gradient(145deg, #0c0616 0%, #1a0a20 20%, #2d1040 40%, #1E1A40 65%, #111030 100%);
+    }
+
+    /* Subtle geometric grid */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.5) 70%, transparent);
+    }
+
+    /* Diagonal accent line */
+    .hero-accent-line {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 45%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(98, 89, 202, 0.3) 30%, rgba(43, 209, 199, 0.2) 70%, transparent);
+      transform: rotate(-8deg) scaleY(1.5);
+      transform-origin: center;
+    }
+
+    .hero-vignette {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 75%;
+      background: linear-gradient(to top,
+        var(--secondary) 0%,
+        rgba(30, 26, 64, 0.85) 35%,
+        rgba(30, 26, 64, 0.3) 65%,
+        transparent 100%);
+    }
+
+    .hero-overlay-left {
+      position: absolute;
+      top: 0; bottom: 0; left: 0;
+      width: 30%;
+      background: linear-gradient(to right, rgba(13, 6, 22, 0.5), transparent);
+    }
+
+    /* Floating decorative orbs */
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .hero-orb-1 {
+      width: 300px; height: 300px;
+      background: rgba(140, 28, 80, 0.6);
+      top: -60px; left: 8%;
+    }
+    .hero-orb-2 {
+      width: 250px; height: 250px;
+      background: rgba(98, 89, 202, 0.5);
+      top: 20%; right: 15%;
+    }
+
+    .hero-content {
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 1280px;
+      padding: 0 2.5rem 2rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .hero-title-block { flex: 1; }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(43, 209, 199, 0.1);
+      border: 1px solid rgba(43, 209, 199, 0.25);
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      margin-bottom: 0.85rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.875rem, 4.5vw, 3.25rem);
+      color: white;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      text-shadow: 0 4px 32px rgba(0,0,0,0.6);
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: rgba(255,255,255,0.55);
+      font-weight: 600;
+      font-size: 0.72em;
+      display: block;
+      margin-top: 0.3rem;
+      letter-spacing: -0.01em;
+    }
+
+    .maker-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 0.45rem 0.875rem 0.45rem 0.5rem;
+      border-radius: 999px;
+      flex-shrink: 0;
+      transition: background .2s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .maker-chip:hover { background: rgba(255,255,255,0.12); }
+
+    .maker-avatar-xs {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .maker-chip-name {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* ═══════════════════════════
+       STATS BAR
+    ═══════════════════════════ */
+    .stats-bar {
+      background: var(--primary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stats-bar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.15) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.1) 100%),
+        linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 100%);
+    }
+
+    /* Animated shimmer */
+    .stats-bar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { transform: translateX(-100%); }
+      50% { transform: translateX(100%); }
+    }
+
+    .stats-bar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.375rem 1rem;
+      position: relative;
+    }
+
+    .stat-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 22%;
+      bottom: 22%;
+      width: 1px;
+      background: rgba(255,255,255,0.18);
+    }
+
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: clamp(1.875rem, 3.5vw, 2.875rem);
+      font-weight: 700;
+      color: white;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .stat-label {
+      font-family: var(--font-body);
+      font-size: 0.665rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-top: 0.4rem;
+    }
+
+    /* ═══════════════════════════
+       PAGE BODY — SPLIT LAYOUT
+    ═══════════════════════════ */
+    .page-body {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2.5rem 2.5rem 5rem;
+      display: grid;
+      grid-template-columns: 65fr 35fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    /* ─── Section headers ─── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.125rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.025em;
+    }
+
+    .section-badge {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.175rem 0.45rem;
+      border-radius: 4px;
+    }
+
+    .section-sep {
+      height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+      margin-bottom: 2.5rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ═══════════════════════════
+       ELEMENTS
+    ═══════════════════════════ */
+    .elements-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.625rem;
+      margin-bottom: 3rem;
+    }
+
+    .element-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 2.5px solid var(--primary);
+      border-radius: var(--r);
+      padding: 0.875rem 0.875rem 0.875rem 0.8rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      transition: border-left-color .2s, background .15s, transform .15s;
+      cursor: default;
+    }
+
+    .element-card:hover {
+      background: var(--surface-hover);
+      border-left-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .element-icon {
+      width: 34px; height: 34px;
+      border-radius: var(--r-sm);
+      background: rgba(98, 89, 202, 0.14);
+      border: 1px solid rgba(98, 89, 202, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .element-info { flex: 1; min-width: 0; }
+
+    .element-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .element-cat {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    .status-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .element-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.125rem;
+      flex-shrink: 0;
+    }
+
+    .element-hours {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .element-cost {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    .elements-more {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: var(--r);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background .15s, color .15s;
+      grid-column: 1 / -1;
+    }
+
+    .elements-more:hover { background: var(--surface-hover); color: var(--text); }
+
+    /* ═══════════════════════════
+       GALLERY
+    ═══════════════════════════ */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+    }
+
+    .gallery-item {
+      aspect-ratio: 4/3;
+      border-radius: var(--r);
+      overflow: hidden;
+      cursor: zoom-in;
+      position: relative;
+    }
+
+    .gallery-img {
+      width: 100%; height: 100%;
+      transition: transform .35s ease;
+    }
+
+    .gallery-item:hover .gallery-img { transform: scale(1.07); }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(30, 26, 64, 0);
+      transition: background .2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-item:hover .gallery-overlay { background: rgba(30, 26, 64, 0.35); }
+
+    .gallery-zoom {
+      opacity: 0;
+      color: white;
+      font-size: 1rem;
+      font-family: var(--font-mono);
+      transition: opacity .2s;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.4rem 0.6rem;
+      border-radius: var(--r-sm);
+      font-size: 0.75rem;
+    }
+
+    .gallery-item:hover .gallery-zoom { opacity: 1; }
+
+    /* ═══════════════════════════
+       SIDEBAR
+    ═══════════════════════════ */
+    .sidebar {
+      position: sticky;
+      top: calc(var(--navbar-h) + 1.5rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+
+    /* Like card */
+    .like-card-body {
+      padding: 1.5rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .like-display {
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+
+    .like-heart {
+      font-size: 1.75rem;
+      line-height: 1;
+      filter: grayscale(0.3);
+      transition: transform .15s;
+    }
+
+    .like-heart.beating {
+      animation: heartbeat .3s ease;
+    }
+
+    @keyframes heartbeat {
+      0%   { transform: scale(1); }
+      30%  { transform: scale(1.35); }
+      60%  { transform: scale(0.9); }
+      100% { transform: scale(1); }
+    }
+
+    .like-number {
+      font-family: var(--font-mono);
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      transition: color .2s;
+    }
+
+    .like-sublabel {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: -0.5rem;
+    }
+
+    .like-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1rem;
+      border: 1.5px solid var(--accent);
+      border-radius: var(--r);
+      background: transparent;
+      color: var(--accent);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .like-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity .2s;
+    }
+
+    .like-btn:hover::before { opacity: 0.08; }
+
+    .like-btn.liked {
+      background: var(--accent);
+      color: var(--secondary);
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .like-btn.liked::before { opacity: 0; }
+
+    /* Ripple */
+    .like-btn .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0;
+      transform: scale(0);
+      animation: ripple-anim .5s ease-out;
+    }
+
+    @keyframes ripple-anim {
+      to { transform: scale(4); opacity: 0; }
+    }
+
+    /* Actions card */
+    .actions-card-body {
+      padding: 0.875rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .kofi-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      width: 100%;
+      padding: 0.75rem;
+      background: #FF5E5B;
+      color: white;
+      border: none;
+      border-radius: var(--r);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s, transform .15s;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .kofi-btn:hover { background: #e84e4b; transform: translateY(-1px); }
+
+    .share-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.65rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .share-btn:hover {
+      background: var(--surface-hover);
+      color: var(--text);
+      border-color: var(--border-hover);
+    }
+
+    /* Maker card */
+    .maker-card-body { padding: 1.125rem; }
+
+    .maker-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.875rem;
+    }
+
+    .maker-avatar {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+      border: 2px solid rgba(98, 89, 202, 0.35);
+      box-shadow: 0 0 0 3px rgba(98, 89, 202, 0.1);
+    }
+
+    .maker-meta { flex: 1; }
+
+    .maker-name {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .maker-stats-row {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.2rem;
+    }
+
+    .maker-stat {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .dot-sep {
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: var(--text-dim);
+    }
+
+    .maker-bio {
+      font-size: 0.78rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 0.875rem;
+    }
+
+    .follow-btn {
+      width: 100%;
+      padding: 0.6rem;
+      background: transparent;
+      border: 1px solid var(--primary);
+      border-radius: var(--r);
+      color: var(--primary);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+    }
+
+    .follow-btn:hover { background: var(--primary-glow); }
+
+    /* ═══════════════════════════
+       MOBILE FIXED LIKE BAR
+    ═══════════════════════════ */
+    .mobile-bar {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      padding: 0.875rem 1.5rem env(safe-area-inset-bottom, 0);
+      background: rgba(30, 26, 64, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      z-index: 80;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .mobile-like-info {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-shrink: 0;
+    }
+
+    .mobile-like-count {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .mobile-like-btn {
+      flex: 1;
+      padding: 0.7rem;
+      background: transparent;
+      border: 1.5px solid var(--accent);
+      border-radius: var(--r);
+      color: var(--accent);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .mobile-like-btn:hover { background: var(--accent-dim); }
+
+    /* ═══════════════════════════
+       RESPONSIVE
+    ═══════════════════════════ */
+    @media (max-width: 1024px) {
+      .page-body {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding-bottom: 6.5rem;
+      }
+
+      .sidebar { position: static; }
+      .mobile-bar { display: flex; }
+
+      .hero-content { padding: 0 1.5rem 1.5rem; }
+      .hero { height: 40vh; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .navbar-inner { padding: 0 1rem; }
+
+      .elements-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .page-body { padding: 1.5rem 1rem 6.5rem; }
+      .stats-bar-inner { padding: 0 1rem; }
+      .stat-value { font-size: 1.75rem; }
+
+      .hero-title { font-size: 1.65rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════ NAVBAR ══════════ -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="#" class="logo">
+        <div class="logo-gem"></div>
+        cosflow
+      </a>
+      <div class="nav-links">
+        <a href="#" class="nav-link">Découverte</a>
+        <a href="#" class="nav-link">Projets</a>
+        <a href="#" class="nav-link">Makers</a>
+      </div>
+      <div class="nav-actions">
+        <button class="btn btn-ghost">Connexion</button>
+        <button class="btn btn-primary">Créer un compte</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════ HERO ══════════ -->
+  <div class="hero">
+    <div class="hero-scene">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+    </div>
+    <div class="hero-grid"></div>
+    <div class="hero-accent-line"></div>
+    <div class="hero-overlay-left"></div>
+    <div class="hero-vignette"></div>
+    <div class="hero-content">
+      <div class="hero-title-block">
+        <div class="hero-eyebrow">✦ Projet public</div>
+        <h1 class="hero-title">
+          Nezuko Kamado
+          <em>Kimetsu no Yaiba — Arc Yukaku-hen</em>
+        </h1>
+      </div>
+      <a href="#" class="maker-chip">
+        <div class="maker-avatar-xs">MC</div>
+        <span class="maker-chip-name">Marie Cosplay</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ══════════ STATS BAR ══════════ -->
+  <div class="stats-bar">
+    <div class="stats-bar-inner">
+      <div class="stat-item">
+        <span class="stat-value">312</span>
+        <span class="stat-label">heures</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">41</span>
+        <span class="stat-label">éléments</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">520€</span>
+        <span class="stat-label">budget</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ MAIN BODY ══════════ -->
+  <div class="page-body">
+
+    <!-- LEFT COLUMN -->
+    <div class="main-col">
+
+      <!-- Elements section -->
+      <div class="section-header">
+        <h2 class="section-title">Éléments</h2>
+        <span class="section-badge">41</span>
+      </div>
+      <div class="elements-grid">
+
+        <div class="element-card">
+          <div class="element-icon">🛡️</div>
+          <div class="element-info">
+            <div class="element-name">Armure thorax</div>
+            <div class="element-cat"><span class="status-dot"></span>Armure · EVA foam</div>
+          </div>
+          <div class="element-meta">
+            <span class="element-hours">68h</span>
+            <span class="element-cost">145 €</span>
+          </div>
+        </div>
+
+        <div class="element-card">
+          <div class="element-icon">🌸</div>
+          <div class="element-info">
+            <div class="element-name">Cape haori</div>
+            <div class="element-cat"><span class="status-dot"></span>Textile · Couture</div>
+          </div>
+          <div class="element-meta">
+            <span class="element-hours">42h</span>
+            <span class="element-cost">87 €</span>
+          </div>
+        </div>
+
+        <div class="element-card">
+          <div class="element-icon">💇</div>
+          <div class="element-info">
+            <div class="element-name">Perruque noire</div>
+            <div class="element-cat"><span class="status-dot"></span>Perruque · Tressage</div>
+          </div>
+          <div class="element-meta">
+            <span class="element-hours">12h</span>
+            <span class="element-cost">58 €</span>
+          </div>
+        </div>
+
+        <div class="element-card">
+          <div class="element-icon">🎋</div>
+          <div class="element-info">
+            <div class="element-name">Bambou prop</div>
+            <div class="element-cat"><span class="status-dot"></span>Accessoire · PVC</div>
+          </div>
+          <div class="element-meta">
+            <span class="element-hours">8h</span>
+            <span class="element-cost">22 €</span>
+          </div>
+        </div>
+
+        <div class="element-card">
+          <div class="element-icon">👘</div>
+          <div class="element-info">
+            <div class="element-name">Tabi & Jika-tabi</div>
+            <div class="element-cat"><span class="status-dot"></span>Chaussures · Achat</div>
+          </div>
+          <div class="element-meta">
+            <span class="element-hours">2h</span>
+            <span class="element-cost">34 €</span>
+          </div>
+        </div>
+
+        <div class="element-card">
+          <div class="element-icon">🩹</div>
+          <div class="element-info">
+            <div class="element-name">Bandes & attaches</div>
+            <div class="element-cat"><span class="status-dot"></span>Accessoire · Couture</div>
+          </div>
+          <div class="element-meta">
+            <span class="element-hours">5h</span>
+            <span class="element-cost">12 €</span>
+          </div>
+        </div>
+
+        <button class="elements-more">
+          <span style="font-size:0.9rem">+</span>
+          Voir les 35 autres éléments
+        </button>
+
+      </div>
+
+      <div class="section-sep"></div>
+
+      <!-- Gallery section -->
+      <div class="section-header">
+        <h2 class="section-title">Galerie de référence</h2>
+        <span class="section-badge">12</span>
+      </div>
+      <div class="gallery-grid">
+
+        <div class="gallery-item">
+          <div class="gallery-img" style="background: linear-gradient(145deg, #3b0f1f 0%, #6259CA 100%);"></div>
+          <div class="gallery-overlay"><span class="gallery-zoom">zoom</span></div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-img" style="background: linear-gradient(145deg, #0a1530 0%, #2BD1C7 100%);"></div>
+          <div class="gallery-overlay"><span class="gallery-zoom">zoom</span></div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-img" style="background: linear-gradient(145deg, #2d0040 0%, #8b1a60 100%);"></div>
+          <div class="gallery-overlay"><span class="gallery-zoom">zoom</span></div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-img" style="background: linear-gradient(145deg, #0d2040 0%, #6259CA 80%);"></div>
+          <div class="gallery-overlay"><span class="gallery-zoom">zoom</span></div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-img" style="background: linear-gradient(145deg, #1a2a0a 0%, #2BD1C7 80%);"></div>
+          <div class="gallery-overlay"><span class="gallery-zoom">zoom</span></div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-img" style="background: linear-gradient(145deg, #3b1a00 0%, #6259CA 70%);"></div>
+          <div class="gallery-overlay"><span class="gallery-zoom">zoom</span></div>
+        </div>
+
+      </div>
+
+    </div><!-- /main-col -->
+
+    <!-- SIDEBAR (35%) -->
+    <aside class="sidebar">
+
+      <!-- Like card -->
+      <div class="card">
+        <div class="like-card-body">
+          <div class="like-display">
+            <span class="like-heart" id="like-heart">🤍</span>
+            <span class="like-number" id="like-count">142</span>
+          </div>
+          <span class="like-sublabel">personnes aiment ce projet</span>
+          <button class="like-btn" id="like-btn" onclick="toggleLike(this)">
+            ♡ Liker ce projet
+          </button>
+        </div>
+      </div>
+
+      <!-- Actions card -->
+      <div class="card">
+        <div class="actions-card-body">
+          <a href="#" class="kofi-btn">
+            ☕ Soutenir sur Ko-fi ↗
+          </a>
+          <button class="share-btn" onclick="handleShare()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            Partager ce projet
+          </button>
+        </div>
+      </div>
+
+      <!-- Maker card -->
+      <div class="card">
+        <div class="maker-card-body">
+          <div class="maker-header">
+            <div class="maker-avatar">MC</div>
+            <div class="maker-meta">
+              <div class="maker-name">Marie Cosplay</div>
+              <div class="maker-stats-row">
+                <span class="maker-stat">234 abonnés</span>
+                <div class="dot-sep"></div>
+                <span class="maker-stat">18 projets</span>
+              </div>
+            </div>
+          </div>
+          <p class="maker-bio">
+            Cosplayeuse passionnée depuis 2018. Spécialiste armures thermoformées et props en résine. Basée à Lyon. Japan Expo depuis 2019.
+          </p>
+          <button class="follow-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Suivre Marie
+          </button>
+        </div>
+      </div>
+
+    </aside>
+
+  </div><!-- /page-body -->
+
+  <!-- MOBILE FIXED BAR -->
+  <div class="mobile-bar">
+    <div class="mobile-like-info">
+      <span>🤍</span>
+      <span class="mobile-like-count" id="mobile-like-count">142</span>
+    </div>
+    <button class="mobile-like-btn" onclick="toggleLike(this)">♡ Liker</button>
+  </div>
+
+  <script>
+    let liked = false;
+    let count = 142;
+
+    function toggleLike(btn) {
+      liked = !liked;
+      count = liked ? count + 1 : count - 1;
+
+      // Update count displays
+      document.getElementById('like-count').textContent = count;
+      document.getElementById('mobile-like-count').textContent = count;
+
+      // Update heart
+      const heart = document.getElementById('like-heart');
+      heart.textContent = liked ? '❤️' : '🤍';
+      heart.classList.remove('beating');
+      void heart.offsetWidth; // reflow to restart animation
+      heart.classList.add('beating');
+
+      // Update main like button
+      const mainBtn = document.getElementById('like-btn');
+      if (liked) {
+        mainBtn.classList.add('liked');
+        mainBtn.textContent = '♥ Projet liké';
+      } else {
+        mainBtn.classList.remove('liked');
+        mainBtn.textContent = '♡ Liker ce projet';
+      }
+
+      // Ripple effect
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      ripple.style.cssText = `width:60px;height:60px;left:calc(50% - 30px);top:calc(50% - 30px)`;
+      mainBtn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    }
+
+    function handleShare() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Nezuko Kamado — Kimetsu no Yaiba',
+          text: '312h de travail, 41 éléments, 520€ — découvrez ce projet sur Cosflow',
+          url: window.location.href
+        });
+      } else {
+        navigator.clipboard.writeText(window.location.href)
+          .then(() => alert('Lien copié !'));
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -2,21 +2,24 @@
 
 import { useLocale } from '@/app/lib/locale-context';
 import { parseHours, formatPrice } from '../utils/parseProjectStats';
+import type { Currency } from '@/app/types/models';
 
 interface ProjectStatsBarProps {
   totalWorkingTime: string;
   elementsCount: number;
   estimatedPrice: string | null;
+  currency: Currency | null;
 }
 
 export function ProjectStatsBar({
   totalWorkingTime,
   elementsCount,
   estimatedPrice,
+  currency,
 }: ProjectStatsBarProps) {
   const { t } = useLocale();
   const hours = parseHours(totalWorkingTime);
-  const price = formatPrice(estimatedPrice);
+  const price = formatPrice(estimatedPrice, currency);
 
   return (
     <div className="w-full bg-[#6259CA]">

@@ -601,6 +601,7 @@ export const fr = {
     },
     gallery: {
       sectionTitle: 'Galerie de référence',
+      empty: 'Aucune photo de référence pour ce projet',
     },
     sidebar: {
       likesLabel: 'personnes aiment ce projet',

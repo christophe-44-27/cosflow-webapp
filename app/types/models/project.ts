@@ -40,6 +40,7 @@ export interface ProjectDetail {
   created_at: string;
   updated_at: string;
   image_url: string;
+  cover_url: string | null;
   photos: ProjectPhoto[];
   photoshoots: Photoshoot[];
   photoReferences: PhotoReference[];

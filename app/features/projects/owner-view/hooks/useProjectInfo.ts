@@ -85,6 +85,40 @@ export function useProjectInfo({ project, slug, onRefetch }: UseProjectInfoProps
     }
   };
 
+  const handleThumbnailUpload = async (blob: Blob) => {
+    const formData = new FormData();
+    formData.append('image', blob, 'thumbnail.jpg');
+
+    try {
+      const res = await fetch(`/api/projects/${slug}/images`, {
+        method: 'POST',
+        body: formData,
+      });
+      if (res.ok) {
+        await onRefetch();
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleCoverUpload = async (blob: Blob) => {
+    const formData = new FormData();
+    formData.append('cover', blob, 'cover.jpg');
+
+    try {
+      const res = await fetch(`/api/projects/${slug}/cover`, {
+        method: 'POST',
+        body: formData,
+      });
+      if (res.ok) {
+        await onRefetch();
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const handleDeleteProject = async () => {
     setIsDeleting(true);
     try {
@@ -112,6 +146,8 @@ export function useProjectInfo({ project, slug, onRefetch }: UseProjectInfoProps
     handleSaveProjectInfo,
     handleImageUpload,
     handleDeleteProject,
+    handleThumbnailUpload,
+    handleCoverUpload,
     initEditedProject,
   };
 }

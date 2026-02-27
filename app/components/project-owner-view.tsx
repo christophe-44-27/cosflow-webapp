@@ -23,6 +23,7 @@ import {
   TimeTrackingSection,
   ProjectGallerySection,
   PackingListSection,
+  CoverEditorSection,
 } from '@/app/features/projects/owner-view';
 
 type Tab = 'summary' | 'content' | 'activity';
@@ -187,7 +188,15 @@ export function ProjectOwnerView({ slug }: ProjectOwnerViewProps) {
   const canMarkComplete = budgetData.progression === 100 && project.status !== 'completed';
 
   return (
-    <div className="flex-1">
+    <div>
+      {/* ── Cover image editor (full-width) ── */}
+      <CoverEditorSection
+        coverUrl={project.cover_url ?? null}
+        projectTitle={project.title}
+        onCoverUpload={projectInfo.handleCoverUpload}
+      />
+
+      <div className="max-w-screen-xl mx-auto px-4 md:px-6 lg:px-8 pb-16">
       {/* ── Tab bar ── */}
       <div className="flex w-full p-1 mt-6 mb-6 bg-white/5 border border-white/10 rounded-xl">
         {TABS.map(tab => {
@@ -532,6 +541,7 @@ export function ProjectOwnerView({ slug }: ProjectOwnerViewProps) {
           </div>
         </div>
       )}
+      </div>{/* /container */}
     </div>
   );
 }

@@ -3766,6 +3766,7 @@ __metadata:
     react: 19.2.3
     react-day-picker: ^9.13.0
     react-dom: 19.2.3
+    react-easy-crop: ^5.5.6
     react-hook-form: ^7.71.1
     react-resizable-panels: ^4.4.1
     recharts: ^3.6.0
@@ -6046,6 +6047,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"normalize-wheel@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "normalize-wheel@npm:1.0.1"
+  checksum: 00b32efa040bad9438e732385a4ca27f8532fa2c8c06b54be43b9f75b2da6642bf41a0b4f81e542639dc8d682cde8b059b0a02ae0723fb8ebc3c8f036c8e51d8
+  languageName: node
+  linkType: hard
+
 "object-assign@npm:^4.1.1":
   version: 4.1.1
   resolution: "object-assign@npm:4.1.1"
@@ -6356,6 +6364,19 @@ __metadata:
   peerDependencies:
     react: ^19.2.3
   checksum: cb1f95df052802f5332cae78303b7fc6f58092d5c7f8d01f0401188b2e0157c1d273a041b900fcc4801f730c70ed17249bd5af170038692878ebe257f641488b
+  languageName: node
+  linkType: hard
+
+"react-easy-crop@npm:^5.5.6":
+  version: 5.5.6
+  resolution: "react-easy-crop@npm:5.5.6"
+  dependencies:
+    normalize-wheel: ^1.0.1
+    tslib: ^2.0.1
+  peerDependencies:
+    react: ">=16.4.0"
+    react-dom: ">=16.4.0"
+  checksum: 80b4ec80ed6009c72917b1640a82df5eb45f6b4e52421db6997618ba854e361055e87d0efdb8feab1731a71757f989db45e9d9aa8e88d80459a2868e40de9175
   languageName: node
   linkType: hard
 
@@ -7292,7 +7313,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.0, tslib@npm:^2.1.0, tslib@npm:^2.4.0, tslib@npm:^2.8.0":
+"tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.1.0, tslib@npm:^2.4.0, tslib@npm:^2.8.0":
   version: 2.8.1
   resolution: "tslib@npm:2.8.1"
   checksum: e4aba30e632b8c8902b47587fd13345e2827fa639e7c3121074d5ee0880723282411a8838f830b55100cbe4517672f84a2472667d355b81e8af165a55dc6203a

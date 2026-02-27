@@ -92,11 +92,13 @@ export function ProjectPublicView({ slug, initialData }: ProjectPublicViewProps)
   }
 
   const makerProfile = project.user.profile;
+  const currency = makerProfile.currency;
 
   return (
     <article>
       <ProjectCoverImage
-        imageUrl={project.image_url || null}
+        coverUrl={project.cover_url ?? null}
+        thumbnailUrl={project.image_url || null}
         projectTitle={project.title}
         fandomName={project.fandom?.name}
         originName={project.origin?.name}
@@ -107,10 +109,11 @@ export function ProjectPublicView({ slug, initialData }: ProjectPublicViewProps)
         totalWorkingTime={project.total_project_working_time}
         elementsCount={project.elements.length}
         estimatedPrice={project.project_estimated_price}
+        currency={currency}
       />
       <div className="max-w-screen-xl mx-auto px-4 md:px-6 lg:px-8 mt-8 pb-16 grid grid-cols-1 lg:grid-cols-[65fr_35fr] gap-8 items-start">
         <main>
-          <ProjectElementsList elements={project.elements} />
+          <ProjectElementsList elements={project.elements} currency={currency} />
           <ProjectGallery photoReferences={project.photoReferences} />
         </main>
         <aside className="lg:sticky lg:top-20 lg:h-fit">

@@ -2,21 +2,22 @@
 
 import { useLocale } from '@/app/lib/locale-context';
 import { parseHours, formatElementPrice } from '../utils/parseProjectStats';
-import type { ProjectElement } from '@/app/types/models';
+import type { Currency, ProjectElement } from '@/app/types/models';
 
 interface ProjectElementCardProps {
   element: ProjectElement;
+  currency: Currency | null;
 }
 
 function getInitial(title: string): string {
   return title.trim().charAt(0).toUpperCase();
 }
 
-export function ProjectElementCard({ element }: ProjectElementCardProps) {
+export function ProjectElementCard({ element, currency }: ProjectElementCardProps) {
   const { t } = useLocale();
 
   const hours = parseHours(element.total_working_time);
-  const price = formatElementPrice(element.price);
+  const price = formatElementPrice(element.price, currency);
 
   const typeLabel =
     element.type === 'buy'

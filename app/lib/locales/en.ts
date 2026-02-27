@@ -603,6 +603,7 @@ export const en: Translations = {
     },
     gallery: {
       sectionTitle: 'Reference gallery',
+      empty: 'No reference photos for this project',
     },
     sidebar: {
       likesLabel: 'people like this project',

@@ -2,7 +2,7 @@ export const revalidate = 60;
 
 import { cache } from 'react';
 import { AppLayout } from '@/app/features/shared/components/app-layout';
-import { ProjectDetailView } from '@/app/components/project-detail-view';
+import { ProjectPublicView } from '@/app/features/projects/public-view/components/ProjectPublicView';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations, defaultLocale } from '@/app/lib/locales';
@@ -18,6 +18,7 @@ const getProject = cache(async (slug: string): Promise<ProjectDetail | null> => 
     if (error instanceof Error && (error.message.includes('403') || error.message.includes('404'))) {
       notFound();
     }
+    console.error('[getProject] SSR fetch failed for slug:', slug, error);
     return null;
   }
 });
@@ -56,7 +57,10 @@ export async function generateMetadata({
       title: project.title,
       description: project.description || t.metadata.projectDetailDescription,
       type: 'website',
-      images: project.image_url ? [{ url: project.image_url }] : undefined,
+      images: project.image_url
+        ? [{ url: project.image_url, width: 1200, height: 630, alt: project.title }]
+        : undefined,
+      url: `${process.env.NEXT_PUBLIC_APP_URL}/projects/${slug}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -77,7 +81,7 @@ export default async function ProjectDetailPage({
 
   return (
     <AppLayout>
-      <ProjectDetailView slug={slug} initialData={initialData} />
+      <ProjectPublicView slug={slug} initialData={initialData} />
     </AppLayout>
   );
 }

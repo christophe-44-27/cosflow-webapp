@@ -282,7 +282,7 @@ export function Navbar({ isLoggedIn, onLoginRequired }: NavbarProps) {
                                 </>
                             )}
                             <div className="px-4 pt-1">
-                                <LanguageSwitcher variant="compact" />
+                                <LanguageSwitcher />
                             </div>
                         </div>
                     </div>

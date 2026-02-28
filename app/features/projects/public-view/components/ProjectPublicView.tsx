@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useLocale } from '@/app/lib/locale-context';
-import { ProjectOwnerView } from '@/app/components/project-owner-view';
 import { projectService } from '@/app/lib/services';
 import type { ProjectDetail } from '@/app/types/models';
 import { ProjectCoverImage } from './ProjectCoverImage';
@@ -14,6 +13,7 @@ import { ProjectSidebar } from './ProjectSidebar';
 interface ProjectPublicViewProps {
   slug: string;
   initialData?: ProjectDetail | null;
+  isPreview?: boolean;
 }
 
 /**
@@ -26,28 +26,30 @@ interface ProjectPublicViewProps {
  *     • Colonne principale (65%) : éléments (Story 2.3) + galerie (Story 2.4)
  *     • Sidebar (35%)           : like + Ko-fi + share + MakerCard (Story 2.5)
  */
-export function ProjectPublicView({ slug, initialData }: ProjectPublicViewProps) {
+export function ProjectPublicView({ slug, initialData, isPreview = false }: ProjectPublicViewProps) {
   const { t } = useLocale();
-  const [isOwnerView, setIsOwnerView] = useState(false);
   const [project, setProject] = useState<ProjectDetail | null>(initialData ?? null);
   const [isLoading, setIsLoading] = useState(!initialData);
   const [error, setError] = useState<string | null>(null);
 
-  // Routing owner côté client uniquement pour préserver l'ISR
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setIsOwnerView(params.get('owner') === 'true');
-  }, []);
-
-  // Fallback fetch côté client si le SSR n'a pas pu charger les données
   useEffect(() => {
     if (initialData) return;
     const fetchProject = async () => {
       try {
         setIsLoading(true);
         setError(null);
-        const response = await projectService.getProject(slug);
-        setProject(response.data);
+        let data: ProjectDetail;
+        if (isPreview) {
+          // Mode preview : l'owner consulte son projet privé → endpoint authentifié
+          const res = await fetch(`/api/projects/${slug}`);
+          if (!res.ok) throw new Error(`${res.status}`);
+          const json = await res.json();
+          data = json.data ?? json;
+        } else {
+          const response = await projectService.getProject(slug);
+          data = response.data;
+        }
+        setProject(data);
       } catch (err) {
         setError(t.projectDetail.errorLoadingProject);
         console.error('Error fetching project:', err);
@@ -56,11 +58,7 @@ export function ProjectPublicView({ slug, initialData }: ProjectPublicViewProps)
       }
     };
     fetchProject();
-  }, [slug, t, initialData]);
-
-  if (isOwnerView) {
-    return <ProjectOwnerView slug={slug} />;
-  }
+  }, [slug, t, initialData, isPreview]);
 
   if (isLoading) {
     return (

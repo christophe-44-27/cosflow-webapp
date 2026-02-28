@@ -87,40 +87,35 @@ export async function POST(
       );
     }
 
-    const contentType = request.headers.get('content-type') || '';
     const finalUrl = apiUrl(API_ENDPOINTS.projects.update(slug));
+    const contentType = request.headers.get('content-type') || '';
 
-    let response;
+    let formData: FormData;
 
     if (contentType.includes('multipart/form-data')) {
-      const formData = await request.formData();
-      formData.append('_method', 'PUT');
-
-      response = await fetch(finalUrl, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Accept': 'application/json',
-        },
-        body: formData,
-      });
+      formData = await request.formData();
     } else {
-      // JSON request
+      // JSON → convertir en FormData pour que Laravel accepte le method spoofing
       const body = await request.json();
-
-      response = await fetch(finalUrl, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...body,
-          _method: 'PUT'
-        }),
-      });
+      formData = new FormData();
+      for (const [key, value] of Object.entries(body)) {
+        if (key !== '_method' && value !== undefined && value !== null) {
+          formData.append(key, String(value));
+        }
+      }
     }
+
+    // Laravel attend un POST direct (pas de method spoofing sur cette route)
+    formData.delete('_method');
+
+    const response = await fetch(finalUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Accept': 'application/json',
+      },
+      body: formData,
+    });
 
     if (!response.ok) {
       if (response.status === 401) {

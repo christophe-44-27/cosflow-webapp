@@ -429,7 +429,7 @@ export function WebProjectsView() {
                         {projects.map((project) => (
                             <Link
                                 key={project.id}
-                                href={`/projects/${project.slug}?owner=true`}
+                                href={`/studio/projects/${project.slug}`}
                                 className="block bg-secondary border border-white/10 rounded-2xl p-6 hover:border-primary/50 transition-all group cursor-pointer"
                             >
                                 <div className="flex items-start gap-6">

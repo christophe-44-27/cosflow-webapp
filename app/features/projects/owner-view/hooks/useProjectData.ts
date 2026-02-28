@@ -11,6 +11,7 @@ export function useProjectData(slug: string, locale: string) {
   const [timeEntries, setTimeEntries] = useState<TimeEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [statusCode, setStatusCode] = useState<number | null>(null);
 
   const fetchCategories = async () => {
     try {
@@ -31,7 +32,10 @@ export function useProjectData(slug: string, locale: string) {
         fetch(`/api/projects/${slug}`),
         fetch(`/api/projects/${slug}/elements`),
       ]);
-      if (!res.ok) throw new Error('Failed to fetch project');
+      if (!res.ok) {
+        setStatusCode(res.status);
+        throw new Error(`HTTP ${res.status}`);
+      }
       const response = await res.json();
       setProject(response.data);
 
@@ -80,6 +84,7 @@ export function useProjectData(slug: string, locale: string) {
     timeEntries,
     isLoading,
     error,
+    statusCode,
     refetch: fetchProject,
     setElements,
     setTimeEntries,

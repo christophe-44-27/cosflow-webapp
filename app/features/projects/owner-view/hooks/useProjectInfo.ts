@@ -24,7 +24,6 @@ export function useProjectInfo({ project, slug, onRefetch }: UseProjectInfoProps
     setEditedProject({
       title: projectData.title,
       description: projectData.description,
-      priority: projectData.priority,
       is_private: projectData.is_private,
       category_id: projectData.category_id,
       fandom_id: projectData.fandom_id,
@@ -39,7 +38,7 @@ export function useProjectInfo({ project, slug, onRefetch }: UseProjectInfoProps
     setIsSaving(true);
     try {
       const formData = new FormData();
-      const excludedFields = ['created_at', 'updated_at', 'id', 'user_id', 'slug'];
+      const excludedFields = ['created_at', 'updated_at', 'id', 'user_id', 'slug', 'priority'];
 
       Object.entries(editedProject).forEach(([key, value]) => {
         if (value !== undefined && value !== null && !excludedFields.includes(key)) {
@@ -47,7 +46,6 @@ export function useProjectInfo({ project, slug, onRefetch }: UseProjectInfoProps
         }
       });
 
-      formData.append('_method', 'PUT');
 
       const res = await fetch(`/api/projects/${slug}`, {
         method: 'POST',

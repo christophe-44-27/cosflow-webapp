@@ -19,6 +19,20 @@ const nextConfig: NextConfig = {
   // Configuration pour le déploiement sur Render
   output: 'standalone',
 
+  async redirects() {
+    return [
+      {
+        source: '/projects',
+        destination: '/studio/projects',
+        permanent: true,
+      },
+    ];
+  },
+
+  experimental: {
+    authInterrupts: true,
+  },
+
   // Optimisations d'images
   images: {
     remotePatterns: [

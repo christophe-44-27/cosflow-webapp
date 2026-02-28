@@ -5,9 +5,11 @@ import { Upload, Eye, EyeOff, Settings, Loader2, Save, Trash2 } from 'lucide-rea
 import { ProjectDetail } from '@/app/types/models';
 import { ImageWithFallback } from '@/app/components/figma/ImageWithFallback';
 import { ThumbnailCropModal } from './ThumbnailCropModal';
+import { PublicVisibilityToggle } from './PublicVisibilityToggle';
 
 interface ProjectInfoSectionProps {
   project: ProjectDetail;
+  slug: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   projectInfo: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -17,6 +19,7 @@ interface ProjectInfoSectionProps {
 
 export function ProjectInfoSection({
   project,
+  slug,
   projectInfo,
   t,
   locale
@@ -173,22 +176,16 @@ export function ProjectInfoSection({
                   {project.status}
                 </span>
                 <span className="px-3 py-1 rounded-lg text-sm bg-white/10 text-white/70">{project.priority}</span>
-                {project.is_private ? (
-                  <span className="px-3 py-1 rounded-lg text-sm bg-white/10 text-white/70 flex items-center gap-1">
-                    <EyeOff className="w-3 h-3" /> {t.projectInfo.visibility_private}
-                  </span>
-                ) : (
-                  <span className="px-3 py-1 rounded-lg text-sm bg-green-500/20 text-green-400 flex items-center gap-1">
-                    <Eye className="w-3 h-3" /> {t.projectInfo.visibility_public}
-                  </span>
-                )}
               </div>
               {/* Actions */}
               <div className="flex justify-between pt-4 border-t border-white/10">
-                <button onClick={() => setIsEditingInfo(true)} className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg">
-                  <Settings className="w-4 h-4" />
-                  {t.common.edit}
-                </button>
+                <div className="flex items-center gap-2">
+                  <button onClick={() => setIsEditingInfo(true)} className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg">
+                    <Settings className="w-4 h-4" />
+                    {t.common.edit}
+                  </button>
+                  <PublicVisibilityToggle slug={slug} initialIsPrivate={project.is_private} />
+                </div>
                 <button onClick={() => setShowDeleteConfirm(true)} className="flex items-center gap-2 px-4 py-2 text-red-400 hover:bg-red-500/10 rounded-lg">
                   <Trash2 className="w-4 h-4" />
                   {t.common.delete}

@@ -228,6 +228,7 @@ export function ProjectOwnerView({ slug }: ProjectOwnerViewProps) {
           <div className="bg-secondary border border-white/10 rounded-2xl p-6 space-y-4">
             <ProjectInfoSection
               project={project}
+              slug={slug}
               projectInfo={projectInfo}
               t={t}
               locale={locale}

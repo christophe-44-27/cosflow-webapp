@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, forwardRef, useImperativeHandle } from 'react';
 import Image from 'next/image';
 import Cropper from 'react-easy-crop';
 import type { Area, Point } from 'react-easy-crop';
-import { Camera, X, Check, Loader2, ImageOff } from 'lucide-react';
+import { Camera, X, Check, Loader2 } from 'lucide-react';
+import { useLocale } from '@/app/lib/locale-context';
 
 // ── Ratio de la zone de couverture (h-[50vh] × 100vw ≈ 16:5 sur desktop) ──
 const COVER_ASPECT = 16 / 5;
@@ -37,14 +38,27 @@ async function getCroppedImg(imageSrc: string, pixelCrop: Area): Promise<Blob> {
   return new Promise((resolve) => canvas.toBlob((blob) => resolve(blob!), 'image/jpeg', 0.92));
 }
 
+export interface CoverEditorSectionRef {
+  openFilePicker: () => void;
+}
+
 interface CoverEditorSectionProps {
   coverUrl: string | null;
   projectTitle: string;
   onCoverUpload: (blob: Blob) => Promise<void>;
+  /** Contenu rendu dans le bas de la cover (titre, statut, breadcrumb…) */
+  children?: React.ReactNode;
 }
 
-export function CoverEditorSection({ coverUrl, projectTitle, onCoverUpload }: CoverEditorSectionProps) {
+export const CoverEditorSection = forwardRef<CoverEditorSectionRef, CoverEditorSectionProps>(
+function CoverEditorSection({ coverUrl, projectTitle, onCoverUpload, children }, ref) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useImperativeHandle(ref, () => ({
+    openFilePicker: () => fileInputRef.current?.click(),
+  }));
+
+  const { t } = useLocale();
 
   // Crop modal state
   const [rawImageSrc, setRawImageSrc] = useState<string | null>(null);
@@ -89,13 +103,8 @@ export function CoverEditorSection({ coverUrl, projectTitle, onCoverUpload }: Co
 
   return (
     <>
-      {/* ── Zone de couverture cliquable ── */}
-      <div
-        className="relative h-[40vh] md:h-[45vh] lg:h-[50vh] w-full overflow-hidden group cursor-pointer"
-        onClick={() => fileInputRef.current?.click()}
-        role="button"
-        aria-label="Modifier l'image de couverture"
-      >
+      {/* ── Zone de couverture ── */}
+      <div className="relative h-[40vh] md:h-[45vh] lg:h-[50vh] w-full overflow-hidden">
         {coverUrl ? (
           <Image
             src={coverUrl}
@@ -112,28 +121,13 @@ export function CoverEditorSection({ coverUrl, projectTitle, onCoverUpload }: Co
         {/* Overlay dégradé bas → haut */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#1E1A40] via-[#1E1A40]/40 to-transparent" />
 
-        {/* Overlay d'édition au hover */}
-        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3">
-          <div className="flex items-center gap-2 px-5 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white">
-            <Camera className="w-5 h-5" />
-            <span className="font-medium text-sm">
-              {coverUrl ? 'Changer la couverture' : 'Ajouter une couverture'}
-            </span>
-          </div>
-          {!coverUrl && (
-            <p className="text-white/50 text-xs">
-              Format recommandé : large panoramique (16:5)
-            </p>
-          )}
-        </div>
-
-        {/* Badge état — coin bas gauche */}
-        {!coverUrl && (
-          <div className="absolute bottom-4 left-4 flex items-center gap-1.5 px-2.5 py-1 bg-black/40 backdrop-blur-sm rounded-lg">
-            <ImageOff className="w-3.5 h-3.5 text-white/50" />
-            <span className="text-white/50 text-xs">Aucune couverture</span>
+        {/* Slot overlay — titre, statut, breadcrumb */}
+        {children && (
+          <div className="absolute inset-0 z-[1] flex flex-col justify-end">
+            {children}
           </div>
         )}
+
       </div>
 
       <input
@@ -150,8 +144,8 @@ export function CoverEditorSection({ coverUrl, projectTitle, onCoverUpload }: Co
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 flex-shrink-0">
             <div>
-              <h2 className="text-white font-semibold text-sm">Recadrer l'image de couverture</h2>
-              <p className="text-white/40 text-xs mt-0.5">Faites glisser et zoomez pour ajuster</p>
+              <h2 className="text-white font-semibold text-sm">{t.projectEdit.cropTitle}</h2>
+              <p className="text-white/40 text-xs mt-0.5">{t.projectEdit.cropHint}</p>
             </div>
             <button
               onClick={handleCancelCrop}
@@ -202,7 +196,7 @@ export function CoverEditorSection({ coverUrl, projectTitle, onCoverUpload }: Co
                 onClick={handleCancelCrop}
                 className="flex-1 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl text-sm transition-colors"
               >
-                Annuler
+                {t.common.cancel}
               </button>
               <button
                 onClick={handleConfirmCrop}
@@ -214,7 +208,7 @@ export function CoverEditorSection({ coverUrl, projectTitle, onCoverUpload }: Co
                 ) : (
                   <Check className="w-4 h-4" />
                 )}
-                {isUploading ? 'Envoi en cours…' : 'Appliquer'}
+                {isUploading ? t.projectEdit.cropUploading : t.projectEdit.cropApply}
               </button>
             </div>
           </div>
@@ -222,4 +216,4 @@ export function CoverEditorSection({ coverUrl, projectTitle, onCoverUpload }: Co
       )}
     </>
   );
-}
+});

@@ -73,15 +73,22 @@ export async function generateMetadata({
 
 export default async function ProjectDetailPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ preview?: string }>;
 }) {
   const { slug } = await params;
-  const initialData = await getProject(slug);
+  const { preview } = await searchParams;
+  const isPreview = preview === '1';
+
+  // En mode preview (owner sur son projet privé), on skip le SSR public
+  // et on laisse le client utiliser l'endpoint authentifié
+  const initialData = isPreview ? null : await getProject(slug);
 
   return (
     <AppLayout noContainer>
-      <ProjectPublicView slug={slug} initialData={initialData} />
+      <ProjectPublicView slug={slug} initialData={initialData} isPreview={isPreview} />
     </AppLayout>
   );
 }

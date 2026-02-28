@@ -1,6 +1,6 @@
 'use client';
 
-import { Image, SlidersHorizontal, MoreVertical, Calendar, Users, ChevronLeft, ChevronRight, Lock, Globe, Search, X, ArrowUpDown, Clock, CheckCircle, Circle, Eye, EyeOff } from 'lucide-react';
+import { Image, SlidersHorizontal, MoreVertical, Calendar, Users, ChevronLeft, ChevronRight, Search, X, ArrowUpDown, Clock, CheckCircle, Circle, Eye, EyeOff } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -448,11 +448,6 @@ export function WebProjectsView() {
                                             <div>
                                                 <div className="flex items-center gap-2 mb-2">
                                                     <h3 className="text-white text-lg font-medium">{project.title}</h3>
-                                                    {project.is_private ? (
-                                                        <Lock className="w-4 h-4 text-white/40" />
-                                                    ) : (
-                                                        <Globe className="w-4 h-4 text-green-400/70" />
-                                                    )}
                                                 </div>
                                                 <div className="flex gap-2 flex-wrap">
                                                     <span className="inline-flex items-center px-3 py-1 rounded-lg bg-white/10 text-white text-sm">
@@ -471,6 +466,16 @@ export function WebProjectsView() {
                                                             : 'bg-white/10 text-white/70'
                                                     }`}>
                                                         {project.status === 'completed' ? 'Terminé' : project.status === 'in_progress' ? 'En cours' : 'Brouillon'}
+                                                    </span>
+                                                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-sm ${
+                                                        project.is_private
+                                                            ? 'bg-white/10 text-white/70 border border-white/20'
+                                                            : 'bg-green-500/20 text-green-400 border border-green-500/30'
+                                                    }`}>
+                                                        {project.is_private
+                                                            ? <><EyeOff className="w-3.5 h-3.5" /> Privé</>
+                                                            : <><Eye className="w-3.5 h-3.5" /> Public</>
+                                                        }
                                                     </span>
                                                 </div>
                                             </div>

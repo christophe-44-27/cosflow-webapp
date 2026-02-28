@@ -22,7 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch public projects
   let projectRoutes: MetadataRoute.Sitemap = [];
   try {
-    const response = await projectService.getProjects({ per_page: 100 });
+    const response = await projectService.getProjects({ per_page: 100, 'filter[public_projects]': true });
     projectRoutes = (response.data ?? []).map((project) => ({
       url: `${baseUrl}/projects/${project.slug}`,
       lastModified: new Date(project.updated_at ?? Date.now()),

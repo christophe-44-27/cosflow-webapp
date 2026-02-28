@@ -28,7 +28,7 @@ export function ProjectSidebar({ project }: ProjectSidebarProps) {
   const supportUrl = kofiUrl || patreonUrl;
 
   const handleShare = async () => {
-    const url = window.location.href;
+    const url = window.location.origin + window.location.pathname;
     if (navigator.share) {
       try {
         await navigator.share({ title: project.title, url });

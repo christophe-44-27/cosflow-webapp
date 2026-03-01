@@ -9,6 +9,7 @@ export const SERVER_CONFIG = {
   },
   auth: {
     tokenEndpoint: '/oauth/token',
+    registerEndpoint: '/api/v2/auth/register',
     userEndpoint: '/api/v2/users/me',
     logoutEndpoint: '/api/v2/logout',
   },

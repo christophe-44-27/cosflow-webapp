@@ -1,10 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import { X, Lock } from 'lucide-react';
 import { useTranslations } from '@/app/lib/locale-context';
 import { LoginForm } from './login-form';
-import { SignupForm } from './signup-form';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -12,14 +10,9 @@ interface AuthModalProps {
 }
 
 export function AuthModal({ isOpen, onClose }: AuthModalProps) {
-  const [isLogin, setIsLogin] = useState(true);
   const t = useTranslations();
 
   if (!isOpen) return null;
-
-  const handleSuccess = () => {
-    onClose();
-  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -44,26 +37,15 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
           <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
             <Lock className="w-8 h-8 text-white" />
           </div>
-          <h2 className="text-white mb-2">
-            {isLogin ? t.auth.login : t.auth.signup}
-          </h2>
-          <p className="text-white/60">
-            {isLogin ? t.auth.loginSubtitle : t.auth.signupSubtitle}
-          </p>
+          <h2 className="text-white mb-2">{t.auth.login}</h2>
+          <p className="text-white/60">{t.auth.loginSubtitle}</p>
         </div>
 
-        {/* Form */}
-        {isLogin ? (
-          <LoginForm
-            onSuccess={handleSuccess}
-            onSwitchToSignup={() => setIsLogin(false)}
-          />
-        ) : (
-          <SignupForm
-            onSuccess={handleSuccess}
-            onSwitchToLogin={() => setIsLogin(true)}
-          />
-        )}
+        {/* Login form */}
+        <LoginForm
+          onSuccess={onClose}
+          onSwitchToSignup={() => { onClose(); window.location.href = '/signup'; }}
+        />
 
         {/* Social Login */}
         {/*<div className="mt-6">*/}

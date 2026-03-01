@@ -11,11 +11,16 @@ interface LikeInviteToastProps {
 
 export function LikeInviteToast({ visible, onClose }: LikeInviteToastProps) {
   const { t } = useLocale();
-  const { setShowAuthModal } = useAuth();
+  const { setShowAuthModal, setShowFanSignupModal } = useAuth();
 
-  const handleCta = () => {
+  const handleLogin = () => {
     onClose();
     setShowAuthModal(true);
+  };
+
+  const handleFanSignup = () => {
+    onClose();
+    setShowFanSignupModal(true);
   };
 
   return (
@@ -34,8 +39,15 @@ export function LikeInviteToast({ visible, onClose }: LikeInviteToastProps) {
         {t.engagement.likeToastMessage}
       </span>
       <button
-        onClick={handleCta}
+        onClick={handleFanSignup}
         className="shrink-0 px-3 py-1.5 bg-[#6259CA] hover:bg-[#6259CA]/90 text-white rounded-[8px] font-medium transition-colors"
+        style={{ fontSize: '0.78rem' }}
+      >
+        {t.engagement.likeToastCtaFan}
+      </button>
+      <button
+        onClick={handleLogin}
+        className="shrink-0 px-2 py-1.5 text-white/60 hover:text-white/90 transition-colors"
         style={{ fontSize: '0.78rem' }}
       >
         {t.engagement.likeToastCta}

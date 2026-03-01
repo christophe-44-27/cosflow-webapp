@@ -11,6 +11,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showFanSignupModal, setShowFanSignupModal] = useState(false);
 
   const router = useRouter();
 
@@ -91,9 +92,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return false;
       }
 
+      // If account needs email verification, redirect to verify-email page
+      if (data.email_not_verified) {
+        setShowAuthModal(false);
+        const returnTo = new URLSearchParams(window.location.search).get('returnTo') ?? '/';
+        const emailParam = data.email ? `&email=${encodeURIComponent(data.email)}` : '';
+        router.push(`/verify-email?next=${encodeURIComponent(returnTo)}${emailParam}`);
+        setIsLoading(false);
+        return true;
+      }
+
       // If user data is returned, use it; otherwise fetch it
       if (data.user) {
         setUser(data.user);
+        // Check if email verification is required
+        if (data.user.is_verified === false) {
+          setShowAuthModal(false);
+          const returnTo = new URLSearchParams(window.location.search).get('returnTo') ?? '/';
+          const emailParam = data.user.email ? `&email=${encodeURIComponent(data.user.email)}` : '';
+          router.push(`/verify-email?next=${encodeURIComponent(returnTo)}${emailParam}`);
+          setIsLoading(false);
+          return true;
+        }
       } else {
         // Fetch user data after successful login
         await fetchUser();
@@ -152,6 +172,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         error,
         showAuthModal,
         setShowAuthModal,
+        showFanSignupModal,
+        setShowFanSignupModal,
         login,
         logout,
         refreshUser,

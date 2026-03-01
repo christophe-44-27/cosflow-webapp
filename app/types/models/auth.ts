@@ -40,6 +40,12 @@ export interface SignupData {
   password_confirmation: string;
 }
 
+export interface FanSignupData {
+  email: string;
+  password: string;
+  consent_given: boolean;
+}
+
 export interface AuthState {
   user: AuthUser | null;
   isLoading: boolean;
@@ -50,6 +56,8 @@ export interface AuthState {
 export interface AuthContextType extends AuthState {
   showAuthModal: boolean;
   setShowAuthModal: (show: boolean) => void;
+  showFanSignupModal: boolean;
+  setShowFanSignupModal: (show: boolean) => void;
   login: (credentials: LoginCredentials) => Promise<boolean>;
   logout: () => Promise<void>;
   refreshUser: () => Promise<void>;

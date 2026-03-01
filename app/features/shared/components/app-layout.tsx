@@ -3,6 +3,7 @@
 import { ReactNode } from 'react';
 import { Navbar } from './navbar';
 import { AuthModal } from '@/app/features/auth/components/auth-modal';
+import { FanSignupModal } from '@/app/features/auth/components/fan-signup-modal';
 import { MobileBanner } from '@/app/components/mobile-banner';
 import { useAuth } from '@/app/features/auth';
 import { LikeToastProvider } from '../context/like-toast-context';
@@ -14,7 +15,7 @@ interface AppLayoutProps {
 }
 
 export function AppLayout({ children, noContainer = false }: AppLayoutProps) {
-  const { isLoggedIn, showAuthModal, handleLoginRequired, setShowAuthModal } = useAuth();
+  const { isLoggedIn, showAuthModal, handleLoginRequired, setShowAuthModal, showFanSignupModal, setShowFanSignupModal } = useAuth();
 
   return (
     <LikeToastProvider>
@@ -35,6 +36,10 @@ export function AppLayout({ children, noContainer = false }: AppLayoutProps) {
         <AuthModal
           isOpen={showAuthModal}
           onClose={() => setShowAuthModal(false)}
+        />
+        <FanSignupModal
+          isOpen={showFanSignupModal}
+          onClose={() => setShowFanSignupModal(false)}
         />
       </div>
     </LikeToastProvider>

@@ -118,14 +118,22 @@ export function Navbar({ isLoggedIn, onLoginRequired }: NavbarProps) {
                             <LanguageSwitcher variant="compact" />
                         </div>
 
-                        {/* Logged out: Login button */}
+                        {/* Logged out: Login + Sign up buttons */}
                         {!isLoggedIn ? (
-                            <button
-                                onClick={onLoginRequired}
-                                className="hidden md:flex bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors"
-                            >
-                                {t.sidebar.login}
-                            </button>
+                            <div className="hidden md:flex items-center gap-2">
+                                <button
+                                    onClick={onLoginRequired}
+                                    className="text-white/70 hover:text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors hover:bg-white/5"
+                                >
+                                    {t.sidebar.login}
+                                </button>
+                                <Link
+                                    href="/signup"
+                                    className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors"
+                                >
+                                    {t.sidebar.signup}
+                                </Link>
+                            </div>
                         ) : (
                             /* Logged in: User dropdown */
                             <div className="hidden md:block relative" ref={userMenuRef}>
@@ -234,12 +242,21 @@ export function Navbar({ isLoggedIn, onLoginRequired }: NavbarProps) {
 
                         <div className="border-t border-white/10 p-3 space-y-1">
                             {!isLoggedIn ? (
-                                <button
-                                    onClick={() => { onLoginRequired(); setIsMobileMenuOpen(false); }}
-                                    className="w-full bg-primary hover:bg-primary/90 text-white px-4 py-3 rounded-xl text-sm font-medium transition-colors"
-                                >
-                                    {t.sidebar.login}
-                                </button>
+                                <div className="space-y-2">
+                                    <Link
+                                        href="/signup"
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        className="block w-full bg-primary hover:bg-primary/90 text-white px-4 py-3 rounded-xl text-sm font-medium transition-colors text-center"
+                                    >
+                                        {t.sidebar.signup}
+                                    </Link>
+                                    <button
+                                        onClick={() => { onLoginRequired(); setIsMobileMenuOpen(false); }}
+                                        className="w-full text-white/70 hover:text-white px-4 py-3 rounded-xl text-sm font-medium transition-colors hover:bg-white/5 text-center"
+                                    >
+                                        {t.sidebar.login}
+                                    </button>
+                                </div>
                             ) : (
                                 <>
                                     {user?.profile && (

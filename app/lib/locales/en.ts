@@ -33,6 +33,7 @@ export const en: Translations = {
     forge: 'Forge',
     myAccount: 'My Account',
     login: 'Sign in',
+    signup: 'Sign up',
     logout: 'Logout',
   },
 
@@ -78,6 +79,15 @@ export const en: Translations = {
       invalidCredentials: 'Invalid email or password',
       serverError: 'An error occurred. Please try again.',
       emailExists: 'This email is already in use',
+    },
+    fan: {
+      modalTitle: 'Join Cosflow',
+      modalSubtitle: 'Create a free Fan account to like the makers you admire',
+      signupButton: 'Create my Fan account',
+      signingUp: 'Creating account...',
+      consentLabel: 'I agree that my data will be used to operate Cosflow.',
+      consentRequired: '(required)',
+      consentError: 'You must accept the terms to create an account.',
     },
   },
 
@@ -694,9 +704,116 @@ export const en: Translations = {
   engagement: {
     likeToastMessage: 'Create an account to like ✨',
     likeToastCta: 'Sign in',
+    likeToastCtaFan: 'Create Fan account',
     profileLikeAction: '♡ Like',
     profileLikedAction: '♥ Liked',
     profileLikesLabel: 'likes',
+  },
+
+  // Email verification
+  verifyEmail: {
+    metaTitle: 'Verify your email',
+    title: 'Verify your email',
+    subtitle: 'We sent a 6-digit code to',
+    instructions: 'Enter the code you received by email to activate your account.',
+    label: 'Verification code',
+    submitButton: 'Verify my email',
+    verifying: 'Verifying...',
+    resendButton: 'Resend code',
+    resendCooldown: 'Resend in {seconds}s',
+    codeResent: 'Code resent!',
+    errors: {
+      invalid: 'Incorrect or expired code. Try again.',
+      tooMany: 'Too many attempts. Request a new code.',
+      serverError: 'An error occurred. Please try again.',
+    },
+  },
+
+  // Signup page (Epic 6 — new flow)
+  signup: {
+    metaTitle: 'Join Cosflow',
+    metaDescription: 'Create your Cosflow account',
+    pageTitle: 'I am…',
+    pageSubtitle: 'Choose your role to personalize your experience',
+    stepIndicator: 'Step {current} of {total}',
+    backToSelector: '← Change profile',
+    alreadyAccount: 'Already have an account?',
+    signIn: 'Sign in',
+
+    maker: {
+      name: 'Maker',
+      tagline: 'I create cosplays',
+      description: 'Manage your cosplay projects end-to-end — hours, budget, elements. Share your progress with your public page.',
+      cta: 'Start as a Maker',
+      features: [
+        '📋 Project & element tracking',
+        '⏱ Build time calculation',
+        '💰 Real vs estimated budget',
+        '🌍 Shareable public page',
+      ],
+      formTitle: 'Create my Maker account',
+      nameLabel: 'Username',
+      namePlaceholder: 'How do you want to be known?',
+    },
+
+    fan: {
+      name: 'Fan',
+      tagline: 'I admire creators',
+      description: 'Discover and follow the makers who inspire you. Like their projects and stay updated on their creations.',
+      cta: 'Create my Fan account',
+      features: [
+        '❤️ Like maker projects and profiles',
+        '🔍 Discover new cosplayers',
+        '📬 Follow project progress',
+        '🆓 Free account in 2 minutes',
+      ],
+      formTitle: 'Create my Fan account',
+    },
+
+    photographer: {
+      name: 'Photographer',
+      tagline: 'I photograph cosplayers',
+      description: 'Portfolio, collaborations with makers, photo session management.',
+      comingSoon: 'Coming soon',
+      features: [
+        '📁 Organized photo portfolio',
+        '🤝 Collaborations with makers',
+        '📅 Session management',
+        '⭐ Verified photographer profile',
+      ],
+    },
+  },
+
+  // Fan onboarding wizard (Epic 6)
+  fanOnboarding: {
+    title: 'Welcome to Cosflow!',
+    subtitle: 'Discover the makers who inspire you and like their creations.',
+    makersSection: 'Makers to discover',
+    exploreButton: 'Explore Cosflow',
+    exploreHint: 'You can always like from maker profile pages.',
+    metaTitle: 'Welcome to Cosflow',
+    metaDescription: 'Discover the makers who inspire you',
+
+    // Wizard step 1 — fandom picker
+    step1Title: 'What universes inspire you?',
+    step1Subtitle: 'Choose anything that speaks to you — we\'ll suggest makers working on them',
+    skipStep: 'Skip this step →',
+    continueButton: 'Continue →',
+    minTagsHint: 'Select at least 3 universes for better suggestions',
+
+    // Wizard step 2 — maker suggestions
+    step2Title: 'Here are makers who might inspire you',
+    step2Subtitle: 'Like the ones you want to follow — you can discover more later',
+    exploreButtonFinal: 'Explore Cosflow →',
+    skip: 'Skip →',
+  },
+
+  // Studio (maker dashboard)
+  studio: {
+    welcomeTitle: 'Welcome to Cosflow, {name}!',
+    welcomeSubtitle: 'You\'re ready to bring your cosplay projects to life.',
+    createFirstProject: 'Create my first project',
+    explore: 'Explore',
   },
 
   // 404

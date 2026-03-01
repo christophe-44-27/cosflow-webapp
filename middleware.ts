@@ -17,11 +17,13 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
+    '/studio',
     '/studio/:path*',
     '/account',
     '/account/:path*',
     '/gallery',
     '/events',
     '/forge',
+    '/fan/:path*',
   ],
 }

@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { AppLayout } from '@/app/features/shared/components/app-layout';
 import { WebProjectsView } from '@/app/components/web-projects-view';
+import { StudioWelcomeBanner } from '@/app/features/studio/components/StudioWelcomeBanner';
 import type { Metadata } from 'next';
 import { getServerTranslations } from '@/app/lib/server-locale';
 
@@ -26,6 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function ProjectsPage() {
   return (
     <AppLayout>
+      <StudioWelcomeBanner />
       <Suspense fallback={<div className="flex items-center justify-center p-8"><div className="text-white">Chargement...</div></div>}>
         <WebProjectsView />
       </Suspense>

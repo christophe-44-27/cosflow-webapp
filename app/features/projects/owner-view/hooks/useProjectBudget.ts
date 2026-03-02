@@ -1,53 +1,38 @@
 'use client';
 
 import { useMemo } from 'react';
-import { ProjectElement } from '../types';
-import { ProjectDetail } from '@/app/types/models';
-import {
-  calculateProjectActualBudget,
-  calculateBudgetDifference,
-  isWithinBudget,
-  calculateBudgetPercentage,
-} from '@/app/lib/budget-utils';
+import { ProjectDetail, ProjectStats } from '@/app/types/models';
 
-export function useProjectBudget(project: ProjectDetail | null, elements: ProjectElement[]) {
-  // Calcul de la progression basée uniquement sur les éléments feuilles (sans enfants)
+export function useProjectBudget(project: ProjectDetail | null, projectStats: ProjectStats | null) {
   const progression = useMemo(() => {
-    if (elements.length === 0) return project?.progression ?? 0;
-    const parentIds = new Set(
-      elements.filter(el => el.parent_id !== null).map(el => el.parent_id!)
-    );
-    const leafElements = elements.filter(el => !parentIds.has(el.id));
-    if (leafElements.length === 0) return project?.progression ?? 0;
-    const done = leafElements.filter(el => el.is_done).length;
-    return Math.round((done / leafElements.length) * 100);
-  }, [elements, project?.progression]);
+    if (projectStats) return Math.round(projectStats.progression_percentage);
+    return project?.progression ?? 0;
+  }, [projectStats, project?.progression]);
 
-  // Calcul du budget réel basé sur les éléments
   const actualBudget = useMemo(() => {
-    return calculateProjectActualBudget(elements);
-  }, [elements]);
+    return projectStats?.budget.spent ?? 0;
+  }, [projectStats]);
 
-  // Budget estimé par l'utilisateur
   const estimatedBudget = useMemo(() => {
+    if (projectStats) return projectStats.budget.estimated;
     if (!project?.project_estimated_price) return null;
     return parseFloat(project.project_estimated_price);
-  }, [project?.project_estimated_price]);
+  }, [projectStats, project?.project_estimated_price]);
 
-  // Différence entre budget estimé et réel
   const budgetDifference = useMemo(() => {
-    return calculateBudgetDifference(estimatedBudget, actualBudget);
-  }, [estimatedBudget, actualBudget]);
+    if (projectStats) return projectStats.budget.remaining;
+    return null;
+  }, [projectStats]);
 
-  // Vérifier si dans le budget
   const withinBudget = useMemo(() => {
-    return isWithinBudget(estimatedBudget, actualBudget);
-  }, [estimatedBudget, actualBudget]);
+    if (projectStats) return !projectStats.budget.is_over_budget;
+    return true;
+  }, [projectStats]);
 
-  // Pourcentage du budget utilisé
   const budgetPercentage = useMemo(() => {
-    return calculateBudgetPercentage(estimatedBudget, actualBudget);
-  }, [estimatedBudget, actualBudget]);
+    if (!estimatedBudget || estimatedBudget === 0) return null;
+    return (actualBudget / estimatedBudget) * 100;
+  }, [actualBudget, estimatedBudget]);
 
   return {
     progression,
@@ -58,4 +43,3 @@ export function useProjectBudget(project: ProjectDetail | null, elements: Projec
     budgetPercentage,
   };
 }
-

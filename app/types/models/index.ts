@@ -11,6 +11,7 @@ export * from './auth';
 export * from './subscription';
 export * from './element-category';
 export * from './project-element';
+export * from './project-stats';
 export * from './time-entry';
 export * from './packing-list';
 export * from './sections-state';

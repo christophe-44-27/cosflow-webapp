@@ -9,6 +9,7 @@ export const API_ENDPOINTS = {
         delete: (slug: string) => `/api/v2/projects/${slug}`,
         images: (slug: string) => `/api/v2/projects/${slug}/images`,
         like: (slug: string) => `/api/v2/projects/${slug}/like`,
+        stats: (slug: string) => `/api/v2/projects/${slug}/stats`,
         elements: {
             list: (slug: string) => `/api/v2/projects/${slug}/elements`,
             detail: (slug: string, elementId: string) => `/api/v2/projects/${slug}/elements/${elementId}`,

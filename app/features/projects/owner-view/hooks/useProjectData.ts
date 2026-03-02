@@ -1,11 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ProjectDetail } from '@/app/types/models';
+import { ProjectDetail, ProjectStats } from '@/app/types/models';
 import { ProjectElement, TimeEntry, ElementCategory } from '../types';
 
 export function useProjectData(slug: string, locale: string) {
   const [project, setProject] = useState<ProjectDetail | null>(null);
+  const [projectStats, setProjectStats] = useState<ProjectStats | null>(null);
   const [elements, setElements] = useState<ProjectElement[]>([]);
   const [categories, setCategories] = useState<ElementCategory[]>([]);
   const [timeEntries, setTimeEntries] = useState<TimeEntry[]>([]);
@@ -28,9 +29,10 @@ export function useProjectData(slug: string, locale: string) {
   const fetchProject = async () => {
     try {
       setIsLoading(true);
-      const [res, elemRes] = await Promise.all([
+      const [res, elemRes, statsRes] = await Promise.all([
         fetch(`/api/projects/${slug}`),
         fetch(`/api/projects/${slug}/elements`),
+        fetch(`/api/projects/${slug}/stats?locale=${locale}`),
       ]);
       if (!res.ok) {
         setStatusCode(res.status);
@@ -57,6 +59,11 @@ export function useProjectData(slug: string, locale: string) {
         el.position != null ? el : { ...el, position: i }
       ));
 
+      if (statsRes.ok) {
+        const statsData = await statsRes.json();
+        setProjectStats(statsData.data || null);
+      }
+
       // Fetch time entries
       const timeRes = await fetch(`/api/timesheets/projects/${slug}`);
       if (timeRes.ok) {
@@ -79,6 +86,7 @@ export function useProjectData(slug: string, locale: string) {
 
   return {
     project,
+    projectStats,
     elements,
     categories,
     timeEntries,

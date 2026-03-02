@@ -59,6 +59,7 @@ export function ProjectOwnerView({ slug }: ProjectOwnerViewProps) {
   // ── Data hooks ─────────────────────────────────────────────────────────────
   const {
     project,
+    projectStats,
     elements,
     categories,
     timeEntries,
@@ -70,7 +71,7 @@ export function ProjectOwnerView({ slug }: ProjectOwnerViewProps) {
     setCategories,
   } = useProjectData(slug, locale);
 
-  const budgetData = useProjectBudget(project, elements);
+  const budgetData = useProjectBudget(project, projectStats);
   const projectInfo = useProjectInfo({ project, slug, onRefetch: refetch });
   const elementsManager = useProjectElements({ slug, onRefetch: refetch, setElements, setCategories });
   const timeManager = useTimeEntries({ projectId: project?.id, onRefetch: refetch, setTimeEntries });

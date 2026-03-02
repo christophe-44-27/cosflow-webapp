@@ -10,6 +10,7 @@ export interface ProjectElement {
   project_id: number;
   category_id: number | null;
   parent_id: number | null;
+  is_leaf?: boolean;
   position?: number;
   total_working_time: string;
   category?: ElementCategory | null;

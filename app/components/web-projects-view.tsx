@@ -152,7 +152,7 @@ export function WebProjectsView() {
         <div className="flex-1">
             <div className="py-8 space-y-6">
                 {/* Stats Overview */}
-                <div className="grid grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
                     <div className="bg-gradient-to-br from-primary to-primary/70 rounded-2xl p-6">
                         <h3 className="text-white/80 mb-2">Total Projets</h3>
                         <p className="text-white text-2xl font-semibold">{isLoading ? '...' : totalProjects}</p>
@@ -410,8 +410,8 @@ export function WebProjectsView() {
                     <div className="space-y-4">
                         {[1, 2, 3].map((i) => (
                             <div key={i} className="bg-secondary border border-white/10 rounded-2xl p-6 animate-pulse">
-                                <div className="flex items-start gap-6">
-                                    <div className="w-24 h-24 bg-white/5 rounded-xl"></div>
+                                <div className="flex items-start gap-3 sm:gap-6">
+                                    <div className="w-16 h-16 sm:w-24 sm:h-24 bg-white/5 rounded-xl"></div>
                                     <div className="flex-1 space-y-3">
                                         <div className="h-6 bg-white/5 rounded w-1/3"></div>
                                         <div className="h-4 bg-white/5 rounded w-1/4"></div>
@@ -432,9 +432,9 @@ export function WebProjectsView() {
                                 href={`/studio/projects/${project.slug}`}
                                 className="block bg-secondary border border-white/10 rounded-2xl p-6 hover:border-primary/50 transition-all group cursor-pointer"
                             >
-                                <div className="flex items-start gap-6">
+                                <div className="flex items-start gap-3 sm:gap-6">
                                     {/* Project Image */}
-                                    <div className="w-24 h-24 bg-white/5 rounded-xl overflow-hidden flex-shrink-0 border border-white/10 group-hover:border-primary/30 transition-colors">
+                                    <div className="w-16 h-16 sm:w-24 sm:h-24 bg-white/5 rounded-xl overflow-hidden flex-shrink-0 border border-white/10 group-hover:border-primary/30 transition-colors">
                                         <ImageWithFallback
                                             src={project.image_url}
                                             alt={project.title}
@@ -487,7 +487,7 @@ export function WebProjectsView() {
                                             </button>
                                         </div>
 
-                                        <div className="grid grid-cols-3 gap-6">
+                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-6">
                                             <div className="flex items-center gap-2 text-white/80">
                                                 <Image className="w-4 h-4 text-white/60" />
                                                 <span className="text-sm">{project.photos.length} photos</span>
@@ -538,7 +538,7 @@ export function WebProjectsView() {
                                 className="flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                             >
                                 <ChevronLeft className="w-5 h-5" />
-                                <span className="font-medium">{t.projects.pagination.previous}</span>
+                                <span className="font-medium hidden sm:inline">{t.projects.pagination.previous}</span>
                             </button>
 
                             {/* Page Info */}
@@ -557,7 +557,7 @@ export function WebProjectsView() {
                                 disabled={currentPage === totalPages}
                                 className="flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-white hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                             >
-                                <span className="font-medium">{t.projects.pagination.next}</span>
+                                <span className="font-medium hidden sm:inline">{t.projects.pagination.next}</span>
                                 <ChevronRight className="w-5 h-5" />
                             </button>
                         </div>

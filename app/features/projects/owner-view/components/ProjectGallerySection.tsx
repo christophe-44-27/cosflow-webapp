@@ -10,7 +10,7 @@ interface ProjectGallerySectionProps {
 
 export function ProjectGallerySection({ project }: ProjectGallerySectionProps) {
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <div>
         <p className="text-white/60 text-sm mb-2 flex items-center gap-2">
           <Camera className="w-4 h-4" /> Photos ({project.photos.length})

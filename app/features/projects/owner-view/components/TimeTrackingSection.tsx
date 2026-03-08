@@ -36,13 +36,13 @@ export function TimeTrackingSection({
           className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg"
         >
           <Plus className="w-4 h-4" />
-          Ajouter une entrée
+          {t.timeManagement.add_action}
         </button>
       ) : (
         <div className="bg-white/5 p-4 rounded-xl border border-white/10 space-y-3">
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="text-white/50 text-xs mb-1 block">Heures</label>
+              <label className="text-white/50 text-xs mb-1 block">{t.timeManagement.label_hours}</label>
               <input
                 type="number"
                 min="0"
@@ -52,7 +52,7 @@ export function TimeTrackingSection({
               />
             </div>
             <div>
-              <label className="text-white/50 text-xs mb-1 block">Minutes</label>
+              <label className="text-white/50 text-xs mb-1 block">{t.timeManagement.label_minutes}</label>
               <input
                 type="number"
                 min="0"
@@ -64,13 +64,13 @@ export function TimeTrackingSection({
               />
             </div>
             <div>
-              <label className="text-white/50 text-xs mb-1 block">Élément (optionnel)</label>
+              <label className="text-white/50 text-xs mb-1 block">{t.timeManagement.label_project_elements}</label>
               <select
                 value={newTimeEntry.element_id}
                 onChange={e => setNewTimeEntry({ ...newTimeEntry, element_id: e.target.value })}
                 className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white"
               >
-                <option value="" className="bg-secondary">Aucun</option>
+                <option value="" className="bg-secondary">{t.projectElements.no_category}</option>
                 {elements.map(el => (
                   <option key={el.id} value={el.id} className="bg-secondary">{el.title}</option>
                 ))}
@@ -83,13 +83,13 @@ export function TimeTrackingSection({
               className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg"
             >
               <Plus className="w-4 h-4" />
-              Ajouter
+              {t.studioProject.resume.addEvent}
             </button>
             <button
               onClick={() => setShowAddTime(false)}
               className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg"
             >
-              Annuler
+              {t.common.cancel}
             </button>
           </div>
         </div>
@@ -98,7 +98,7 @@ export function TimeTrackingSection({
       {/* Time entries list */}
       <div className="space-y-2">
         {timeEntries.length === 0 ? (
-          <p className="text-white/40 text-center py-8">Aucune entrée de temps</p>
+          <p className="text-white/40 text-center py-8">{t.timeManagement.no_entries}</p>
         ) : (
           timeEntries.map(entry => (
             <div key={entry.id} className="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10">

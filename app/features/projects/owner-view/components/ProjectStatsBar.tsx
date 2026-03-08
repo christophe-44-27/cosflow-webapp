@@ -79,7 +79,7 @@ export function ProjectStatsBar({
         </p>
         {budgetPercentage !== null && (
           <p className={`text-xs mt-1 ${budgetPercentage <= 100 ? 'text-white/60' : 'text-red-400'}`}>
-            {budgetPercentage.toFixed(0)}% utilisé
+            {t.projectInfo.percentageUsed.replace('{percentage}', budgetPercentage.toFixed(0))}
           </p>
         )}
       </div>

@@ -123,7 +123,7 @@ export function ProjectElementsSection({
   const handleSubmit = isEditMode ? handleUpdateElement : handleAddElement;
 
   const modalTitle = isEditMode
-    ? "Modifier l'élément"
+    ? t.projectElements.edit_element
     : parentElement
       ? t.projectElements.add_sub_element
       : t.projectElements.add_element;
@@ -340,7 +340,7 @@ if (over && active.id !== over.id)
             </div>
 
             <div>
-              <label className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2 block">Type</label>
+              <label className="text-white/60 text-xs font-medium uppercase tracking-wider mb-2 block">{t.projectElements.label_type}</label>
               <div className="grid grid-cols-3 gap-2">
                 {typeOptions.map(opt => {
                   const Icon = opt.icon;
@@ -391,12 +391,12 @@ if (over && active.id !== over.id)
                     value={newCategoryName}
                     onChange={e => setNewCategoryName(e.target.value)}
                     onKeyDown={(e: React.KeyboardEvent) => e.key === 'Enter' && handleAddCategory()}
-                    placeholder="Nom de la catégorie"
+                    placeholder={t.projectElements.category_name_placeholder}
                     className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 text-sm focus:outline-none focus:border-primary/50"
                     autoFocus
                   />
                   <button onClick={handleAddCategory} disabled={isAddingCategory || !newCategoryName.trim()} className="px-3 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm disabled:opacity-50">
-                    {isAddingCategory ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Créer'}
+                    {isAddingCategory ? <Loader2 className="w-4 h-4 animate-spin" /> : t.common.create}
                   </button>
                   <button onClick={() => { setShowAddCategory(false); setNewCategoryName(''); }} className="px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm">
                     <X className="w-4 h-4" />
@@ -430,10 +430,10 @@ if (over && active.id !== over.id)
                 className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-primary hover:bg-primary/90 text-white rounded-xl disabled:opacity-50 transition-colors"
               >
                 {isAddingElement ? <Loader2 className="w-4 h-4 animate-spin" /> : isEditMode ? <Save className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                {isEditMode ? 'Enregistrer' : newElementParentId ? t.projectElements.add_sub_element : t.projectElements.add_element}
+                {isEditMode ? t.common.save : newElementParentId ? t.projectElements.add_sub_element : t.projectElements.add_element}
               </button>
               <button onClick={closeModal} className="px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-colors">
-                Annuler
+                {t.common.cancel}
               </button>
             </div>
           </div>

@@ -20,6 +20,8 @@ export const en: Translations = {
     page: 'Page',
     of: 'of',
     total: 'total',
+    add: 'Add',
+    create: 'Create',
   },
 
   // Sidebar
@@ -363,6 +365,9 @@ export const en: Translations = {
         description: 'Your profile is visible to everyone',
       },
     },
+    notConnected: 'Not connected',
+    profileSection: 'Profile',
+    profileCompletion: 'Completion',
   },
 
   // Pagination
@@ -550,6 +555,9 @@ export const en: Translations = {
     no_category: "None",
     no_parent: "None (root element)",
     delete_element: "Delete element",
+    edit_element: "Edit element",
+    label_type: "Type",
+    category_name_placeholder: "Category name",
   },
 
   // Project Info
@@ -567,6 +575,7 @@ export const en: Translations = {
     visibility_private: "Private",
     visibility_public: "Public",
     visibility_error: "Visibility could not be updated",
+    percentageUsed: "{percentage}% used",
   },
 
   // Metadata
@@ -806,6 +815,60 @@ export const en: Translations = {
     step2Subtitle: 'Like the ones you want to follow — you can discover more later',
     exploreButtonFinal: 'Explore Cosflow →',
     skip: 'Skip →',
+    fandoms: {
+      anime:    { label: 'Anime & Manga',    examples: 'Naruto, Demon Slayer, JJK' },
+      gaming:   { label: 'Video games',      examples: 'Final Fantasy, Genshin, LoL' },
+      movies:   { label: 'Movies & Series',  examples: 'Marvel, DC, Star Wars' },
+      fantasy:  { label: 'Fantasy',          examples: 'Tolkien, D&D, Critical Role' },
+      kpop:     { label: 'K-pop & Idols',    examples: 'BTS, Kpop generals' },
+      original: { label: 'Original',         examples: 'OC, original design' },
+    },
+  },
+
+  // Web Projects View (studio/projects list)
+  webProjects: {
+    search_placeholder: 'Search a project...',
+    sort_label: 'Sort',
+    sort_recent: 'Most recent',
+    sort_oldest: 'Oldest',
+    sort_name_az: 'Name (A-Z)',
+    sort_name_za: 'Name (Z-A)',
+    sort_created: 'Created date',
+    sort_end_date: 'Estimated end date',
+    filter_recent: 'Recent (30d)',
+    reset_filters: 'Reset filters',
+    active_filters: 'Active filters:',
+    filter_search: 'Search:',
+    filter_status: 'Status:',
+    filter_visibility: 'Visibility:',
+  },
+
+  // Packing List
+  packingList: {
+    title: 'Packing Lists',
+    add_new_list: 'New list',
+    name_placeholder: 'List name (e.g. Paris Convention 2025)',
+    description_placeholder: 'Description (optional)',
+    create_button: 'Create list',
+    no_lists: 'No packing lists for this project',
+    no_items: 'No items in this list',
+    item_name_placeholder: 'Item name',
+    quantity_placeholder: 'Qty',
+    category_placeholder: 'Category (optional)',
+    notes_placeholder: 'Notes (optional)',
+    add_item: 'Add an item',
+  },
+
+  // Thumbnail Crop Modal
+  thumbnailCrop: {
+    title: 'Crop thumbnail',
+    subtitle: 'Position the subject in both zones',
+    mobile_only: 'Mobile only',
+    web: 'Web',
+    keep_subject: 'Keep the subject here',
+    web_square: 'Web (square)',
+    mobile_portrait: 'Mobile (portrait)',
+    zoom: 'Zoom',
   },
 
   // Studio (maker dashboard)

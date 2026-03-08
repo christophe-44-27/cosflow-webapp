@@ -140,12 +140,12 @@ export function WebProjectsView() {
     }, [currentPage, locale, filters, t.projects.errorLoading]);
 
     const sortOptions = [
-        { value: '-id', label: 'Plus récent' },
-        { value: 'id', label: 'Plus ancien' },
-        { value: 'name', label: 'Nom (A-Z)' },
-        { value: '-name', label: 'Nom (Z-A)' },
-        { value: '-created_at', label: 'Date de création' },
-        { value: 'estimated_end_date', label: 'Date de fin estimée' },
+        { value: '-id', label: t.webProjects.sort_recent },
+        { value: 'id', label: t.webProjects.sort_oldest },
+        { value: 'name', label: t.webProjects.sort_name_az },
+        { value: '-name', label: t.webProjects.sort_name_za },
+        { value: '-created_at', label: t.webProjects.sort_created },
+        { value: 'estimated_end_date', label: t.webProjects.sort_end_date },
     ];
 
     return (
@@ -154,19 +154,19 @@ export function WebProjectsView() {
                 {/* Stats Overview */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
                     <div className="bg-gradient-to-br from-primary to-primary/70 rounded-2xl p-6">
-                        <h3 className="text-white/80 mb-2">Total Projets</h3>
+                        <h3 className="text-white/80 mb-2">{t.projects.stats.totalProjects}</h3>
                         <p className="text-white text-2xl font-semibold">{isLoading ? '...' : totalProjects}</p>
                     </div>
                     <div className="bg-gradient-to-br from-tertiary to-tertiary/70 rounded-2xl p-6">
-                        <h3 className="text-white/80 mb-2">Pages</h3>
+                        <h3 className="text-white/80 mb-2">{t.projects.stats.pages}</h3>
                         <p className="text-white text-2xl font-semibold">{isLoading ? '...' : totalPages}</p>
                     </div>
                     <div className="bg-gradient-to-br from-green-500 to-green-500/70 rounded-2xl p-6">
-                        <h3 className="text-white/80 mb-2">Page Actuelle</h3>
+                        <h3 className="text-white/80 mb-2">{t.projects.stats.currentPage}</h3>
                         <p className="text-white text-2xl font-semibold">{currentPage}</p>
                     </div>
                     <div className="bg-gradient-to-br from-orange-500 to-orange-500/70 rounded-2xl p-6">
-                        <h3 className="text-white/80 mb-2">Projets/Page</h3>
+                        <h3 className="text-white/80 mb-2">{t.projects.stats.projectsPerPage}</h3>
                         <p className="text-white text-2xl font-semibold">{perPage}</p>
                     </div>
                 </div>
@@ -178,7 +178,7 @@ export function WebProjectsView() {
                         type="text"
                         value={searchInput}
                         onChange={(e) => setSearchInput(e.target.value)}
-                        placeholder="Rechercher un projet..."
+                        placeholder={t.webProjects.search_placeholder}
                         className="w-full pl-12 pr-12 py-3 bg-secondary border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-primary/50 transition-colors"
                     />
                     {searchInput && (
@@ -207,7 +207,7 @@ export function WebProjectsView() {
                             }`}
                         >
                             <Circle className="w-4 h-4" />
-                            <span>Tous</span>
+                            <span>{t.common.all}</span>
                         </button>
                         <button
                             onClick={() => updateFilter('status', 'in_progress')}
@@ -218,7 +218,7 @@ export function WebProjectsView() {
                             }`}
                         >
                             <Clock className="w-4 h-4" />
-                            <span>En cours</span>
+                            <span>{t.projectEdit.status.inProgress}</span>
                         </button>
                         <button
                             onClick={() => updateFilter('status', 'completed')}
@@ -229,7 +229,7 @@ export function WebProjectsView() {
                             }`}
                         >
                             <CheckCircle className="w-4 h-4" />
-                            <span>Terminé</span>
+                            <span>{t.projectEdit.status.completed}</span>
                         </button>
                     </div>
 
@@ -243,7 +243,7 @@ export function WebProjectsView() {
                                     : 'text-white/70 hover:text-white hover:bg-white/5'
                             }`}
                         >
-                            <span>Tous</span>
+                            <span>{t.common.all}</span>
                         </button>
                         <button
                             onClick={() => updateFilter('visibility', 'public')}
@@ -254,7 +254,7 @@ export function WebProjectsView() {
                             }`}
                         >
                             <Eye className="w-4 h-4" />
-                            <span>Publics</span>
+                            <span>{t.projectInfo.visibility_public}</span>
                         </button>
                         <button
                             onClick={() => updateFilter('visibility', 'private')}
@@ -265,7 +265,7 @@ export function WebProjectsView() {
                             }`}
                         >
                             <EyeOff className="w-4 h-4" />
-                            <span>Privés</span>
+                            <span>{t.projectInfo.visibility_private}</span>
                         </button>
                     </div>
 
@@ -279,7 +279,7 @@ export function WebProjectsView() {
                         }`}
                     >
                         <Clock className="w-4 h-4" />
-                        <span>Récents (30j)</span>
+                        <span>{t.webProjects.filter_recent}</span>
                     </button>
 
                     <div className="flex-1"></div>
@@ -291,7 +291,7 @@ export function WebProjectsView() {
                             className="flex items-center gap-2 bg-secondary text-white px-4 py-2 rounded-xl border border-white/10 hover:bg-white/5 transition-colors"
                         >
                             <ArrowUpDown className="w-4 h-4" />
-                            <span>{sortOptions.find(o => o.value === filters.sort)?.label || 'Trier'}</span>
+                            <span>{sortOptions.find(o => o.value === filters.sort)?.label || t.webProjects.sort_label}</span>
                         </button>
                         {showAdvancedFilters && (
                             <div className="absolute right-0 top-full mt-2 bg-secondary border border-white/10 rounded-xl shadow-xl z-10 min-w-[200px] overflow-hidden">
@@ -325,7 +325,7 @@ export function WebProjectsView() {
                         }`}
                     >
                         <SlidersHorizontal className="w-4 h-4" />
-                        <span>Filtres</span>
+                        <span>{t.common.filters}</span>
                         {hasActiveFilters && (
                             <span className="bg-primary text-white text-xs px-2 py-0.5 rounded-full">
                                 {[
@@ -346,7 +346,7 @@ export function WebProjectsView() {
                             className="flex items-center gap-2 px-4 py-2 rounded-xl bg-red-500/10 text-red-400 border border-red-500/30 hover:bg-red-500/20 transition-colors"
                         >
                             <X className="w-4 h-4" />
-                            <span>Réinitialiser</span>
+                            <span>{t.projectElements.reset}</span>
                         </button>
                     )}
                 </div>
@@ -354,10 +354,10 @@ export function WebProjectsView() {
                 {/* Active Filters Display */}
                 {hasActiveFilters && (
                     <div className="flex flex-wrap items-center gap-2 text-sm">
-                        <span className="text-white/60">Filtres actifs:</span>
+                        <span className="text-white/60">{t.webProjects.active_filters}</span>
                         {filters.search && (
                             <span className="bg-white/10 text-white px-3 py-1 rounded-lg flex items-center gap-2">
-                                Recherche: "{filters.search}"
+                                {t.webProjects.filter_search} &quot;{filters.search}&quot;
                                 <button onClick={() => { setSearchInput(''); updateFilter('search', ''); }}>
                                     <X className="w-3 h-3" />
                                 </button>
@@ -365,7 +365,7 @@ export function WebProjectsView() {
                         )}
                         {filters.status !== 'all' && (
                             <span className="bg-white/10 text-white px-3 py-1 rounded-lg flex items-center gap-2">
-                                Statut: {filters.status === 'in_progress' ? 'En cours' : 'Terminé'}
+                                {t.webProjects.filter_status} {filters.status === 'in_progress' ? t.projectEdit.status.inProgress : t.projectEdit.status.completed}
                                 <button onClick={() => updateFilter('status', 'all')}>
                                     <X className="w-3 h-3" />
                                 </button>
@@ -373,7 +373,7 @@ export function WebProjectsView() {
                         )}
                         {filters.visibility !== 'all' && (
                             <span className="bg-white/10 text-white px-3 py-1 rounded-lg flex items-center gap-2">
-                                Visibilité: {filters.visibility === 'public' ? 'Publics' : 'Privés'}
+                                {t.webProjects.filter_visibility} {filters.visibility === 'public' ? t.projectInfo.visibility_public : t.projectInfo.visibility_private}
                                 <button onClick={() => updateFilter('visibility', 'all')}>
                                     <X className="w-3 h-3" />
                                 </button>
@@ -381,7 +381,7 @@ export function WebProjectsView() {
                         )}
                         {filters.recent && (
                             <span className="bg-white/10 text-white px-3 py-1 rounded-lg flex items-center gap-2">
-                                Récents (30j)
+                                {t.webProjects.filter_recent}
                                 <button onClick={() => updateFilter('recent', false)}>
                                     <X className="w-3 h-3" />
                                 </button>
@@ -465,7 +465,7 @@ export function WebProjectsView() {
                                                             ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
                                                             : 'bg-white/10 text-white/70'
                                                     }`}>
-                                                        {project.status === 'completed' ? 'Terminé' : project.status === 'in_progress' ? 'En cours' : 'Brouillon'}
+                                                        {project.status === 'completed' ? t.projectEdit.status.completed : project.status === 'in_progress' ? t.projectEdit.status.inProgress : t.projectEdit.status.draft}
                                                     </span>
                                                     <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-sm ${
                                                         project.is_private
@@ -473,8 +473,8 @@ export function WebProjectsView() {
                                                             : 'bg-green-500/20 text-green-400 border border-green-500/30'
                                                     }`}>
                                                         {project.is_private
-                                                            ? <><EyeOff className="w-3.5 h-3.5" /> Privé</>
-                                                            : <><Eye className="w-3.5 h-3.5" /> Public</>
+                                                            ? <><EyeOff className="w-3.5 h-3.5" /> {t.projectInfo.visibility_private}</>
+                                                            : <><Eye className="w-3.5 h-3.5" /> {t.projectInfo.visibility_public}</>
                                                         }
                                                     </span>
                                                 </div>
@@ -521,7 +521,7 @@ export function WebProjectsView() {
                                 onClick={resetFilters}
                                 className="text-primary hover:text-primary/80 transition-colors"
                             >
-                                Réinitialiser les filtres
+                                {t.webProjects.reset_filters}
                             </button>
                         )}
                     </div>

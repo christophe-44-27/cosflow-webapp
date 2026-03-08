@@ -28,7 +28,7 @@ export function StudioWelcomeBanner() {
         type="button"
         onClick={() => setVisible(false)}
         className="absolute top-3 right-3 p-1.5 hover:bg-white/10 rounded-lg transition-colors"
-        aria-label="Fermer"
+        aria-label={t.common.close}
       >
         <X className="w-4 h-4 text-white/60" />
       </button>

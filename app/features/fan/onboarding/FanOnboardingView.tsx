@@ -10,13 +10,13 @@ interface FanOnboardingViewProps {
   makers: User[];
 }
 
-const FANDOMS = [
-  { id: 'anime', emoji: '⛩️', label: 'Anime & Manga', examples: 'Naruto, Demon Slayer, JJK' },
-  { id: 'gaming', emoji: '🎮', label: 'Jeux vidéo', examples: 'Final Fantasy, Genshin, LoL' },
-  { id: 'movies', emoji: '🎬', label: 'Cinéma & Séries', examples: 'Marvel, DC, Star Wars' },
-  { id: 'fantasy', emoji: '🐉', label: 'Fantasy', examples: 'Tolkien, D&D, Critical Role' },
-  { id: 'kpop', emoji: '🎤', label: 'K-pop & Idols', examples: 'BTS, Kpop generals' },
-  { id: 'original', emoji: '✨', label: 'Original', examples: 'OC, design original' },
+const FANDOM_KEYS = [
+  { id: 'anime'    as const, emoji: '⛩️' },
+  { id: 'gaming'   as const, emoji: '🎮' },
+  { id: 'movies'   as const, emoji: '🎬' },
+  { id: 'fantasy'  as const, emoji: '🐉' },
+  { id: 'kpop'     as const, emoji: '🎤' },
+  { id: 'original' as const, emoji: '✨' },
 ];
 
 export function FanOnboardingView({ makers }: FanOnboardingViewProps) {
@@ -90,7 +90,7 @@ function FandomPickerStep({ t, selectedFandoms, onToggle, onContinue, onSkip }: 
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
-        {FANDOMS.map(fandom => {
+        {FANDOM_KEYS.map(fandom => {
           const selected = selectedFandoms.has(fandom.id);
           return (
             <button
@@ -109,8 +109,8 @@ function FandomPickerStep({ t, selectedFandoms, onToggle, onContinue, onSkip }: 
                 </span>
               )}
               <span className="text-3xl mb-2">{fandom.emoji}</span>
-              <span className="text-white font-semibold text-sm leading-snug">{fandom.label}</span>
-              <span className="text-white/40 text-xs mt-0.5 line-clamp-1">{fandom.examples}</span>
+              <span className="text-white font-semibold text-sm leading-snug">{t.fanOnboarding.fandoms[fandom.id].label}</span>
+              <span className="text-white/40 text-xs mt-0.5 line-clamp-1">{t.fanOnboarding.fandoms[fandom.id].examples}</span>
             </button>
           );
         })}

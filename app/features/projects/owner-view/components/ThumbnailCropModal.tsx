@@ -4,6 +4,7 @@ import { useState, useCallback, useRef, useLayoutEffect } from 'react';
 import Cropper from 'react-easy-crop';
 import type { Area, Point } from 'react-easy-crop';
 import { X, Check, Loader2, Monitor, Smartphone } from 'lucide-react';
+import { useLocale } from '@/app/lib/locale-context';
 
 const THUMBNAIL_ASPECT = 3 / 4; // Portrait mobile
 // Inset du carré 1:1 centré dans la zone 3:4 :
@@ -53,6 +54,7 @@ interface ThumbnailCropModalProps {
 }
 
 export function ThumbnailCropModal({ imageSrc, onConfirm, onCancel }: ThumbnailCropModalProps) {
+  const { t } = useLocale();
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
@@ -107,9 +109,9 @@ export function ThumbnailCropModal({ imageSrc, onConfirm, onCancel }: ThumbnailC
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 flex-shrink-0">
         <div>
-          <h2 className="text-white font-semibold text-sm">Recadrer la miniature</h2>
+          <h2 className="text-white font-semibold text-sm">{t.thumbnailCrop.title}</h2>
           <p className="text-white/40 text-xs mt-0.5">
-            Positionnez le sujet dans les deux zones
+            {t.thumbnailCrop.subtitle}
           </p>
         </div>
         <button
@@ -154,7 +156,7 @@ export function ThumbnailCropModal({ imageSrc, onConfirm, onCancel }: ThumbnailC
               style={{ height: `${SQUARE_INSET_PCT}%`, background: 'rgba(0,0,0,0.72)' }}
             >
               <span className="flex items-center gap-1 text-[10px] font-semibold text-[#2BD1C7]/80">
-                <Smartphone className="w-3 h-3" /> Mobile uniquement
+                <Smartphone className="w-3 h-3" /> {t.thumbnailCrop.mobile_only}
               </span>
             </div>
             <div
@@ -162,7 +164,7 @@ export function ThumbnailCropModal({ imageSrc, onConfirm, onCancel }: ThumbnailC
               style={{ height: `${SQUARE_INSET_PCT}%`, background: 'rgba(0,0,0,0.72)' }}
             >
               <span className="flex items-center gap-1 text-[10px] font-semibold text-[#2BD1C7]/80">
-                <Smartphone className="w-3 h-3" /> Mobile uniquement
+                <Smartphone className="w-3 h-3" /> {t.thumbnailCrop.mobile_only}
               </span>
             </div>
 
@@ -177,10 +179,10 @@ export function ThumbnailCropModal({ imageSrc, onConfirm, onCancel }: ThumbnailC
               }}
             >
               <span className="absolute top-2 left-2 flex items-center gap-1 text-[11px] font-bold bg-[#6259CA] text-white px-2 py-0.5 rounded">
-                <Monitor className="w-3 h-3" /> Web
+                <Monitor className="w-3 h-3" /> {t.thumbnailCrop.web}
               </span>
               <span className="absolute bottom-2 right-2 text-[10px] text-white/50">
-                Gardez le sujet ici
+                {t.thumbnailCrop.keep_subject}
               </span>
             </div>
 
@@ -196,17 +198,17 @@ export function ThumbnailCropModal({ imageSrc, onConfirm, onCancel }: ThumbnailC
         <div className="flex items-center gap-5 text-[11px] text-white/50">
           <span className="flex items-center gap-1.5">
             <span className="inline-block w-5 border-t-2 border-[#6259CA]" />
-            <Monitor className="w-3 h-3" /> Web (carré)
+            <Monitor className="w-3 h-3" /> {t.thumbnailCrop.web_square}
           </span>
           <span className="flex items-center gap-1.5">
             <span className="inline-block w-5 border-t-2 border-white/30" />
-            <Smartphone className="w-3 h-3" /> Mobile (portrait)
+            <Smartphone className="w-3 h-3" /> {t.thumbnailCrop.mobile_portrait}
           </span>
         </div>
 
         {/* Zoom */}
         <div className="flex items-center gap-3">
-          <span className="text-white/40 text-xs w-8">Zoom</span>
+          <span className="text-white/40 text-xs w-8">{t.thumbnailCrop.zoom}</span>
           <input
             type="range"
             min={1}
@@ -225,7 +227,7 @@ export function ThumbnailCropModal({ imageSrc, onConfirm, onCancel }: ThumbnailC
             onClick={onCancel}
             className="flex-1 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl text-sm transition-colors"
           >
-            Annuler
+            {t.common.cancel}
           </button>
           <button
             onClick={handleConfirm}
@@ -233,7 +235,7 @@ export function ThumbnailCropModal({ imageSrc, onConfirm, onCancel }: ThumbnailC
             className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-[#6259CA] hover:bg-[#6259CA]/90 text-white rounded-xl text-sm transition-colors disabled:opacity-60"
           >
             {isUploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
-            {isUploading ? 'Envoi en cours…' : 'Appliquer'}
+            {isUploading ? t.projectEdit.cropUploading : t.projectEdit.cropApply}
           </button>
         </div>
       </div>

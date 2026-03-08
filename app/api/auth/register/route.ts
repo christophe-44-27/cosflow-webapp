@@ -61,19 +61,15 @@ export async function POST(request: NextRequest) {
     }
 
     // 2. Auto-login via OAuth to get httpOnly tokens
-    const tokenResponse = await fetch(apiUrl(auth.tokenEndpoint), {
+    const tokenResponse = await fetch(apiUrl(auth.loginEndpoint), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
       body: JSON.stringify({
-        grant_type: 'password',
-        client_id: api.clientId,
-        client_secret: api.clientSecret,
         username: email,
         password: password,
-        scope: '',
       }),
     });
 

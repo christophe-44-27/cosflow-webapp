@@ -55,7 +55,7 @@ export function LikeInviteToast({ visible, onClose }: LikeInviteToastProps) {
       <button
         onClick={onClose}
         className="shrink-0 p-1 text-white/40 hover:text-white/80 transition-colors rounded-md"
-        aria-label="Fermer"
+        aria-label={t.common.close}
       >
         <X size={14} />
       </button>

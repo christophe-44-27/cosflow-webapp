@@ -18,6 +18,8 @@ export const fr = {
     page: 'Page',
     of: 'sur',
     total: 'au total',
+    add: 'Ajouter',
+    create: 'Créer',
   },
 
   // Sidebar
@@ -361,6 +363,9 @@ export const fr = {
         description: 'Votre profil est visible par tous',
       },
     },
+    notConnected: 'Non connecté',
+    profileSection: 'Profil',
+    profileCompletion: 'Complétion',
   },
 
   // Pagination
@@ -548,6 +553,9 @@ export const fr = {
     no_category: "Aucune",
     no_parent: "Aucun (élément racine)",
     delete_element: "Supprimer l'élément",
+    edit_element: "Modifier l'élément",
+    label_type: "Type",
+    category_name_placeholder: "Nom de la catégorie",
   },
 
   // Project Info
@@ -565,6 +573,7 @@ export const fr = {
     visibility_private: "Privé",
     visibility_public: "Public",
     visibility_error: "La visibilité n'a pas pu être mise à jour",
+    percentageUsed: "{percentage}% utilisé",
   },
 
   // Metadata
@@ -804,6 +813,60 @@ export const fr = {
     step2Subtitle: 'Like ceux que tu veux suivre — tu pourras en découvrir d\'autres ensuite',
     exploreButtonFinal: 'Explorer Cosflow →',
     skip: 'Passer →',
+    fandoms: {
+      anime:    { label: 'Anime & Manga',    examples: 'Naruto, Demon Slayer, JJK' },
+      gaming:   { label: 'Jeux vidéo',       examples: 'Final Fantasy, Genshin, LoL' },
+      movies:   { label: 'Cinéma & Séries',  examples: 'Marvel, DC, Star Wars' },
+      fantasy:  { label: 'Fantasy',          examples: 'Tolkien, D&D, Critical Role' },
+      kpop:     { label: 'K-pop & Idols',    examples: 'BTS, Kpop generals' },
+      original: { label: 'Original',         examples: 'OC, design original' },
+    },
+  },
+
+  // Web Projects View (studio/projects list)
+  webProjects: {
+    search_placeholder: 'Rechercher un projet...',
+    sort_label: 'Trier',
+    sort_recent: 'Plus récent',
+    sort_oldest: 'Plus ancien',
+    sort_name_az: 'Nom (A-Z)',
+    sort_name_za: 'Nom (Z-A)',
+    sort_created: 'Date de création',
+    sort_end_date: 'Date de fin estimée',
+    filter_recent: 'Récents (30j)',
+    reset_filters: 'Réinitialiser les filtres',
+    active_filters: 'Filtres actifs :',
+    filter_search: 'Recherche :',
+    filter_status: 'Statut :',
+    filter_visibility: 'Visibilité :',
+  },
+
+  // Packing List
+  packingList: {
+    title: 'Packing Lists',
+    add_new_list: 'Nouvelle liste',
+    name_placeholder: 'Nom de la liste (ex: Convention Paris 2025)',
+    description_placeholder: 'Description (optionnel)',
+    create_button: 'Créer la liste',
+    no_lists: 'Aucune packing list pour ce projet',
+    no_items: 'Aucun élément dans cette liste',
+    item_name_placeholder: "Nom de l'élément",
+    quantity_placeholder: 'Qté',
+    category_placeholder: 'Catégorie (optionnel)',
+    notes_placeholder: 'Notes (optionnel)',
+    add_item: 'Ajouter un élément',
+  },
+
+  // Thumbnail Crop Modal
+  thumbnailCrop: {
+    title: 'Recadrer la miniature',
+    subtitle: 'Positionnez le sujet dans les deux zones',
+    mobile_only: 'Mobile uniquement',
+    web: 'Web',
+    keep_subject: 'Gardez le sujet ici',
+    web_square: 'Web (carré)',
+    mobile_portrait: 'Mobile (portrait)',
+    zoom: 'Zoom',
   },
 
   // Studio (maker dashboard)

@@ -3,17 +3,19 @@
 import { Camera, Image as ImageIcon } from 'lucide-react';
 import { ProjectDetail } from '@/app/types/models';
 import { ImageWithFallback } from '@/app/components/figma/ImageWithFallback';
+import { useLocale } from '@/app/lib/locale-context';
 
 interface ProjectGallerySectionProps {
   project: ProjectDetail;
 }
 
 export function ProjectGallerySection({ project }: ProjectGallerySectionProps) {
+  const { t } = useLocale();
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <div>
         <p className="text-white/60 text-sm mb-2 flex items-center gap-2">
-          <Camera className="w-4 h-4" /> Photos ({project.photos.length})
+          <Camera className="w-4 h-4" /> {t.projectDetail.gallery.photos} ({project.photos.length})
         </p>
         <div className="grid grid-cols-2 gap-2">
           {project.photos.slice(0, 4).map(photo => (
@@ -29,7 +31,7 @@ export function ProjectGallerySection({ project }: ProjectGallerySectionProps) {
       </div>
       <div>
         <p className="text-white/60 text-sm mb-2 flex items-center gap-2">
-          <ImageIcon className="w-4 h-4" /> Références ({project.photoReferences.length})
+          <ImageIcon className="w-4 h-4" /> {t.projectDetail.gallery.references} ({project.photoReferences.length})
         </p>
         <div className="grid grid-cols-2 gap-2">
           {project.photoReferences.slice(0, 4).map(ref => (
@@ -45,7 +47,7 @@ export function ProjectGallerySection({ project }: ProjectGallerySectionProps) {
       </div>
       <div>
         <p className="text-white/60 text-sm mb-2 flex items-center gap-2">
-          <Camera className="w-4 h-4" /> Photoshoots ({project.photoshoots.length})
+          <Camera className="w-4 h-4" /> {t.projectDetail.gallery.photoshoots} ({project.photoshoots.length})
         </p>
         <div className="grid grid-cols-2 gap-2">
           {project.photoshoots.slice(0, 4).map(shoot => (

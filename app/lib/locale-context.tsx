@@ -27,7 +27,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
       ?.split('=')[1];
 
     const stored = cookieLocale || localStorage.getItem(LOCALE_STORAGE_KEY);
-    if (stored === 'fr' || stored === 'en') {
+    if (stored === 'fr' || stored === 'en' || stored === 'de') {
       // Utiliser startTransition pour indiquer que c'est une mise à jour non-urgente
       startTransition(() => {
         setLocaleState(stored);

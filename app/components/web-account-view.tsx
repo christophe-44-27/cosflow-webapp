@@ -29,7 +29,7 @@ export function WebAccountView() {
   if (!user) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <div className="text-white/60">Non connecté</div>
+        <div className="text-white/60">{t.account.notConnected}</div>
       </div>
     );
   }
@@ -113,9 +113,9 @@ export function WebAccountView() {
             {/* Profile Completion */}
             {!profile.is_complete && (
               <div className="bg-secondary border border-white/10 rounded-2xl p-6">
-                <h3 className="text-white mb-4">Profil</h3>
+                <h3 className="text-white mb-4">{t.account.profileSection}</h3>
                 <div className="mb-2 flex justify-between text-sm">
-                  <span className="text-white/60">Complétion</span>
+                  <span className="text-white/60">{t.account.profileCompletion}</span>
                   <span className="text-white">{profile.completion_percentage}%</span>
                 </div>
                 <div className="w-full bg-white/10 rounded-full h-2">

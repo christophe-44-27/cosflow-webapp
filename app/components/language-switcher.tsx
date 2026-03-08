@@ -17,6 +17,7 @@ export function LanguageSwitcher({ variant = 'default' }: LanguageSwitcherProps)
   const languages: { code: Locale; label: string; flag: string }[] = [
     { code: 'fr', label: 'Français', flag: '🇫🇷' },
     { code: 'en', label: 'English', flag: '🇬🇧' },
+    { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
   ];
 
   useEffect(() => {

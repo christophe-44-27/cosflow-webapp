@@ -26,32 +26,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { api, auth, cookies: cookieConfig } = SERVER_CONFIG;
+    const { auth, cookies: cookieConfig } = SERVER_CONFIG;
 
-    // Validate server configuration
-    if (!api.clientId || !api.clientSecret) {
-      console.error('Missing API_CLIENT_ID or API_CLIENT_SECRET environment variables');
-      return NextResponse.json(
-        { error: 'Server configuration error' },
-        { status: 500 }
-      );
-    }
-
-    // Call Laravel Passport token endpoint
-    const tokenResponse = await fetch(apiUrl(auth.tokenEndpoint), {
+    // Call login proxy endpoint
+    const tokenResponse = await fetch(apiUrl(auth.loginEndpoint), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      body: JSON.stringify({
-        grant_type: 'password',
-        client_id: api.clientId,
-        client_secret: api.clientSecret,
-        username: email,
-        password: password,
-        scope: '',
-      }),
+      body: JSON.stringify({ email, password }),
     });
 
     if (!tokenResponse.ok) {

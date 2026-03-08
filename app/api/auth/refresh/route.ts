@@ -12,15 +12,7 @@ interface TokenResponse {
 export async function POST() {
   try {
     const cookieStore = await cookies();
-    const { api, auth, cookies: cookieConfig } = SERVER_CONFIG;
-
-    if (!api.clientId || !api.clientSecret) {
-      console.error('Missing API_CLIENT_ID or API_CLIENT_SECRET environment variables');
-      return NextResponse.json(
-        { error: 'Server configuration error' },
-        { status: 500 }
-      );
-    }
+    const { auth, cookies: cookieConfig } = SERVER_CONFIG;
 
     const refreshToken = cookieStore.get(cookieConfig.refreshToken)?.value;
 
@@ -31,19 +23,13 @@ export async function POST() {
       );
     }
 
-    const tokenResponse = await fetch(apiUrl(auth.tokenEndpoint), {
+    const tokenResponse = await fetch(apiUrl(auth.refreshEndpoint), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      body: JSON.stringify({
-        grant_type: 'refresh_token',
-        client_id: api.clientId,
-        client_secret: api.clientSecret,
-        refresh_token: refreshToken,
-        scope: '',
-      }),
+      body: JSON.stringify({ refresh_token: refreshToken }),
     });
 
     if (!tokenResponse.ok) {

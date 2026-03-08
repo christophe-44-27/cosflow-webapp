@@ -8,7 +8,8 @@ export const SERVER_CONFIG = {
     clientSecret: process.env.API_CLIENT_SECRET || '',
   },
   auth: {
-    tokenEndpoint: '/oauth/token',
+    loginEndpoint: '/auth/login',
+    refreshEndpoint: '/auth/refresh',
     registerEndpoint: '/api/v2/auth/register',
     userEndpoint: '/api/v2/users/me',
     logoutEndpoint: '/api/v2/logout',
